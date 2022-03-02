@@ -1,4 +1,4 @@
-// package com.lev.project.geometries;
+// package geometries;
 
 // public class Sphere implements Geometry {
 
