@@ -12,6 +12,7 @@ public class Double3 {
 
 	/**
 	 * Zero triad (0,0,0)
+	 * 
 	 */
 	static final Double3 ZERO = new Double3(0, 0, 0);
 

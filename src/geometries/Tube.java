@@ -1,10 +1,11 @@
 package geometries;
 
-/**
- * Tube defines by a Ray and radius
- */
 import primitives.*;
 
+/**
+ * Tube class represents infinite cylinder in 3D space
+ * 
+ */
 public class Tube implements Geometry {
 
 	private final Ray axisRay;
@@ -21,10 +22,20 @@ public class Tube implements Geometry {
 		radius = r;
 	}
 
+	/**
+	 * getAxisRay
+	 * 
+	 * @return ray axis
+	 */
 	public Ray getAxisRay() {
 		return axisRay;
 	}
 
+	/**
+	 * getRadius
+	 * 
+	 * @return radius
+	 */
 	public double getRadius() {
 		return radius;
 	}

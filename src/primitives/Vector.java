@@ -1,7 +1,7 @@
 package primitives;
 
 /**
- * Vector defines Point which points from the origin of the coordinate space
+ * Vector class represents a vector in 3D space
  * 
  */
 public class Vector extends Point {
@@ -11,6 +11,11 @@ public class Vector extends Point {
 			throw new IllegalArgumentException(Errors.ZERO_VEC);
 	}
 
+	/**
+	 * Vector build ctor
+	 * 
+	 * @param d 3D point
+	 */
 	public Vector(Double3 d) {
 		super(d);
 	}
@@ -38,7 +43,7 @@ public class Vector extends Point {
 	/**
 	 * crossProduct returns cross product of two vectors
 	 * 
-	 * @param rhs
+	 * @param rhs vector
 	 * @return vector cross product
 	 */
 	public Vector crossProduct(Vector rhs) {
