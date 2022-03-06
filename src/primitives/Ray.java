@@ -1,4 +1,8 @@
 package primitives;
+/** 
+* Ray defines All points on the line that are on one side of the point.
+*
+*/
 
 public class Ray {
 	private Point p0;
