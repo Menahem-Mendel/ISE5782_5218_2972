@@ -7,6 +7,7 @@ package primitives;
 public class Vector extends Point {
 	public Vector(double x, double y, double z) {
 		super(x, y, z);
+
 		if (Util.isZero(x) && Util.isZero(y) && Util.isZero(z))
 			throw new IllegalArgumentException(Errors.ZERO_VEC);
 	}
@@ -47,8 +48,7 @@ public class Vector extends Point {
 	 * @return vector cross product
 	 */
 	public Vector crossProduct(Vector rhs) {
-		double sample = xyz.d1 / rhs.xyz.d1;
-		if ((xyz.d2 / rhs.xyz.d2) == sample && (xyz.d3 / rhs.xyz.d3) == sample)
+		if (Util.isZero(dotProduct(rhs) - length()))
 			throw new IllegalArgumentException(Errors.PARALLEL_VEC);
 
 		return new Vector(

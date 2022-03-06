@@ -11,10 +11,13 @@ public class Ray {
 	/**
 	 * Ray build ctor
 	 * 
-	 * @param p
-	 * @param v
+	 * @param p starting point
+	 * @param v directional vector
 	 */
 	public Ray(Point p, Vector v) {
+		if (Util.isZero(v.length()))
+			throw new IllegalArgumentException(Errors.ZERO_VEC);
+
 		dir = v.normalize();
 		p0 = p;
 	}
