@@ -27,6 +27,11 @@ public class Vector extends Point {
 
 	// crossProduct returns cross product of two vectors
 	public Vector crossProduct(Vector v) {
+		double sample = xyz.d1 / v.xyz.d1;
+		if((xyz.d2 / v.xyz.d2)==sample && (xyz.d3 / v.xyz.d3)==sample ){
+			throw new IllegalArgumentException("parallel vectors");
+
+		}
 		return new Vector(
 				new Double3(xyz.d2 * v.xyz.d3 - xyz.d3 * v.xyz.d2,
 						xyz.d3 * v.xyz.d1 - xyz.d1 * v.xyz.d3,
