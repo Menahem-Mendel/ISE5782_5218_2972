@@ -19,15 +19,28 @@ public class Point {
 		return xyz;
 	}
 
+	
 	// return sum of two points
 	public Point add(Vector p) {
 		return new Point(xyz.add(p.xyz));
 	}
 
-	// substarct returns point of difference of two points
-	public Point subtract(Point p) {
-		return new Point(xyz.subtract(p.xyz));
+	// // substarct returns point of difference of two points
+	// public Point subtract(Point p) {
+	// 	return new Point(xyz.subtract(p.xyz));
+	// }
+
+	/**
+	 * 
+	 * @param p point in 3D
+	 * @return a vector from point p to the current point
+	 */
+	public Vector subtract(Point p){
+		return new Vector(xyz.d1-p.xyz.d1,xyz.d2-p.xyz.d2,xyz.d3-p.xyz.d3);
+
 	}
+
+
 
 	public Double3 getDouble3(){
 		return xyz;
