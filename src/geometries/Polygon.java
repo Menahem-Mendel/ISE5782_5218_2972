@@ -58,8 +58,8 @@ public class Polygon implements Geometry {
 
 		// Subtracting any subsequent points will throw an IllegalArgumentException
 		// because of Zero Vector if they are in the same point
-		Vector edge1 = (Vector) vertices[vertices.length - 1].subtract(vertices[vertices.length - 2]);
-		Vector edge2 = (Vector) vertices[0].subtract(vertices[vertices.length - 1]);
+		Vector edge1 = vertices[vertices.length - 1].subtract(vertices[vertices.length - 2]);
+		Vector edge2 = vertices[0].subtract(vertices[vertices.length - 1]);
 
 		// Cross Product of any subsequent edges will throw an IllegalArgumentException
 		// because of Zero Vector if they connect three vertices that lay in the same
@@ -77,7 +77,7 @@ public class Polygon implements Geometry {
 				throw new IllegalArgumentException("All vertices of a polygon must lay in the same plane");
 			// Test the consequent edges have
 			edge1 = edge2;
-			edge2 = (Vector) vertices[i].subtract(vertices[i - 1]);
+			edge2 = vertices[i].subtract(vertices[i - 1]);
 			if (positive != (edge1.crossProduct(edge2).dotProduct(n) > 0))
 				throw new IllegalArgumentException("All vertices must be ordered and the polygon must be convex");
 		}

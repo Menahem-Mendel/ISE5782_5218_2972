@@ -4,28 +4,48 @@ package geometries;
  * Sphere defines by a point and size of the radius
  */
 import primitives.*;
+
+/**
+ * Sphere class represents a sphere in two-dimensional space
+ * 
+ */
 public class Sphere implements Geometry {
 
     private final Point center;
-	private final double radius;
+    private final double radius;
 
-    public Sphere(Point p , double r){
-        center= p;
+    /**
+     * Sphere build ctor
+     * 
+     * @param p center point
+     * @param r radius
+     */
+    public Sphere(Point p, double r) {
+        center = p;
         radius = r;
     }
 
-    public Point getCenter(){
+    /**
+     * getCenter
+     * 
+     * @return center point
+     */
+    public Point getCenter() {
         return center;
     }
 
-    public double getRadius(){
+    /**
+     * getRadius
+     * 
+     * @return radius
+     */
+    public double getRadius() {
         return radius;
     }
 
     @Override
     public Vector getNormal(Point p) {
-        // TODO Auto-generated method stub
-        return null;
+        return p.subtract(center);
     }
 
     @Override
@@ -33,6 +53,5 @@ public class Sphere implements Geometry {
         // TODO Auto-generated method stub
         return super.toString();
     }
-
 
 }

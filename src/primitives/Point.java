@@ -7,39 +7,55 @@ package primitives;
 public class Point {
 	protected final Double3 xyz;
 
+	/**
+	 * Point build ctor
+	 * 
+	 * @param x x coordinate
+	 * @param y y coordinate
+	 * @param z z coordinate
+	 */
 	public Point(double x, double y, double z) {
 		xyz = new Double3(x, y, z);
 	}
 
+	/**
+	 * Point build ctor
+	 * 
+	 * @param d 3D point
+	 */
 	public Point(Double3 d) {
 		xyz = d;
 	}
 
+	/**
+	 * getXYZ
+	 * 
+	 * @return xyz
+	 */
 	public Double3 getXYZ() {
 		return xyz;
 	}
 
-	
-	// return sum of two points
-	public Point add(Vector p) {
-		return new Point(xyz.add(p.xyz));
+	/**
+	 * add vector to a point
+	 * 
+	 * @param v vector
+	 * @return vector of sum
+	 */
+	public Point add(Vector v) {
+		return new Point(xyz.add(v.xyz));
 	}
-
-	// // substarct returns point of difference of two points
-	// public Point subtract(Point p) {
-	// 	return new Point(xyz.subtract(p.xyz));
-	// }
 
 	/**
+	 * subtract two points
 	 * 
-	 * @param p point in 3D
-	 * @return a vector from point p to the current point
+	 * @param p point
+	 * @return vector of substraction
 	 */
-	public Vector subtract(Point p){
-		return new Vector(xyz.d1-p.xyz.d1,xyz.d2-p.xyz.d2,xyz.d3-p.xyz.d3);
+	public Vector subtract(Point p) {
+		return new Vector(xyz.d1 - p.xyz.d1, xyz.d2 - p.xyz.d2, xyz.d3 - p.xyz.d3);
 
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {

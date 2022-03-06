@@ -1,7 +1,8 @@
- /**
-  * name:               id:             mail:
-    name: josef wolf    id: 317732972   mail: yossiwolf@hotmail.com
-  */
+
+/**
+ * name: mendel gelfand    id: 342795218   mail: mendelgel@gmail.com
+   name: josef wolf        id: 317732972   mail: yossiwolf@hotmail.com
+ */
 import primitives.*;
 import static java.lang.System.out;
 import static primitives.Util.*;
@@ -19,7 +20,7 @@ public final class Main {
      * @param args irrelevant here
      */
     public static void main(String[] args) {
-        
+
         try { // test zero vector
             new Vector(0, 0, 0);
             out.println("ERROR: zero vector does not throw an exception");

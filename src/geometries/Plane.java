@@ -1,10 +1,11 @@
 package geometries;
 
-/**
- * plane defines by a point and a vertical vector
- */
 import primitives.*;
 
+/**
+ * Plane class represents two-dimensional plane in 3D Cartesian coordinate
+ * 
+ */
 public class Plane implements Geometry {
 
 	private final Point q0;
@@ -12,6 +13,7 @@ public class Plane implements Geometry {
 
 	/**
 	 * Constructor for a plane by 3 points
+	 * 
 	 * @param p1 first point
 	 * @param p2 second point
 	 * @param p3 third point
@@ -27,6 +29,7 @@ public class Plane implements Geometry {
 
 	/**
 	 * Contructor for a plane by a vector and a point
+	 * 
 	 * @param p point in space
 	 * @param n vectour normal of the plane
 	 */
@@ -35,16 +38,32 @@ public class Plane implements Geometry {
 		normal = n.normalize();
 	}
 
+	/**
+	 * getQ0
+	 * 
+	 * @return center point
+	 */
 	public Point getQ0() {
 		return q0;
 	}
 
+	/**
+	 * getNormal
+	 * 
+	 * @return normal vector
+	 */
 	public Vector getNormal() {
 		return normal;
 	}
 
+	/**
+	 * getNormal
+	 * 
+	 * @param p point
+	 * @return normal vector
+	 */
 	public Vector getNormal(Point p) {
 		return normal;
 	}
-	
+
 }

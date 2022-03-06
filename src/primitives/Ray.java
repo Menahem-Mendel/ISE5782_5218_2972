@@ -1,23 +1,39 @@
 package primitives;
-/** 
-* Ray defines All points on the line that are on one side of the point.
-*
-*/
 
+/**
+ * Ray defines All points on the line that are on one side of the point.
+ *
+ */
 public class Ray {
 	private Point p0;
 	private Vector dir;
 
+	/**
+	 * Ray build ctor
+	 * 
+	 * @param p
+	 * @param v
+	 */
 	public Ray(Point p, Vector v) {
 		dir = v.normalize();
 		p0 = p;
 	}
 
+	/**
+	 * getP0
+	 * 
+	 * @return starting point
+	 */
 	public Point getP0() {
 		return p0;
 	}
 
-	public Vector getDir(){
+	/**
+	 * getDir
+	 * 
+	 * @return vector direction
+	 */
+	public Vector getDir() {
 		return dir;
 	}
 

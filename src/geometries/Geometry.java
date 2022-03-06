@@ -1,8 +1,10 @@
 package geometries;
 
 import primitives.*;
+
 /**
- * interface for all Geometries with getnormal
+ * Geometry interface describes every geometry in multi-dimensional space
+ * 
  */
 public interface Geometry {
 	Vector getNormal(Point p);
