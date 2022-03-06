@@ -35,6 +35,10 @@ public class Plane implements Geometry {
 		normal = n.normalize();
 	}
 
+	public Point getQ0() {
+		return q0;
+	}
+
 	public Vector getNormal() {
 		return normal;
 	}

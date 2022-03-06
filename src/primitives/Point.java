@@ -41,11 +41,6 @@ public class Point {
 	}
 
 
-
-	public Double3 getDouble3(){
-		return xyz;
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

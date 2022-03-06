@@ -13,6 +13,14 @@ public class Ray {
 		p0 = p;
 	}
 
+	public Point getP0() {
+		return p0;
+	}
+
+	public Vector getDir(){
+		return dir;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
