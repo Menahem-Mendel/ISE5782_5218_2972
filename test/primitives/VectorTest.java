@@ -33,6 +33,20 @@ public class VectorTest {
 	@Test
 	public void VectorTest() {
 
+		// ============ Equivalence Partitions Tests ==============
+
+		// TC01: Correct vector
+		try {
+			new Vector(q1, q2, q3);
+		} catch (IllegalArgumentException e) {
+			fail("Failed constructing a correct vector");
+		}
+
+		// =============== Boundary Values Tests ==================
+
+		// TC11: Zero vector
+		assertThrows(IllegalArgumentException.class, () -> new Vector(0, 0, 0), "Constructed a zero vector");
+
 	}
 
 	/**
