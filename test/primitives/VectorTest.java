@@ -5,9 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import geometries.*;
-import primitives.*;
-
 public class VectorTest {
 
 	final double MIN = -1000;
