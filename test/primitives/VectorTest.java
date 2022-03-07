@@ -24,7 +24,7 @@ public class VectorTest {
 
 	@Test
 	public void VectorTest() {
-		
+
 	}
 
 	/**
@@ -86,6 +86,10 @@ public class VectorTest {
 		assertEquals("scale() wrong scaling vector result", v2.length(), vec.scale(scalar).length(), DELTA);
 
 		// =============== Boundary Values Tests ==================
+
+		// TC11: Test zero scaled vector
+		assertThrows("sclae() for zero scalar doesn't throw an exception", IllegalArgumentException.class,
+				() -> vec.scale(0));
 	}
 
 	@Test
