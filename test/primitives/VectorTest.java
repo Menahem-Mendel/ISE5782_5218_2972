@@ -36,6 +36,9 @@ public class VectorTest {
 				() -> v1.crossProduct(v3));
 	}
 
+	/**
+	 * Test method for {@link primitives.Vector#dotProduct(primitives.Vector)}.
+	 */
 	@Test
 	public void dotProduct() {
 		Vector v1 = new Vector(1, 2, 3);
@@ -46,7 +49,7 @@ public class VectorTest {
 		assertEquals("dotProduct() wrong result value", v1.length() * v1.length(), v1.dotProduct(v1), 0.00001);
 
 		Vector v2 = new Vector(-2, -4, -6);
-		assertEquals("dotProduct() wrong result value", v1.length() * v1.length(), v1.dotProduct(v2), 0.00001);
+		assertEquals("dotProduct() wrong result value", v1.length() * v1.length() * 2, v1.dotProduct(v2), 0.00001);
 
 		Vector v3 = new Vector(0, 0, 1);
 		Vector v4 = new Vector(0, 1, 0);
