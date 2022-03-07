@@ -76,7 +76,7 @@ public class VectorTest {
 		// ============ Equivalence Partitions Tests ==============
 		Vector v2 = new Vector(q1 * scalar, q2 * scalar, q3 * scalar);
 
-		// TC01: Test scaled vector length
+		// TC01: Test scaled vector
 		assertEquals("scale() wrong scaling vector result", v2.length(), v1.scale(scalar).length(), DELTA);
 
 		// =============== Boundary Values Tests ==================
@@ -84,7 +84,15 @@ public class VectorTest {
 
 	@Test
 	public void normalizeTest() {
+		final double q1 = Math.random() * (MAX - MIN + 1) + MIN;
+		final double q2 = Math.random() * (MAX - MIN + 1) + MIN;
+		final double q3 = Math.random() * (MAX - MIN + 1) + MIN;
+
+		Vector v1 = new Vector(q1, q2, q3);
 		// ============ Equivalence Partitions Tests ==============
+
+		// TC01: Test scaled vector
+		assertEquals("scale() wrong normal vector", 1, v1.normalize().length(), DELTA);
 
 		// =============== Boundary Values Tests ==================
 	}
