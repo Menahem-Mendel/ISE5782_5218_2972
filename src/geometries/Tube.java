@@ -7,7 +7,6 @@ import primitives.*;
  * 
  */
 public class Tube implements Geometry {
-
 	private final Ray axisRay;
 	private final double radius;
 
@@ -23,7 +22,7 @@ public class Tube implements Geometry {
 	}
 
 	/**
-	 * getAxisRay
+	 * getAxisRay get axis ray
 	 * 
 	 * @return ray axis
 	 */
@@ -32,7 +31,7 @@ public class Tube implements Geometry {
 	}
 
 	/**
-	 * getRadius
+	 * getRadius get radius of the tube base
 	 * 
 	 * @return radius
 	 */
@@ -42,14 +41,7 @@ public class Tube implements Geometry {
 
 	@Override
 	public Vector getNormal(Point p) {
-		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
 	}
 
 }

@@ -26,7 +26,7 @@ public class Sphere implements Geometry {
     }
 
     /**
-     * getCenter
+     * getCenter get center of the Sphere
      * 
      * @return center point
      */
@@ -35,7 +35,7 @@ public class Sphere implements Geometry {
     }
 
     /**
-     * getRadius
+     * getRadius get the radius of the Sphere
      * 
      * @return radius
      */
@@ -46,12 +46,6 @@ public class Sphere implements Geometry {
     @Override
     public Vector getNormal(Point p) {
         return p.subtract(center);
-    }
-
-    @Override
-    public String toString() {
-        // TODO Auto-generated method stub
-        return super.toString();
     }
 
 }

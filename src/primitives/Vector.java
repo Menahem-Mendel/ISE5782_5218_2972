@@ -1,15 +1,19 @@
 package primitives;
 
-/**
+/*
  * Vector class represents a vector in 3D space
  * 
  */
 public class Vector extends Point {
+	/**
+	 * Vector build ctor
+	 * 
+	 * @param x coordinate
+	 * @param y coordinate
+	 * @param z coordinate
+	 */
 	public Vector(double x, double y, double z) {
-		super(x, y, z);
-
-		if (Util.isZero(x) && Util.isZero(y) && Util.isZero(z))
-			throw new IllegalArgumentException(Errors.ZERO_VEC);
+		this(new Double3(x, y, z));
 	}
 
 	/**
@@ -19,10 +23,12 @@ public class Vector extends Point {
 	 */
 	public Vector(Double3 d) {
 		super(d);
+		if (xyz.equals(Double3.ZERO))
+			throw new IllegalArgumentException(Errors.ZERO_VEC);
 	}
 
 	/**
-	 * add returns vector addition of two vectors
+	 * add returns vector of sum of two vectors
 	 * 
 	 * @param v
 	 * @return vector of sum
@@ -32,7 +38,7 @@ public class Vector extends Point {
 	}
 
 	/**
-	 * scale returns scaled vector by factor
+	 * scale returns scaled vector by the factor parametere
 	 * 
 	 * @param d
 	 * @return scaled vector
@@ -48,31 +54,25 @@ public class Vector extends Point {
 	 * @return vector cross product
 	 */
 	public Vector crossProduct(Vector rhs) {
-		if (Util.isZero(dotProduct(rhs) - length()))
-			throw new IllegalArgumentException(Errors.PARALLEL_VEC);
-
-		return new Vector(
-				new Double3(xyz.d2 * rhs.xyz.d3 - xyz.d3 * rhs.xyz.d2,
-						xyz.d3 * rhs.xyz.d1 - xyz.d1 * rhs.xyz.d3,
-						xyz.d1 * rhs.xyz.d2 - xyz.d2 * rhs.xyz.d1));
+		return new Vector(xyz.d2 * rhs.xyz.d3 - xyz.d3 * rhs.xyz.d2,
+				xyz.d3 * rhs.xyz.d1 - xyz.d1 * rhs.xyz.d3,
+				xyz.d1 * rhs.xyz.d2 - xyz.d2 * rhs.xyz.d1);
 	}
 
 	/**
 	 * lengthSquared returns squared length of the vector
 	 * 
-	 * @return squared length
+	 * @return vector squared length
 	 */
 	public double lengthSquared() {
-		return Math.pow(xyz.d1, 2d)
-				+ Math.pow(xyz.d2, 2d)
-				+ Math.pow(xyz.d3, 2d);
+		return dotProduct(this);
 
 	}
 
 	/**
 	 * length returns length of the vector
 	 * 
-	 * @return length
+	 * @return vector length
 	 */
 	public double length() {
 		return Math.sqrt(lengthSquared());
@@ -81,7 +81,7 @@ public class Vector extends Point {
 	/**
 	 * normalize returns the normalized vector
 	 * 
-	 * @return normal
+	 * @return normal vector
 	 */
 	public Vector normalize() {
 		return new Vector(xyz.reduce(length()));
@@ -90,7 +90,7 @@ public class Vector extends Point {
 	/**
 	 * dotProduct returns dot product of two vectors
 	 * 
-	 * @param rhs
+	 * @param rhs vector
 	 * @return dot product
 	 */
 	public double dotProduct(Vector rhs) {

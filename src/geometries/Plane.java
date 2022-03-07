@@ -12,26 +12,25 @@ public class Plane implements Geometry {
 	private final Vector normal;
 
 	/**
-	 * Constructor for a plane by 3 points
+	 * Plane build ctor
 	 * 
 	 * @param p1 first point
 	 * @param p2 second point
 	 * @param p3 third point
 	 */
 	public Plane(Point p1, Point p2, Point p3) {
-		Vector a = new Vector(p2.subtract(p1).getXYZ());
-		Vector b = new Vector(p3.subtract(p1).getXYZ());
-		Vector c = a.crossProduct(b);
+		Vector a = p2.subtract(p1);
+		Vector b = p3.subtract(p1);
 
+		normal = a.crossProduct(b).normalize();
 		q0 = p1;
-		normal = c.normalize();
 	}
 
 	/**
-	 * Contructor for a plane by a vector and a point
+	 * Plane build ctor
 	 * 
-	 * @param p point in space
-	 * @param n vectour normal of the plane
+	 * @param p point in 3D space
+	 * @param n vector normal of the plane
 	 */
 	public Plane(Point p, Vector n) {
 		q0 = p;
@@ -39,7 +38,7 @@ public class Plane implements Geometry {
 	}
 
 	/**
-	 * getQ0
+	 * getQ0 get center point of the plane
 	 * 
 	 * @return center point
 	 */
@@ -48,22 +47,20 @@ public class Plane implements Geometry {
 	}
 
 	/**
-	 * getNormal
+	 * getNormal get vector normal of the plane
 	 * 
-	 * @return normal vector
+	 * @return vector normal
 	 */
 	public Vector getNormal() {
-		return normal;
+		return null;
 	}
 
 	/**
-	 * getNormal
+	 * getNormal get vector normal of the plane
 	 * 
-	 * @param p point
-	 * @return normal vector
+	 * @return vector normal
 	 */
 	public Vector getNormal(Point p) {
-		return normal;
+		return null;
 	}
-
 }

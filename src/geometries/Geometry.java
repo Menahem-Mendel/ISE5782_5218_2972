@@ -7,5 +7,11 @@ import primitives.*;
  * 
  */
 public interface Geometry {
+	/**
+	 * getNomal
+	 * 
+	 * @param p point
+	 * @return vector normal
+	 */
 	Vector getNormal(Point p);
 }

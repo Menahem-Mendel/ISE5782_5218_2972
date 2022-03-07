@@ -5,8 +5,8 @@ package primitives;
  *
  */
 public class Ray {
-	private Point p0;
-	private Vector dir;
+	private final Point p0;
+	private final Vector dir;
 
 	/**
 	 * Ray build ctor
@@ -23,7 +23,7 @@ public class Ray {
 	}
 
 	/**
-	 * getP0
+	 * getP0 get starting point
 	 * 
 	 * @return starting point
 	 */
@@ -32,7 +32,7 @@ public class Ray {
 	}
 
 	/**
-	 * getDir
+	 * getDir get directional vector
 	 * 
 	 * @return vector direction
 	 */
@@ -54,6 +54,6 @@ public class Ray {
 
 	@Override
 	public String toString() {
-		return p0.toString() + dir.toString();
+		return "->" + String.format("%s, %s", p0.toString(), dir.toString());
 	}
 }

@@ -10,9 +10,9 @@ public class Point {
 	/**
 	 * Point build ctor
 	 * 
-	 * @param x x coordinate
-	 * @param y y coordinate
-	 * @param z z coordinate
+	 * @param x coordinate
+	 * @param y coordinate
+	 * @param z coordinate
 	 */
 	public Point(double x, double y, double z) {
 		xyz = new Double3(x, y, z);
@@ -25,15 +25,6 @@ public class Point {
 	 */
 	public Point(Double3 d) {
 		xyz = d;
-	}
-
-	/**
-	 * getXYZ
-	 * 
-	 * @return xyz
-	 */
-	public Double3 getXYZ() {
-		return xyz;
 	}
 
 	/**
@@ -50,11 +41,10 @@ public class Point {
 	 * subtract two points
 	 * 
 	 * @param p point
-	 * @return vector of substraction
+	 * @return vector of subtraction
 	 */
 	public Vector subtract(Point p) {
-		return new Vector(xyz.d1 - p.xyz.d1, xyz.d2 - p.xyz.d2, xyz.d3 - p.xyz.d3);
-
+		return new Vector(xyz.subtract(p.xyz));
 	}
 
 	@Override
