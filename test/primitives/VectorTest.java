@@ -10,6 +10,10 @@ import geometries.*;
 import primitives.*;
 
 public class VectorTest {
+	final double MIN = -1000;
+	final double MAX = 1000;
+	final double DELTA = 0.00001;
+
 	/**
 	 * Test method for {@link primitives.Vector#crossProduct(primitives.Vector)}.
 	 */
@@ -23,7 +27,7 @@ public class VectorTest {
 
 		// TC01: Test that length of cross-product is proper (orthogonal vectors taken
 		// for simplicity)
-		assertEquals("crossProduct() wrong result length", v1.length() * v2.length(), vr.length(), 0.00001);
+		assertEquals("crossProduct() wrong result length", v1.length() * v2.length(), vr.length(), DELTA);
 
 		// TC02: Test cross-product result orthogonality to its operands
 		assertTrue("crossProduct() result is not orthogonal to 1st operand", Util.isZero(vr.dotProduct(v1)));
@@ -40,22 +44,47 @@ public class VectorTest {
 	 * Test method for {@link primitives.Vector#dotProduct(primitives.Vector)}.
 	 */
 	@Test
-	public void dotProduct() {
+	public void dotProductTest() {
 		Vector v1 = new Vector(1, 2, 3);
 
 		// ============ Equivalence Partitions Tests ==============
 
 		// TC01: Test dot product of two parallel vectors
-		final double scalar = Math.random() * (1000 + 1000 + 1) - 1000;
+		final double scalar = Math.random() * (MAX - MIN + 1) + MIN;
 		Vector v2 = v1.scale(scalar);
 
 		assertEquals("dotProduct() wrong result of parallel vectors dot product", v1.lengthSquared() * scalar,
-				v1.dotProduct(v2), 0.00001);
+				v1.dotProduct(v2), DELTA);
 
 		// TC02: Test dot product of orthogonal vectors
 		Vector v3 = new Vector(0, 0, 1);
 		Vector v4 = new Vector(0, 1, 0);
-		assertEquals("dotProduct() result should be zero value", 0, v3.dotProduct(v4), 0.00001);
+		assertEquals("dotProduct() result should be zero value", 0, v3.dotProduct(v4), DELTA);
+
+		// =============== Boundary Values Tests ==================
+	}
+
+	@Test
+	public void scaleTest() {
+		final double q1 = Math.random() * (MAX - MIN + 1) + MIN;
+		final double q2 = Math.random() * (MAX - MIN + 1) + MIN;
+		final double q3 = Math.random() * (MAX - MIN + 1) + MIN;
+
+		final double scalar = Math.random() * (MAX - MIN + 1) + MIN;
+
+		Vector v1 = new Vector(q1, q2, q3);
+		// ============ Equivalence Partitions Tests ==============
+		Vector v2 = new Vector(q1 * scalar, q2 * scalar, q3 * scalar);
+
+		// TC01: Test scaled vector length
+		assertEquals("scale() wrong scaling vector result", v2.length(), v1.scale(scalar).length(), DELTA);
+
+		// =============== Boundary Values Tests ==================
+	}
+
+	@Test
+	public void normalizeTest() {
+		// ============ Equivalence Partitions Tests ==============
 
 		// =============== Boundary Values Tests ==================
 	}
