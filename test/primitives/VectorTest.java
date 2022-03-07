@@ -14,6 +14,17 @@ public class VectorTest {
 	final double MAX = 1000;
 	final double DELTA = 0.00001;
 
+	final double q1 = Math.random() * (MAX - MIN + 1) + MIN;
+	final double q2 = Math.random() * (MAX - MIN + 1) + MIN;
+	final double q3 = Math.random() * (MAX - MIN + 1) + MIN;
+
+	final double scalar = Math.random() * (MAX - MIN + 1) + MIN;
+
+	@Test
+	public void VectorTest() {
+
+	}
+
 	/**
 	 * Test method for {@link primitives.Vector#crossProduct(primitives.Vector)}.
 	 */
@@ -50,7 +61,6 @@ public class VectorTest {
 		// ============ Equivalence Partitions Tests ==============
 
 		// TC01: Test dot product of two parallel vectors
-		final double scalar = Math.random() * (MAX - MIN + 1) + MIN;
 		Vector v2 = v1.scale(scalar);
 
 		assertEquals("dotProduct() wrong result of parallel vectors dot product", v1.lengthSquared() * scalar,
@@ -66,15 +76,12 @@ public class VectorTest {
 
 	@Test
 	public void scaleTest() {
-		final double q1 = Math.random() * (MAX - MIN + 1) + MIN;
-		final double q2 = Math.random() * (MAX - MIN + 1) + MIN;
-		final double q3 = Math.random() * (MAX - MIN + 1) + MIN;
-
 		final double scalar = Math.random() * (MAX - MIN + 1) + MIN;
 
 		Vector v1 = new Vector(q1, q2, q3);
-		// ============ Equivalence Partitions Tests ==============
 		Vector v2 = new Vector(q1 * scalar, q2 * scalar, q3 * scalar);
+
+		// ============ Equivalence Partitions Tests ==============
 
 		// TC01: Test scaled vector
 		assertEquals("scale() wrong scaling vector result", v2.length(), v1.scale(scalar).length(), DELTA);
@@ -84,16 +91,30 @@ public class VectorTest {
 
 	@Test
 	public void normalizeTest() {
-		final double q1 = Math.random() * (MAX - MIN + 1) + MIN;
-		final double q2 = Math.random() * (MAX - MIN + 1) + MIN;
-		final double q3 = Math.random() * (MAX - MIN + 1) + MIN;
-
 		Vector v1 = new Vector(q1, q2, q3);
+
 		// ============ Equivalence Partitions Tests ==============
 
-		// TC01: Test scaled vector
+		// TC01: Test normalized vector
 		assertEquals("scale() wrong normal vector", 1, v1.normalize().length(), DELTA);
 
 		// =============== Boundary Values Tests ==================
+	}
+
+	@Test
+	public void lengthTest() {
+		Vector v1 = new Vector(q1, q2, q3);
+
+		// ============ Equivalence Partitions Tests ==============
+
+		// TC01: test vector length
+		assertEquals("length()", Math.sqrt(q1 * q1 + q2 * q2 + q3 * q3), v1.length(), DELTA);
+
+		// =============== Boundary Values Tests ==================
+	}
+
+	@Test
+	public void addTest() {
+
 	}
 }
