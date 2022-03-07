@@ -1,8 +1,6 @@
 package geometries;
 
-import primitives.Errors;
 import primitives.Ray;
-import primitives.Util;
 
 /**
  * Cylinder class represents cylinder in 3D space

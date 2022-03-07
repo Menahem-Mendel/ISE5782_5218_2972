@@ -7,8 +7,9 @@ import org.junit.jupiter.api.Test;
 
 public class VectorTest {
 
-	final double MIN = -1000;
-	final double MAX = 1000;
+	final double MIN = -10;
+	final double MAX = 10;
+
 	final double DELTA = 0.00001;
 
 	double q1;
@@ -17,21 +18,21 @@ public class VectorTest {
 
 	double scalar;
 
-	Vector vec;
+	Vector lhs;
 
 	@BeforeEach
-	public void setup() {
-		q1 = Math.random() * (MAX - MIN + 1) + MIN;
-		q2 = Math.random() * (MAX - MIN + 1) + MIN;
-		q3 = Math.random() * (MAX - MIN + 1) + MIN;
+	public void init() {
+		q1 = Util.random(MIN, MAX);
+		q2 = Util.random(MIN, MAX);
+		q3 = Util.random(MIN, MAX);
 
-		scalar = Math.random() * (MAX - MIN + 1) + MIN;
+		scalar = Util.random(MIN, MAX);
 
-		vec = new Vector(q1, q2, q3); // base vector
+		lhs = new Vector(q1, q2, q3); // base vector
 	}
 
 	/**
-	 * Test method for {@link primitives.Vector#Vector()}.
+	 * Test method for {@link primitives.Vector#Vector(double, double, double)}.
 	 */
 	@Test
 	public void ctorTest() {
@@ -57,25 +58,29 @@ public class VectorTest {
 	 */
 	@Test
 	public void crossProductTest() {
-		Vector v1 = new Vector(1, 2, 3);
+		final double w1 = Util.random(MIN, MAX);
+		final double w2 = Util.random(MIN, MAX);
+		final double w3 = Util.random(MIN, MAX);
 
 		// ============ Equivalence Partitions Tests ==============
-		Vector v2 = new Vector(0, 3, -2);
-		Vector vr = v1.crossProduct(v2);
+		Vector rhs = new Vector(w1, w2, w3);
+		Vector vcp = lhs.crossProduct(rhs);
 
-		// TC01: Test that length of cross-product is proper (orthogonal vectors taken
-		// for simplicity)
-		assertEquals(v1.length() * v2.length(), vr.length(), DELTA, "crossProduct() wrong result length");
+		final double theta = Math.acos((lhs.dotProduct(rhs) / (lhs.length() * rhs.length())));
+
+		// TC01: Test that length of cross-product is proper
+		assertEquals(lhs.length() * rhs.length() * Math.sin(theta), vcp.length(), DELTA,
+				"crossProduct() wrong result vector length");
 
 		// TC02: Test cross-product result orthogonality to its operands
-		assertTrue(Util.isZero(vr.dotProduct(v1)), "crossProduct() result is not orthogonal to 1st operand");
-		assertTrue(Util.isZero(vr.dotProduct(v2)), "crossProduct() result is not orthogonal to 2nd operand");
+		assertTrue(Util.isZero(vcp.dotProduct(lhs)), "crossProduct() result is not orthogonal to 1st operand");
+		assertTrue(Util.isZero(vcp.dotProduct(rhs)), "crossProduct() result is not orthogonal to 2nd operand");
 
 		// =============== Boundary Values Tests ==================
-		// TC11: test zero vector from cross-productof co-lined vectors
-		Vector v3 = new Vector(-2, -4, -6);
-		assertThrows(IllegalArgumentException.class, () -> v1.crossProduct(v3),
-				"crossProduct() for parallel vectors does not throw an exception");
+		// TC11: test zero vector from cross-product of co-lined vectors
+		Vector vs = lhs.scale(scalar);
+		assertThrows(IllegalArgumentException.class, () -> lhs.crossProduct(vs),
+				"crossProduct() for parallel vectors does not throw an exception: lhs: %s, rhs: %s");
 	}
 
 	/**
@@ -86,15 +91,15 @@ public class VectorTest {
 		// ============ Equivalence Partitions Tests ==============
 
 		// TC01: Test dot product of two parallel vectors
-		Vector v2 = vec.scale(scalar);
+		Vector rhs = lhs.scale(scalar);
 
-		assertEquals(vec.lengthSquared() * scalar, vec.dotProduct(v2), DELTA,
+		assertEquals(lhs.lengthSquared() * scalar, lhs.dotProduct(rhs), DELTA,
 				"dotProduct() wrong result of parallel vectors dot product");
 
 		// TC02: Test dot product of orthogonal vectors
-		Vector v3 = new Vector(0, 0, 1);
-		Vector v4 = new Vector(0, 1, 0);
-		assertEquals(0, v3.dotProduct(v4), DELTA, "dotProduct() result should be zero value");
+		lhs = new Vector(0, 0, 1);
+		rhs = new Vector(1, 1, 0);
+		assertEquals(0, lhs.dotProduct(rhs), DELTA, "dotProduct() result should be zero value");
 
 		// =============== Boundary Values Tests ==================
 	}
@@ -104,17 +109,17 @@ public class VectorTest {
 	 */
 	@Test
 	public void scaleTest() {
-		Vector v2 = new Vector(q1 * scalar, q2 * scalar, q3 * scalar);
+		Vector rhs = new Vector(q1 * scalar, q2 * scalar, q3 * scalar);
 
 		// ============ Equivalence Partitions Tests ==============
 
 		// TC01: Test scaled vector
-		assertEquals(v2.length(), vec.scale(scalar).length(), DELTA, "scale() wrong scaling vector result");
+		assertEquals(rhs.length(), lhs.scale(scalar).length(), DELTA, "scale() wrong scaling vector result");
 
 		// =============== Boundary Values Tests ==================
 
 		// TC11: Test zero scaled vector
-		assertThrows(IllegalArgumentException.class, () -> vec.scale(0),
+		assertThrows(IllegalArgumentException.class, () -> lhs.scale(0),
 				"scale() for zero scalar doesn't throw an exception");
 	}
 
@@ -127,7 +132,7 @@ public class VectorTest {
 		// ============ Equivalence Partitions Tests ==============
 
 		// TC01: Test normalized vector
-		assertEquals(1, vec.normalize().length(), DELTA, "normalize() wrong normal vector");
+		assertEquals(1, lhs.normalize().length(), DELTA, "normalize() wrong normal vector");
 
 		// =============== Boundary Values Tests ==================
 	}
@@ -141,7 +146,7 @@ public class VectorTest {
 		// ============ Equivalence Partitions Tests ==============
 
 		// TC01: test vector length
-		assertEquals(Math.sqrt(q1 * q1 + q2 * q2 + q3 * q3), vec.length(), DELTA, "length() wrong vector length");
+		assertEquals(q1 * q1 + q2 * q2 + q3 * q3, lhs.lengthSquared(), DELTA, "length() wrong vector length");
 
 		// =============== Boundary Values Tests ==================
 	}
@@ -151,26 +156,26 @@ public class VectorTest {
 	 */
 	@Test
 	public void addTest() {
-		final double w1 = Math.random() * (MAX - MIN + 1) + MIN;
-		final double w2 = Math.random() * (MAX - MIN + 1) + MIN;
-		final double w3 = Math.random() * (MAX - MIN + 1) + MIN;
+		final double w1 = Util.random(MIN, MAX);
+		final double w2 = Util.random(MIN, MAX);
+		final double w3 = Util.random(MIN, MAX);
 
 		// ============ Equivalence Partitions Tests ==============
-		Vector v2 = new Vector(w1, w2, w3);
-		Vector v3 = new Vector(q1 + w1, q2 + w2, q3 + w3);
+		Vector rhs = new Vector(w1, w2, w3);
+		Vector vs = new Vector(q1 + w1, q2 + w2, q3 + w3);
 
 		// TC01: test vector of sum length
-		assertEquals(v3.length(), vec.add(v2).length(), DELTA, "add() wrong vector of sum length");
+		assertEquals(vs.length(), lhs.add(rhs).length(), DELTA, "add() wrong vector of sum length");
 
 		// TC02: test vector of sum direction
-		assertEquals(v3.lengthSquared(), vec.add(v2).dotProduct(v3), DELTA, "add() wrong vector of sum direction");
+		assertEquals(vs.lengthSquared(), lhs.add(rhs).dotProduct(vs), DELTA, "add() wrong vector of sum direction");
 
 		// =============== Boundary Values Tests ==================
 
 		Vector v4 = new Vector(-q1, -q2, -q3);
 
 		// TC11: test vector sum gives zero
-		assertThrows(IllegalArgumentException.class, () -> vec.add(v4),
+		assertThrows(IllegalArgumentException.class, () -> lhs.add(v4),
 				"add() for opposite vectors sum doesn't throw an exception");
 	}
 }
