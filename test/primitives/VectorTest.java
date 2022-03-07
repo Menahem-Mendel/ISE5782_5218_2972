@@ -31,7 +31,7 @@ public class VectorTest {
 	 * Test method for {@link primitives.Vector#Vector()}.
 	 */
 	@Test
-	public void VectorTest() {
+	public void ctorTest() {
 
 		// ============ Equivalence Partitions Tests ==============
 
