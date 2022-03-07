@@ -45,15 +45,18 @@ public class VectorTest {
 
 		// ============ Equivalence Partitions Tests ==============
 
-		// TC01: Test that dot product value is proper
-		assertEquals("dotProduct() wrong result value", v1.length() * v1.length(), v1.dotProduct(v1), 0.00001);
+		// TC01: Test dot product of two parallel vectors
+		final double scalar = Math.random() * (1000 + 1000 + 1) - 1000;
+		Vector v2 = v1.scale(scalar);
 
-		Vector v2 = new Vector(-2, -4, -6);
-		assertEquals("dotProduct() wrong result value", v1.length() * v1.length() * 2, v1.dotProduct(v2), 0.00001);
+		assertEquals("dotProduct() wrong result of parallel vectors dot product", v1.lengthSquared() * scalar,
+				v1.dotProduct(v2), 0.00001);
 
+		// TC02: Test dot product of orthogonal vectors
 		Vector v3 = new Vector(0, 0, 1);
 		Vector v4 = new Vector(0, 1, 0);
-		assertEquals("dotProduct() wrong result value", 0, v3.dotProduct(v4), 0.00001);
+		assertEquals("dotProduct() result should be zero value", 0, v3.dotProduct(v4), 0.00001);
+
 		// =============== Boundary Values Tests ==================
 	}
 }
