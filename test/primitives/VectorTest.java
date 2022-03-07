@@ -14,16 +14,22 @@ public class VectorTest {
 	final double MAX = 1000;
 	final double DELTA = 0.00001;
 
-	final double q1 = Math.random() * (MAX - MIN + 1) + MIN;
-	final double q2 = Math.random() * (MAX - MIN + 1) + MIN;
-	final double q3 = Math.random() * (MAX - MIN + 1) + MIN;
+	double q1;
+	double q2;
+	double q3;
 
-	final double scalar = Math.random() * (MAX - MIN + 1) + MIN;
+	double scalar;
 
 	Vector vec;
 
 	@BeforeEach
 	public void setup() {
+		q1 = Math.random() * (MAX - MIN + 1) + MIN;
+		q2 = Math.random() * (MAX - MIN + 1) + MIN;
+		q3 = Math.random() * (MAX - MIN + 1) + MIN;
+
+		scalar = Math.random() * (MAX - MIN + 1) + MIN;
+
 		vec = new Vector(q1, q2, q3); // base vector
 	}
 
@@ -80,8 +86,6 @@ public class VectorTest {
 	 */
 	@Test
 	public void dotProductTest() {
-		Vector vec = new Vector(1, 2, 3);
-
 		// ============ Equivalence Partitions Tests ==============
 
 		// TC01: Test dot product of two parallel vectors
@@ -114,7 +118,7 @@ public class VectorTest {
 
 		// TC11: Test zero scaled vector
 		assertThrows(IllegalArgumentException.class, () -> vec.scale(0),
-				"sclae() for zero scalar doesn't throw an exception");
+				"scale() for zero scalar doesn't throw an exception");
 	}
 
 	/**
@@ -126,7 +130,7 @@ public class VectorTest {
 		// ============ Equivalence Partitions Tests ==============
 
 		// TC01: Test normalized vector
-		assertEquals(1, vec.normalize().length(), DELTA, "scale() wrong normal vector");
+		assertEquals(1, vec.normalize().length(), DELTA, "normalize() wrong normal vector");
 
 		// =============== Boundary Values Tests ==================
 	}
@@ -165,9 +169,11 @@ public class VectorTest {
 		assertEquals(v3.lengthSquared(), vec.add(v2).dotProduct(v3), DELTA, "add() wrong vector of sum direction");
 
 		// =============== Boundary Values Tests ==================
+
 		Vector v4 = new Vector(-q1, -q2, -q3);
 
+		// TC11: test vector sum gives zero
 		assertThrows(IllegalArgumentException.class, () -> vec.add(v4),
-				"add() for opposite vectors doesn't throw an exception");
+				"add() for opposite vectors sum doesn't throw an exception");
 	}
 }
