@@ -47,6 +47,10 @@ public class Point {
 		return new Vector(xyz.subtract(rhs.xyz));
 	}
 
+	public double dist(Point rhs) {
+		return subtract(rhs).length();
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
