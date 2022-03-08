@@ -13,11 +13,11 @@ public class VectorTest {
 	final double DELTA = 0.00001;
 
 	/**
-	 * @param q1 x coordinate
-	 * @param q2 y coordinate
-	 * @param q3 z coordinate
+	 * @param x coordinate
+	 * @param y coordinate
+	 * @param z coordinate
 	 */
-	double q1, q2, q3;
+	double x, y, z;
 	/**
 	 * scalar
 	 */
@@ -29,22 +29,22 @@ public class VectorTest {
 
 	@BeforeEach
 	public void init() {
-		q1 = Util.random(MIN, MAX);
-		q2 = Util.random(MIN, MAX);
-		q3 = Util.random(MIN, MAX);
+		x = Util.random(MIN, MAX);
+		y = Util.random(MIN, MAX);
+		z = Util.random(MIN, MAX);
 
 		t = Util.random(MIN, MAX);
 
-		if (Util.isZero(q1) && Util.isZero(q2) && Util.isZero(q3)) {
-			q1 = 1;
-			q2 = 2;
-			q3 = 3;
+		if (Util.isZero(x) && Util.isZero(y) && Util.isZero(z)) {
+			x = 1;
+			y = 2;
+			z = 3;
 		}
 
 		if (Util.isZero(t))
 			t = 2;
 
-		lhs = new Vector(q1, q2, q3);
+		lhs = new Vector(x, y, z);
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class VectorTest {
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test correct vector
 		try {
-			new Vector(q1, q2, q3);
+			new Vector(x, y, z);
 		} catch (IllegalArgumentException e) {
 			fail("Failed constructing a correct vector");
 		}
@@ -109,7 +109,7 @@ public class VectorTest {
 				"dotProduct() wrong result of parallel vectors dot product");
 
 		// =============== Boundary Values Tests ==================
-		rhs = new Vector(-(q2 * t + q3 * t) / q1, t, t); // orthogonal vector for lhs
+		rhs = new Vector(-(y * t + z * t) / x, t, t); // orthogonal vector for lhs
 
 		// TC11: Test dot product of orthogonal vectors
 		assertEquals(0, lhs.dotProduct(rhs), DELTA, "dotProduct() result should be zero value for orthogonal vectors");
@@ -120,7 +120,7 @@ public class VectorTest {
 	 */
 	@RepeatedTest(10)
 	public void scaleTest() {
-		Vector rhs = new Vector(q1 * t, q2 * t, q3 * t);
+		Vector rhs = new Vector(x * t, y * t, z * t);
 
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test scaled vector
@@ -151,7 +151,7 @@ public class VectorTest {
 	public void lengthTest() {
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test vector length
-		assertEquals(q1 * q1 + q2 * q2 + q3 * q3, lhs.lengthSquared(), DELTA, "length() wrong vector length");
+		assertEquals(x * x + y * y + z * z, lhs.lengthSquared(), DELTA, "length() wrong vector length");
 
 		// =============== Boundary Values Tests ==================
 	}
@@ -166,7 +166,7 @@ public class VectorTest {
 		final double w3 = Util.random(MIN, MAX);
 
 		Vector rhs = new Vector(w1, w2, w3);
-		Vector vsum = new Vector(q1 + w1, q2 + w2, q3 + w3);
+		Vector vsum = new Vector(x + w1, y + w2, z + w3);
 
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test vector of sum length
@@ -177,7 +177,7 @@ public class VectorTest {
 
 		// =============== Boundary Values Tests ==================
 		// TC11: Test vector sum gives zero
-		assertThrows(IllegalArgumentException.class, () -> lhs.add(new Vector(-q1, -q2, -q3)),
+		assertThrows(IllegalArgumentException.class, () -> lhs.add(new Vector(-x, -y, -z)),
 				"add() for opposite vectors sum doesn't throw an exception");
 	}
 }
