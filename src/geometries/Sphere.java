@@ -1,8 +1,5 @@
 package geometries;
 
-/**
- * Sphere defines by a point and size of the radius
- */
 import primitives.*;
 
 /**

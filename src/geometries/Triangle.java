@@ -7,6 +7,7 @@ import primitives.*;
  * 
  */
 public class Triangle extends Polygon {
+	
 	/**
 	 * Triangle represents triangle in 3D space
 	 * 
