@@ -64,8 +64,7 @@ public class PlaneTest {
 
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test normal vector length and orthogonality
-		assertEquals(vcp.lengthSquared(), vcp.dotProduct(plane.getNormal()), DELTA,
-				"getNormal() wrong normal vector");
+		assertEquals(vcp, plane.getNormal(), "getNormal() wrong normal vector");
 
 		// =============== Boundary Values Tests ==================
 	}
