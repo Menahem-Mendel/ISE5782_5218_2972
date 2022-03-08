@@ -168,7 +168,19 @@ public class VectorTest {
 	public void lengthTest() {
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test vector length
-		assertTrue(Util.isZero(lhs.lengthSquared() - (x * x + y * y + z * z)), "length() wrong value");
+		assertTrue(Util.isZero(lhs.length() - Math.sqrt(x * x + y * y + z * z)), "length() wrong value");
+
+		// =============== Boundary Values Tests ==================
+	}
+
+	/**
+	 * Test method for {@link primitives.Vector#lengthSquared()}.
+	 */
+	@RepeatedTest(10)
+	public void lengthSquaredTest() {
+		// ============ Equivalence Partitions Tests ==============
+		// TC01: Test vector length squared
+		assertTrue(Util.isZero(lhs.lengthSquared() - (x * x + y * y + z * z)), "lengthSquared() wrong value");
 
 		// =============== Boundary Values Tests ==================
 	}
