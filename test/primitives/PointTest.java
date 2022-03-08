@@ -19,7 +19,7 @@ public class PointTest {
 	 * 
 	 */
 	@RepeatedTest(10)
-	public void subtractTest() {
+	public void subTest() {
 		assertTrue(true);
 	}
 

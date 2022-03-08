@@ -5,7 +5,7 @@ package primitives;
  * 
  */
 public class Point {
-	
+
 	protected final Double3 xyz;
 
 	/**
@@ -39,13 +39,13 @@ public class Point {
 	}
 
 	/**
-	 * subtract two points
+	 * sub two points
 	 * 
 	 * @param rhs point
-	 * @return vector of subtraction
+	 * @return vector of subion
 	 */
-	public Vector subtract(Point rhs) {
-		return new Vector(xyz.subtract(rhs.xyz));
+	public Vector sub(Point rhs) {
+		return new Vector(xyz.sub(rhs.xyz));
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class Point {
 	 * @return squared distance between two points
 	 */
 	public double distSquared(Point rhs) {
-		return subtract(rhs).lengthSquared();
+		return sub(rhs).lengthSquared();
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class Point {
 	 * @return distance between two points
 	 */
 	public double dist(Point rhs) {
-		return subtract(rhs).length();
+		return sub(rhs).length();
 	}
 
 	@Override

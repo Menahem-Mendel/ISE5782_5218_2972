@@ -69,7 +69,7 @@ public class Double3 {
 	 * @param rhs right handle side operand for addition
 	 * @return result of add
 	 */
-	Double3 subtract(Double3 rhs) {
+	Double3 sub(Double3 rhs) {
 		return new Double3(d1 - rhs.d1, d2 - rhs.d2, d3 - rhs.d3);
 	}
 

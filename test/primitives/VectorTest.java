@@ -57,33 +57,33 @@ public class VectorTest {
 	}
 
 	/**
-	 * Test method for {@link primitives.Vector#crossProduct(primitives.Vector)}.
+	 * Test method for {@link primitives.Vector#cross(primitives.Vector)}.
 	 */
 	@RepeatedTest(10)
-	public void crossProductTest() {
+	public void crossTest() {
 		final double ax = Util.random(MIN, MAX);
 		final double ay = Util.random(MIN, MAX);
 		final double az = Util.random(MIN, MAX);
 
 		Vector rhs = new Vector(ax, ay, az);
-		Vector vcp = lhs.crossProduct(rhs);
+		Vector vcp = lhs.cross(rhs);
 
 		final double theta = Math.acos((lhs.dotProduct(rhs) / (lhs.length() * rhs.length())));
 
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test that length of cross-product is proper
 		assertEquals(lhs.length() * rhs.length() * Math.sin(theta), vcp.length(), DELTA,
-				"crossProduct() wrong result vector length");
+				"cross() wrong result vector length");
 
 		// TC02: Test cross-product result orthogonality to its operands
-		assertTrue(Util.isZero(vcp.dotProduct(lhs)), "crossProduct() result is not orthogonal to 1st operand");
-		assertTrue(Util.isZero(vcp.dotProduct(rhs)), "crossProduct() result is not orthogonal to 2nd operand");
+		assertTrue(Util.isZero(vcp.dotProduct(lhs)), "cross() result is not orthogonal to 1st operand");
+		assertTrue(Util.isZero(vcp.dotProduct(rhs)), "cross() result is not orthogonal to 2nd operand");
 
 		// =============== Boundary Values Tests ==================
 		// TC11: Test zero vector from cross-product of co-lined vectors
 		Vector vs = lhs.scale(t);
-		assertThrows(IllegalArgumentException.class, () -> lhs.crossProduct(vs),
-				"crossProduct() for parallel vectors does not throw an exception: lhs: %s, rhs: %s");
+		assertThrows(IllegalArgumentException.class, () -> lhs.cross(vs),
+				"cross() for parallel vectors does not throw an exception: lhs: %s, rhs: %s");
 	}
 
 	/**
@@ -142,7 +142,7 @@ public class VectorTest {
 		assertTrue(Util.isZero(lhs.normalize().length() - 1), "normalize() the normalized vector is not a unit vector");
 
 		// TC02: Test normal vector cross product with original vector
-		assertThrows(IllegalArgumentException.class, () -> lhs.crossProduct(lhs.normalize()),
+		assertThrows(IllegalArgumentException.class, () -> lhs.cross(lhs.normalize()),
 				"normalize() the normalized vector is not parallel to the original one");
 
 		// TC03: Test normal vector direction

@@ -38,9 +38,9 @@ public class TriangleTest {
 	 */
 	@RepeatedTest(10)
 	public void getNormalTest() {
-		Vector lhs = pp[1].subtract(pp[0]);
-		Vector rhs = pp[2].subtract(pp[0]);
-		Vector vcp = lhs.crossProduct(rhs).normalize();
+		Vector lhs = pp[1].sub(pp[0]);
+		Vector rhs = pp[2].sub(pp[0]);
+		Vector vcp = lhs.cross(rhs).normalize();
 		Random r = new Random();
 
 		// ============ Equivalence Partitions Tests ==============

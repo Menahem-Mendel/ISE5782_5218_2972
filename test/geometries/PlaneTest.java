@@ -53,7 +53,7 @@ public class PlaneTest {
 
 		// TC12: Test when all points are on the same line
 		assertThrows(IllegalArgumentException.class,
-				() -> new Plane(pp[0], pp[1], pp[1].add(pp[1].subtract(pp[0]))),
+				() -> new Plane(pp[0], pp[1], pp[1].add(pp[1].sub(pp[0]))),
 				"Constructed a plane when three points on the same line");
 	}
 
@@ -62,9 +62,9 @@ public class PlaneTest {
 	 */
 	@RepeatedTest(10)
 	public void getNormalTest() {
-		Vector lhs = pp[1].subtract(pp[0]);
-		Vector rhs = pp[2].subtract(pp[0]);
-		Vector vcp = lhs.crossProduct(rhs).normalize();
+		Vector lhs = pp[1].sub(pp[0]);
+		Vector rhs = pp[2].sub(pp[0]);
+		Vector vcp = lhs.cross(rhs).normalize();
 
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test normal vector length and orthogonality
