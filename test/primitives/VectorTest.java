@@ -7,15 +7,24 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 public class VectorTest {
-
 	final double MIN = -10;
 	final double MAX = 10;
 
 	final double DELTA = 0.00001;
 
+	/**
+	 * @param q1 x coordinate
+	 * @param q2 y coordinate
+	 * @param q3 z coordinate
+	 */
 	double q1, q2, q3;
-	double scalar;
-
+	/**
+	 * scalar
+	 */
+	double t;
+	/**
+	 * lhs base test vector
+	 */
 	Vector lhs;
 
 	@BeforeEach
@@ -24,7 +33,7 @@ public class VectorTest {
 		q2 = Util.random(MIN, MAX);
 		q3 = Util.random(MIN, MAX);
 
-		scalar = Util.random(MIN, MAX);
+		t = Util.random(MIN, MAX);
 
 		if (Util.isZero(q1) && Util.isZero(q2) && Util.isZero(q3)) {
 			q1 = 1;
@@ -32,10 +41,10 @@ public class VectorTest {
 			q3 = 3;
 		}
 
-		if (Util.isZero(scalar))
-			scalar = 2;
+		if (Util.isZero(t))
+			t = 2;
 
-		lhs = new Vector(q1, q2, q3); // base test vector
+		lhs = new Vector(q1, q2, q3);
 	}
 
 	/**
@@ -82,7 +91,7 @@ public class VectorTest {
 
 		// =============== Boundary Values Tests ==================
 		// TC11: Test zero vector from cross-product of co-lined vectors
-		Vector vs = lhs.scale(scalar);
+		Vector vs = lhs.scale(t);
 		assertThrows(IllegalArgumentException.class, () -> lhs.crossProduct(vs),
 				"crossProduct() for parallel vectors does not throw an exception: lhs: %s, rhs: %s");
 	}
@@ -92,17 +101,15 @@ public class VectorTest {
 	 */
 	@RepeatedTest(10)
 	public void dotProductTest() {
-		final double t = Util.random(MIN, MAX);
-
 		// ============ Equivalence Partitions Tests ==============
-		Vector rhs = lhs.scale(scalar);
+		Vector rhs = lhs.scale(t);
 
 		// TC01: Test dot product of two parallel vectors
-		assertEquals(lhs.lengthSquared() * scalar, lhs.dotProduct(rhs), DELTA,
+		assertEquals(lhs.lengthSquared() * t, lhs.dotProduct(rhs), DELTA,
 				"dotProduct() wrong result of parallel vectors dot product");
 
 		// =============== Boundary Values Tests ==================
-		rhs = new Vector(-(q2 * t + q3 * t) / q1, t, t).scale(scalar); // orthogonal vector for lhs
+		rhs = new Vector(-(q2 * t + q3 * t) / q1, t, t); // orthogonal vector for lhs
 
 		// TC11: Test dot product of orthogonal vectors
 		assertEquals(0, lhs.dotProduct(rhs), DELTA, "dotProduct() result should be zero value for orthogonal vectors");
@@ -113,16 +120,16 @@ public class VectorTest {
 	 */
 	@RepeatedTest(10)
 	public void scaleTest() {
-		Vector rhs = new Vector(q1 * scalar, q2 * scalar, q3 * scalar);
+		Vector rhs = new Vector(q1 * t, q2 * t, q3 * t);
 
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test scaled vector
-		assertEquals(rhs.length(), lhs.scale(scalar).length(), DELTA, "scale() wrong scaling vector result");
+		assertEquals(rhs.length(), lhs.scale(t).length(), DELTA, "scale() wrong scaling vector result");
 
 		// =============== Boundary Values Tests ==================
 		// TC11: Test zero scaled vector
 		assertThrows(IllegalArgumentException.class, () -> lhs.scale(0),
-				"scale() for zero scalar doesn't throw an exception");
+				"scale() for zero t doesn't throw an exception");
 	}
 
 	/**
