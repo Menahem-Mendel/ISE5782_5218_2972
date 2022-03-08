@@ -90,8 +90,8 @@ public class VectorTest {
 				"dotProduct() wrong result of parallel vectors dot product");
 
 		// TC02: Test dot product of orthogonal vectors
-		lhs = new Vector(0, 0, 1);
-		rhs = new Vector(1, 1, 0);
+		lhs = new Vector(q1, 0, 0);
+		rhs = new Vector(0, q2, 0);
 		assertEquals(0, lhs.dotProduct(rhs), DELTA, "dotProduct() result should be zero value");
 
 		// =============== Boundary Values Tests ==================
