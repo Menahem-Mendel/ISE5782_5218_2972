@@ -19,10 +19,10 @@ public class Vector extends Point {
 	/**
 	 * Vector build ctor
 	 * 
-	 * @param d 3D point
+	 * @param rhs 3D double
 	 */
-	public Vector(Double3 d) {
-		super(d);
+	public Vector(Double3 rhs) {
+		super(rhs);
 
 		if (xyz.equals(Double3.ZERO))
 			throw new IllegalArgumentException(Errors.ZERO_VEC);
@@ -41,11 +41,11 @@ public class Vector extends Point {
 	/**
 	 * scale returns scaled vector by the factor parametere
 	 * 
-	 * @param d scalar
+	 * @param rhs scalar
 	 * @return scaled vector
 	 */
-	public Vector scale(double d) {
-		return new Vector(xyz.scale(d));
+	public Vector scale(double rhs) {
+		return new Vector(xyz.scale(rhs));
 	}
 
 	/**

@@ -21,10 +21,10 @@ public class Point {
 	/**
 	 * Point build ctor
 	 * 
-	 * @param d 3D point
+	 * @param rhs 3D double
 	 */
-	public Point(Double3 d) {
-		xyz = d;
+	public Point(Double3 rhs) {
+		xyz = rhs;
 	}
 
 	/**

@@ -26,7 +26,16 @@ public class VectorTest {
 
 		scalar = Util.random(MIN, MAX);
 
-		lhs = new Vector(q1, q2, q3); // base vector
+		if (Util.isZero(q1) && Util.isZero(q2) && Util.isZero(q3)) {
+			q1 = 1;
+			q2 = 2;
+			q3 = 3;
+		}
+
+		if (Util.isZero(scalar))
+			scalar = 2;
+
+		lhs = new Vector(q1, q2, q3); // base test vector
 	}
 
 	/**
