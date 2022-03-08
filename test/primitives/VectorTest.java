@@ -34,7 +34,7 @@ public class VectorTest {
 	@Test
 	public void ctorTest() {
 		// ============ Equivalence Partitions Tests ==============
-		// TC01: Correct vector
+		// TC01: Test correct vector
 		try {
 			new Vector(q1, q2, q3);
 		} catch (IllegalArgumentException e) {
@@ -42,7 +42,7 @@ public class VectorTest {
 		}
 
 		// =============== Boundary Values Tests ==================
-		// TC11: Zero vector
+		// TC11: Test zero vector
 		assertThrows(IllegalArgumentException.class, () -> new Vector(0, 0, 0), "Constructed a zero vector");
 
 	}
@@ -89,12 +89,12 @@ public class VectorTest {
 		assertEquals(lhs.lengthSquared() * scalar, lhs.dotProduct(rhs), DELTA,
 				"dotProduct() wrong result of parallel vectors dot product");
 
-		// TC02: Test dot product of orthogonal vectors
+		// =============== Boundary Values Tests ==================
 		lhs = new Vector(q1, 0, 0);
 		rhs = new Vector(0, q2, 0);
-		assertEquals(0, lhs.dotProduct(rhs), DELTA, "dotProduct() result should be zero value");
 
-		// =============== Boundary Values Tests ==================
+		// TC11: Test dot product of orthogonal vectors
+		assertEquals(0, lhs.dotProduct(rhs), DELTA, "dotProduct() result should be zero value");
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class VectorTest {
 	@Test
 	public void lengthTest() {
 		// ============ Equivalence Partitions Tests ==============
-		// TC01: test vector length
+		// TC01: Test vector length
 		assertEquals(q1 * q1 + q2 * q2 + q3 * q3, lhs.lengthSquared(), DELTA, "length() wrong vector length");
 
 		// =============== Boundary Values Tests ==================
@@ -151,14 +151,14 @@ public class VectorTest {
 		Vector vs = new Vector(q1 + w1, q2 + w2, q3 + w3);
 
 		// ============ Equivalence Partitions Tests ==============
-		// TC01: test vector of sum length
+		// TC01: Test vector of sum length
 		assertEquals(vs.length(), lhs.add(rhs).length(), DELTA, "add() wrong vector of sum length");
 
-		// TC02: test vector of sum direction
+		// TC02: Test vector of sum direction
 		assertEquals(vs.lengthSquared(), lhs.add(rhs).dotProduct(vs), DELTA, "add() wrong vector of sum direction");
 
 		// =============== Boundary Values Tests ==================
-		// TC11: test vector sum gives zero
+		// TC11: Test vector sum gives zero
 		assertThrows(IllegalArgumentException.class, () -> lhs.add(new Vector(-q1, -q2, -q3)),
 				"add() for opposite vectors sum doesn't throw an exception");
 	}
