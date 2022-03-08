@@ -5,6 +5,7 @@ package primitives;
  *
  */
 public class Ray {
+
 	private final Point p0;
 	private final Vector dir;
 

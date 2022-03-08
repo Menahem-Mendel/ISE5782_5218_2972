@@ -5,6 +5,7 @@ package primitives;
  * 
  */
 public class Vector extends Point {
+
 	/**
 	 * Vector build ctor
 	 * 

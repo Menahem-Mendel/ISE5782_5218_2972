@@ -5,6 +5,7 @@ package primitives;
  * 
  */
 public final class Errors {
+
 	/**
 	 * Vector
 	 */

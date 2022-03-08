@@ -5,6 +5,7 @@ package primitives;
  * 
  */
 public class Point {
+	
 	protected final Double3 xyz;
 
 	/**
