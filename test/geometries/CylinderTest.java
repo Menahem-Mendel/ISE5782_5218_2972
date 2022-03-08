@@ -15,12 +15,17 @@ public class CylinderTest {
 	@Test
 	public void getNormalTest() {
 		// ============ Equivalence Partitions Tests ==============
-		// TC01:
-		// TC02:
-		// TC03:
+
+		// TC01: Test side
+
+		// TC02: Test base one
+
+		// TC03: Test base two
 
 		// =============== Boundary Values Tests ==================
-		// TC11:
-		// TC12:
+
+		// TC11: Test center base one point
+
+		// TC12: Test center base two point
 	}
 }

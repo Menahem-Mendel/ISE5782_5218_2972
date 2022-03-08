@@ -3,6 +3,7 @@ package geometries;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import primitives.*;
@@ -13,47 +14,53 @@ public class PlaneTest {
 
 	final double DELTA = 0.00001;
 
-	double[] qq = new double[9];
-	Point p1, p2, p3;
+	Point[] pp = new Point[3];
 
 	Plane plane;
 
 	@BeforeEach
 	public void init() {
-		for (int i = 0; i < 9; i++) {
-			qq[i] = Util.random(MIN, MAX);
+		for (int i = 0; i < 3; i++) {
+			double x = Util.random(MIN, MAX);
+			double y = Util.random(MIN, MAX);
+			double z = Util.random(MIN, MAX);
+
+			pp[i] = new Point(x, y, z);
 		}
 
-		p1 = new Point(qq[0], qq[1], qq[2]);
-		p2 = new Point(qq[3], qq[4], qq[5]);
-		p3 = new Point(qq[6], qq[7], qq[8]);
-
-		plane = new Plane(p1, p2, p3);
+		plane = new Plane(pp[0], pp[1], pp[2]);
 	}
 
 	@Test
 	public void ctorTest() {
 		// ============ Equivalence Partitions Tests ==============
-		// TC01:
+
+		// TC01: three points test
 
 		// =============== Boundary Values Tests ==================
-		// TC11:
-		// TC12:
+
+		// TC11: Test when the first and second points are equal
+
+		// TC12: Test when all points are on the same line
 	}
 
 	/**
 	 * Test method for {@link geometries.Plane#getNormal(primitives.Point)}.
 	 */
-	@Test
+	@RepeatedTest(10)
 	public void getNormalTest() {
-		Vector v1 = p2.subtract(p1);
-		Vector v2 = p3.subtract(p1);
+		Vector lhs = pp[1].subtract(pp[0]);
+		Vector rhs = pp[2].subtract(pp[0]);
+		Vector vcp = lhs.crossProduct(rhs).normalize();
 
 		// ============ Equivalence Partitions Tests ==============
-		// TC01: Test normal vector
+		// TC01: Test normal vector length
+		assertEquals(vcp.length(), plane.getNormal().length(),
+				"getNormal() wrong normal vector length");
 
-		// assertEquals(v1.crossProduct(v2), plane.getNormal(p1), "getNormal() wrong
-		// result normal vector");
+		// TC02: Test normal vector orthogonality
+		assertEquals(vcp.length(), vcp.dotProduct(plane.getNormal()),
+				"getNormal() wrong normal vector direction");
 
 		// =============== Boundary Values Tests ==================
 	}
