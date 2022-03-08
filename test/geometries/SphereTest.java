@@ -34,6 +34,9 @@ public class SphereTest {
 		sphere = new Sphere(p, r);
 	}
 
+	/**
+	 * Test method for {@link geometries.Sphere#getNormal(primitives.Point)}
+	 */
 	@RepeatedTest(10)
 	public void getNormalTest() {
 		double alpha = 2 * Math.PI * Util.random(0, 1);

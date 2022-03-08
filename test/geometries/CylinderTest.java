@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import primitives.*;
 
 public class CylinderTest {
+
 	/**
 	 * Test method for
 	 * {@link geometries.Cylinder#getNormal(primitives.Ray, double, double)}.

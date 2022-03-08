@@ -31,6 +31,10 @@ public class PlaneTest {
 		plane = new Plane(pp[0], pp[1], pp[2]);
 	}
 
+	/**
+	 * Test method for
+	 * {@link geometries.Plane#Plane(primitives.Point, primitives.Point, primitives.Point)}
+	 */
 	@Test
 	public void ctorTest() {
 		// ============ Equivalence Partitions Tests ==============
