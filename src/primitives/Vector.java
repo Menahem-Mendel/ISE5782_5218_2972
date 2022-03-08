@@ -23,6 +23,7 @@ public class Vector extends Point {
 	 */
 	public Vector(Double3 d) {
 		super(d);
+
 		if (xyz.equals(Double3.ZERO))
 			throw new IllegalArgumentException(Errors.ZERO_VEC);
 	}
@@ -30,17 +31,17 @@ public class Vector extends Point {
 	/**
 	 * add returns vector of sum of two vectors
 	 * 
-	 * @param v
+	 * @param rhs vector
 	 * @return vector of sum
 	 */
-	public Vector add(Vector v) {
-		return new Vector(super.add(v).xyz);
+	public Vector add(Vector rhs) {
+		return new Vector(super.add(rhs).xyz);
 	}
 
 	/**
 	 * scale returns scaled vector by the factor parametere
 	 * 
-	 * @param d
+	 * @param d scalar
 	 * @return scaled vector
 	 */
 	public Vector scale(double d) {

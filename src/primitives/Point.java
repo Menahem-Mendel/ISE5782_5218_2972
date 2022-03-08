@@ -30,21 +30,21 @@ public class Point {
 	/**
 	 * add vector to a point
 	 * 
-	 * @param v vector
+	 * @param rhs vector
 	 * @return vector of sum
 	 */
-	public Point add(Vector v) {
-		return new Point(xyz.add(v.xyz));
+	public Point add(Vector rhs) {
+		return new Point(xyz.add(rhs.xyz));
 	}
 
 	/**
 	 * subtract two points
 	 * 
-	 * @param p point
+	 * @param rhs point
 	 * @return vector of subtraction
 	 */
-	public Vector subtract(Point p) {
-		return new Vector(xyz.subtract(p.xyz));
+	public Vector subtract(Point rhs) {
+		return new Vector(xyz.subtract(rhs.xyz));
 	}
 
 	@Override

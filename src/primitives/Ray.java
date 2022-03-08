@@ -1,7 +1,7 @@
 package primitives;
 
 /**
- * Ray defines All points on the line that are on one side of the point.
+ * Ray represents directional vector which starts from the starting point
  *
  */
 public class Ray {
