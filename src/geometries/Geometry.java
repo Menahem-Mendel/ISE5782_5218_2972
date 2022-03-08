@@ -7,6 +7,7 @@ import primitives.*;
  * 
  */
 public interface Geometry {
+
 	/**
 	 * getNormal returns normal vector of a particular point on the figure
 	 * 
