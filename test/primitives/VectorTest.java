@@ -2,7 +2,6 @@ package primitives;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -52,7 +51,6 @@ public class VectorTest {
 	 * Test method for {@link primitives.Vector#Vector(double, double, double)}.
 	 */
 	@Test
-	@BeforeAll
 	public void ctorTest() {
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test correct vector
@@ -65,7 +63,6 @@ public class VectorTest {
 		// =============== Boundary Values Tests ==================
 		// TC11: Test zero vector
 		assertThrows(IllegalArgumentException.class, () -> new Vector(0, 0, 0), "Constructed a zero vector");
-
 	}
 
 	/**
@@ -111,7 +108,7 @@ public class VectorTest {
 				"dotProduct() wrong result of parallel vectors dot product");
 
 		// =============== Boundary Values Tests ==================
-		rhs = new Vector(-(y * t + z * t) / x, t, t); // orthogonal vector for lhs
+		rhs = new Vector(-(y + z) * t / x, t, t); // orthogonal vector for lhs
 
 		// TC11: Test dot product of orthogonal vectors
 		assertEquals(0, lhs.dotProduct(rhs), DELTA, "dotProduct() result should be zero value for orthogonal vectors");
@@ -131,7 +128,7 @@ public class VectorTest {
 		// =============== Boundary Values Tests ==================
 		// TC11: Test zero scaled vector
 		assertThrows(IllegalArgumentException.class, () -> lhs.scale(0),
-				"scale() for zero t doesn't throw an exception");
+				"scale() for zero vector doesn't throw an exception");
 	}
 
 	/**
