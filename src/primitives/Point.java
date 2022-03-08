@@ -48,6 +48,16 @@ public class Point {
 	}
 
 	/**
+	 * dist returns squared distance between two points
+	 * 
+	 * @param rhs point
+	 * @return squared distance between two points
+	 */
+	public double distSquared(Point rhs) {
+		return subtract(rhs).lengthSquared();
+	}
+
+	/**
 	 * dist returns distance between two points
 	 * 
 	 * @param rhs point
