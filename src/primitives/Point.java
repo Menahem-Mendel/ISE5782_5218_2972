@@ -47,6 +47,12 @@ public class Point {
 		return new Vector(xyz.subtract(rhs.xyz));
 	}
 
+	/**
+	 * dist returns distance between two points
+	 * 
+	 * @param rhs point
+	 * @return distance between two points
+	 */
 	public double dist(Point rhs) {
 		return subtract(rhs).length();
 	}
