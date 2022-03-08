@@ -35,15 +35,6 @@ public class VectorTest {
 
 		t = Util.random(MIN, MAX);
 
-		if (Util.isZero(x) && Util.isZero(y) && Util.isZero(z)) {
-			x = 1;
-			y = 2;
-			z = 3;
-		}
-
-		if (Util.isZero(t))
-			t = 2;
-
 		lhs = new Vector(x, y, z);
 	}
 
