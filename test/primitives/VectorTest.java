@@ -12,10 +12,7 @@ public class VectorTest {
 
 	final double DELTA = 0.00001;
 
-	double q1;
-	double q2;
-	double q3;
-
+	double q1, q2, q3;
 	double scalar;
 
 	Vector lhs;
@@ -36,9 +33,7 @@ public class VectorTest {
 	 */
 	@Test
 	public void ctorTest() {
-
 		// ============ Equivalence Partitions Tests ==============
-
 		// TC01: Correct vector
 		try {
 			new Vector(q1, q2, q3);
@@ -47,7 +42,6 @@ public class VectorTest {
 		}
 
 		// =============== Boundary Values Tests ==================
-
 		// TC11: Zero vector
 		assertThrows(IllegalArgumentException.class, () -> new Vector(0, 0, 0), "Constructed a zero vector");
 
@@ -62,12 +56,12 @@ public class VectorTest {
 		final double w2 = Util.random(MIN, MAX);
 		final double w3 = Util.random(MIN, MAX);
 
-		// ============ Equivalence Partitions Tests ==============
 		Vector rhs = new Vector(w1, w2, w3);
 		Vector vcp = lhs.crossProduct(rhs);
 
 		final double theta = Math.acos((lhs.dotProduct(rhs) / (lhs.length() * rhs.length())));
 
+		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test that length of cross-product is proper
 		assertEquals(lhs.length() * rhs.length() * Math.sin(theta), vcp.length(), DELTA,
 				"crossProduct() wrong result vector length");
@@ -77,7 +71,7 @@ public class VectorTest {
 		assertTrue(Util.isZero(vcp.dotProduct(rhs)), "crossProduct() result is not orthogonal to 2nd operand");
 
 		// =============== Boundary Values Tests ==================
-		// TC11: test zero vector from cross-product of co-lined vectors
+		// TC11: Test zero vector from cross-product of co-lined vectors
 		Vector vs = lhs.scale(scalar);
 		assertThrows(IllegalArgumentException.class, () -> lhs.crossProduct(vs),
 				"crossProduct() for parallel vectors does not throw an exception: lhs: %s, rhs: %s");
@@ -89,7 +83,6 @@ public class VectorTest {
 	@Test
 	public void dotProductTest() {
 		// ============ Equivalence Partitions Tests ==============
-
 		// TC01: Test dot product of two parallel vectors
 		Vector rhs = lhs.scale(scalar);
 
@@ -112,12 +105,10 @@ public class VectorTest {
 		Vector rhs = new Vector(q1 * scalar, q2 * scalar, q3 * scalar);
 
 		// ============ Equivalence Partitions Tests ==============
-
 		// TC01: Test scaled vector
 		assertEquals(rhs.length(), lhs.scale(scalar).length(), DELTA, "scale() wrong scaling vector result");
 
 		// =============== Boundary Values Tests ==================
-
 		// TC11: Test zero scaled vector
 		assertThrows(IllegalArgumentException.class, () -> lhs.scale(0),
 				"scale() for zero scalar doesn't throw an exception");
@@ -128,9 +119,7 @@ public class VectorTest {
 	 */
 	@Test
 	public void normalizeTest() {
-
 		// ============ Equivalence Partitions Tests ==============
-
 		// TC01: Test normalized vector
 		assertEquals(1, lhs.normalize().length(), DELTA, "normalize() wrong normal vector");
 
@@ -142,9 +131,7 @@ public class VectorTest {
 	 */
 	@Test
 	public void lengthTest() {
-
 		// ============ Equivalence Partitions Tests ==============
-
 		// TC01: test vector length
 		assertEquals(q1 * q1 + q2 * q2 + q3 * q3, lhs.lengthSquared(), DELTA, "length() wrong vector length");
 
@@ -160,10 +147,10 @@ public class VectorTest {
 		final double w2 = Util.random(MIN, MAX);
 		final double w3 = Util.random(MIN, MAX);
 
-		// ============ Equivalence Partitions Tests ==============
 		Vector rhs = new Vector(w1, w2, w3);
 		Vector vs = new Vector(q1 + w1, q2 + w2, q3 + w3);
 
+		// ============ Equivalence Partitions Tests ==============
 		// TC01: test vector of sum length
 		assertEquals(vs.length(), lhs.add(rhs).length(), DELTA, "add() wrong vector of sum length");
 
@@ -171,11 +158,8 @@ public class VectorTest {
 		assertEquals(vs.lengthSquared(), lhs.add(rhs).dotProduct(vs), DELTA, "add() wrong vector of sum direction");
 
 		// =============== Boundary Values Tests ==================
-
-		Vector v4 = new Vector(-q1, -q2, -q3);
-
 		// TC11: test vector sum gives zero
-		assertThrows(IllegalArgumentException.class, () -> lhs.add(v4),
+		assertThrows(IllegalArgumentException.class, () -> lhs.add(new Vector(-q1, -q2, -q3)),
 				"add() for opposite vectors sum doesn't throw an exception");
 	}
 }
