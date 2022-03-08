@@ -71,11 +71,11 @@ public class VectorTest {
 	 */
 	@RepeatedTest(10)
 	public void crossProductTest() {
-		final double w1 = Util.random(MIN, MAX);
-		final double w2 = Util.random(MIN, MAX);
-		final double w3 = Util.random(MIN, MAX);
+		final double ax = Util.random(MIN, MAX);
+		final double ay = Util.random(MIN, MAX);
+		final double az = Util.random(MIN, MAX);
 
-		Vector rhs = new Vector(w1, w2, w3);
+		Vector rhs = new Vector(ax, ay, az);
 		Vector vcp = lhs.crossProduct(rhs);
 
 		final double theta = Math.acos((lhs.dotProduct(rhs) / (lhs.length() * rhs.length())));
@@ -161,12 +161,12 @@ public class VectorTest {
 	 */
 	@RepeatedTest(10)
 	public void addTest() {
-		final double w1 = Util.random(MIN, MAX);
-		final double w2 = Util.random(MIN, MAX);
-		final double w3 = Util.random(MIN, MAX);
+		final double ax = Util.random(MIN, MAX);
+		final double ay = Util.random(MIN, MAX);
+		final double az = Util.random(MIN, MAX);
 
-		Vector rhs = new Vector(w1, w2, w3);
-		Vector vsum = new Vector(x + w1, y + w2, z + w3);
+		Vector rhs = new Vector(ax, ay, az);
+		Vector vsum = new Vector(x + ax, y + ay, z + az);
 
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test vector of sum length
