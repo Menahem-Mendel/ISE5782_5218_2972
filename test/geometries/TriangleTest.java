@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Random;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import primitives.*;
@@ -35,7 +36,7 @@ public class TriangleTest {
 	/**
 	 * Test method for {@link geometries.Triangle#getNormal(primitives.Point)}.
 	 */
-	@Test
+	@RepeatedTest(10)
 	public void getNormalTest() {
 		Vector lhs = pp[1].subtract(pp[0]);
 		Vector rhs = pp[2].subtract(pp[0]);

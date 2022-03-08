@@ -101,17 +101,18 @@ public class VectorTest {
 	@RepeatedTest(10)
 	public void dotProductTest() {
 		// ============ Equivalence Partitions Tests ==============
-		Vector rhs = lhs.scale(t);
-
-		// TC01: Test dot product of two parallel vectors
-		assertEquals(lhs.lengthSquared() * t, lhs.dotProduct(rhs), DELTA,
-				"dotProduct() wrong result of parallel vectors dot product");
 
 		// =============== Boundary Values Tests ==================
+		Vector rhs = lhs.scale(t);
+
+		// TC11: Test dot product of two parallel vectors
+		assertTrue(Util.isZero(lhs.dotProduct(rhs) - lhs.lengthSquared() * t),
+				"dotProduct() for parallel vectors is not squared length");
+
 		rhs = new Vector(-(y + z) * t / x, t, t); // orthogonal vector for lhs
 
-		// TC11: Test dot product of orthogonal vectors
-		assertEquals(0, lhs.dotProduct(rhs), DELTA, "dotProduct() result should be zero value for orthogonal vectors");
+		// TC12: Test dot product of orthogonal vectors
+		assertTrue(Util.isZero(lhs.dotProduct(rhs)), "dotProduct() for orthogonal vectors is not zero");
 	}
 
 	/**
@@ -123,7 +124,7 @@ public class VectorTest {
 
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test scaled vector
-		assertEquals(rhs.length(), lhs.scale(t).length(), DELTA, "scale() wrong scaling vector result");
+		assertEquals(rhs, lhs.scale(t), "scale() wrong scaling vector result");
 
 		// =============== Boundary Values Tests ==================
 		// TC11: Test zero scaled vector
@@ -138,7 +139,15 @@ public class VectorTest {
 	public void normalizeTest() {
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test normalized vector
-		assertEquals(1, lhs.normalize().length(), DELTA, "normalize() wrong normal vector");
+		assertTrue(Util.isZero(lhs.normalize().length() - 1), "normalize() the normalized vector is not a unit vector");
+
+		// TC02: Test normal vector cross product with original vector
+		assertThrows(IllegalArgumentException.class, () -> lhs.crossProduct(lhs.normalize()),
+				"normalize() the normalized vector is not parallel to the original one");
+
+		// TC03: Test normal vector direction
+		assertTrue(lhs.dotProduct(lhs.normalize()) >= 0,
+				"normalize() the normalized vector is opposite to the original one");
 
 		// =============== Boundary Values Tests ==================
 	}
@@ -150,7 +159,7 @@ public class VectorTest {
 	public void lengthTest() {
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test vector length
-		assertEquals(x * x + y * y + z * z, lhs.lengthSquared(), DELTA, "length() wrong vector length");
+		assertTrue(Util.isZero(lhs.lengthSquared() - (x * x + y * y + z * z)), "length() wrong value");
 
 		// =============== Boundary Values Tests ==================
 	}
@@ -168,11 +177,8 @@ public class VectorTest {
 		Vector vsum = new Vector(x + ax, y + ay, z + az);
 
 		// ============ Equivalence Partitions Tests ==============
-		// TC01: Test vector of sum length
-		assertEquals(vsum.length(), lhs.add(rhs).length(), DELTA, "add() wrong vector of sum length");
-
-		// TC02: Test vector of sum direction
-		assertEquals(vsum.lengthSquared(), lhs.add(rhs).dotProduct(vsum), DELTA, "add() wrong vector of sum direction");
+		// TC01: Test vector of sum
+		assertEquals(vsum, lhs.add(rhs), "add() wrong vector of sum");
 
 		// =============== Boundary Values Tests ==================
 		// TC11: Test vector sum gives zero
