@@ -47,5 +47,4 @@ public class Sphere implements Geometry {
     public Vector getNormal(Point p) {
         return p.subtract(center);
     }
-
 }

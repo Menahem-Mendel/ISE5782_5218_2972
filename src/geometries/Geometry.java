@@ -8,9 +8,9 @@ import primitives.*;
  */
 public interface Geometry {
 	/**
-	 * getNomal
+	 * getNormal returns normal vector of a particular point on the figure
 	 * 
-	 * @param p point
+	 * @param p 3D point
 	 * @return vector normal
 	 */
 	Vector getNormal(Point p);

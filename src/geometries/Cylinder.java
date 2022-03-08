@@ -1,6 +1,6 @@
 package geometries;
 
-import primitives.Ray;
+import primitives.*;
 
 /**
  * Cylinder class represents cylinder in 3D space
@@ -28,5 +28,10 @@ public class Cylinder extends Tube {
 	 */
 	public double getHeight() {
 		return h;
+	}
+
+	@Override
+	public Vector getNormal(Point p) {
+		return null;
 	}
 }
