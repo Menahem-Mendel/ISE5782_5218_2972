@@ -2,6 +2,7 @@ package primitives;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -51,6 +52,7 @@ public class VectorTest {
 	 * Test method for {@link primitives.Vector#Vector(double, double, double)}.
 	 */
 	@Test
+	@BeforeAll
 	public void ctorTest() {
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test correct vector
