@@ -83,19 +83,20 @@ public class VectorTest {
 	 */
 	@RepeatedTest(10)
 	public void dotProductTest() {
+		final double t = Util.random(MIN, MAX);
+
 		// ============ Equivalence Partitions Tests ==============
-		// TC01: Test dot product of two parallel vectors
 		Vector rhs = lhs.scale(scalar);
 
+		// TC01: Test dot product of two parallel vectors
 		assertEquals(lhs.lengthSquared() * scalar, lhs.dotProduct(rhs), DELTA,
 				"dotProduct() wrong result of parallel vectors dot product");
 
 		// =============== Boundary Values Tests ==================
-		Vector lhs = new Vector(q1, 0, 0);
-		rhs = new Vector(0, q2, 0);
+		rhs = new Vector(-(q2 * t + q3 * t) / q1, t, t).scale(scalar); // orthogonal vector for lhs
 
 		// TC11: Test dot product of orthogonal vectors
-		assertEquals(0, lhs.dotProduct(rhs), DELTA, "dotProduct() result should be zero value");
+		assertEquals(0, lhs.dotProduct(rhs), DELTA, "dotProduct() result should be zero value for orthogonal vectors");
 	}
 
 	/**
