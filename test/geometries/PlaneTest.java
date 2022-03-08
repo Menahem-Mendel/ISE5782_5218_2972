@@ -34,14 +34,23 @@ public class PlaneTest {
 	@Test
 	public void ctorTest() {
 		// ============ Equivalence Partitions Tests ==============
-
 		// TC01: three points test
+		try {
+			plane = new Plane(pp[0], pp[1], pp[2]);
+		} catch (IllegalArgumentException e) {
+			fail("Failed constructing a correct plane");
+		}
 
 		// =============== Boundary Values Tests ==================
-
 		// TC11: Test when the first and second points are equal
+		assertThrows(IllegalArgumentException.class,
+				() -> new Plane(pp[0], pp[0], pp[2]),
+				"Constructed a plane when two points are equal");
 
 		// TC12: Test when all points are on the same line
+		assertThrows(IllegalArgumentException.class,
+				() -> new Plane(pp[0], pp[1], pp[1].add(pp[1].subtract(pp[0]))),
+				"Constructed a plane when three points on the same line");
 	}
 
 	/**
@@ -54,13 +63,9 @@ public class PlaneTest {
 		Vector vcp = lhs.crossProduct(rhs).normalize();
 
 		// ============ Equivalence Partitions Tests ==============
-		// TC01: Test normal vector length
-		assertEquals(vcp.length(), plane.getNormal().length(),
-				"getNormal() wrong normal vector length");
-
-		// TC02: Test normal vector orthogonality
-		assertEquals(vcp.length(), vcp.dotProduct(plane.getNormal()),
-				"getNormal() wrong normal vector direction");
+		// TC01: Test normal vector length and orthogonality
+		assertEquals(vcp.lengthSquared(), vcp.dotProduct(plane.getNormal()), DELTA,
+				"getNormal() wrong normal vector");
 
 		// =============== Boundary Values Tests ==================
 	}

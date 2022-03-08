@@ -2,6 +2,8 @@ package geometries;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Random;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,22 +15,21 @@ public class TriangleTest {
 
 	final double DELTA = 0.00001;
 
-	double[] qq = new double[9];
-	Point p1, p2, p3;
+	Point[] pp = new Point[3];
 
 	Triangle triangle;
 
 	@BeforeEach
 	public void init() {
-		for (int i = 0; i < 9; i++) {
-			qq[i] = Util.random(MIN, MAX);
+		for (int i = 0; i < 3; i++) {
+			double x = Util.random(MIN, MAX);
+			double y = Util.random(MIN, MAX);
+			double z = Util.random(MIN, MAX);
+
+			pp[i] = new Point(x, y, z);
 		}
 
-		p1 = new Point(qq[0], qq[1], qq[2]);
-		p2 = new Point(qq[3], qq[4], qq[5]);
-		p3 = new Point(qq[6], qq[7], qq[8]);
-
-		triangle = new Triangle(p1, p2, p3);
+		triangle = new Triangle(pp[0], pp[1], pp[2]);
 	}
 
 	/**
@@ -36,14 +37,15 @@ public class TriangleTest {
 	 */
 	@Test
 	public void getNormalTest() {
-		Vector v1 = p2.subtract(p1);
-		Vector v2 = p3.subtract(p1);
+		Vector lhs = pp[1].subtract(pp[0]);
+		Vector rhs = pp[2].subtract(pp[0]);
+		Vector vcp = lhs.crossProduct(rhs).normalize();
+		Random r = new Random();
 
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test normal vector
-
-		// assertEquals(v1.crossProduct(v2), triangle.getNormal(p1), "getNormal() wrong
-		// result normal vector");
+		assertEquals(vcp.lengthSquared(), vcp.dotProduct(triangle.getNormal(pp[r.nextInt(3)])), DELTA,
+				"getNormal() wrong result normal vector");
 
 		// =============== Boundary Values Tests ==================
 	}

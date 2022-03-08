@@ -52,7 +52,7 @@ public class Plane implements Geometry {
 	 * @return vector normal
 	 */
 	public Vector getNormal() {
-		return null;
+		return normal;
 	}
 
 	@Override
