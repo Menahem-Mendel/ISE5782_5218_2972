@@ -68,7 +68,7 @@ public class VectorTest {
 		Vector rhs = new Vector(ax, ay, az);
 		Vector vcp = lhs.cross(rhs);
 
-		final double theta = Math.acos((lhs.dotProduct(rhs) / (lhs.length() * rhs.length())));
+		final double theta = Math.acos((lhs.dot(rhs) / (lhs.length() * rhs.length())));
 
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test that length of cross-product is proper
@@ -76,8 +76,8 @@ public class VectorTest {
 				"cross() wrong result vector length");
 
 		// TC02: Test cross-product result orthogonality to its operands
-		assertTrue(Util.isZero(vcp.dotProduct(lhs)), "cross() result is not orthogonal to 1st operand");
-		assertTrue(Util.isZero(vcp.dotProduct(rhs)), "cross() result is not orthogonal to 2nd operand");
+		assertTrue(Util.isZero(vcp.dot(lhs)), "cross() result is not orthogonal to 1st operand");
+		assertTrue(Util.isZero(vcp.dot(rhs)), "cross() result is not orthogonal to 2nd operand");
 
 		// =============== Boundary Values Tests ==================
 		// TC11: Test zero vector from cross-product of co-lined vectors
@@ -87,10 +87,10 @@ public class VectorTest {
 	}
 
 	/**
-	 * Test method for {@link primitives.Vector#dotProduct(primitives.Vector)}.
+	 * Test method for {@link primitives.Vector#dot(primitives.Vector)}.
 	 */
 	@RepeatedTest(10)
-	public void dotProductTest() {
+	public void dotTest() {
 		final double ax = Util.random(MIN, MAX);
 		final double ay = Util.random(MIN, MAX);
 		final double az = Util.random(MIN, MAX);
@@ -100,19 +100,19 @@ public class VectorTest {
 
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test dot product for different vectors
-		assertTrue(Util.isZero(lhs.dotProduct(rhs) - dp), "dotProduct() wrong result");
+		assertTrue(Util.isZero(lhs.dot(rhs) - dp), "dot() wrong result");
 
 		// =============== Boundary Values Tests ==================
 		rhs = lhs.scale(t);
 
 		// TC11: Test dot product of two parallel vectors
-		assertTrue(Util.isZero(lhs.dotProduct(rhs) - lhs.lengthSquared() * t),
-				"dotProduct() for parallel vectors is not squared length");
+		assertTrue(Util.isZero(lhs.dot(rhs) - lhs.lengthSquared() * t),
+				"dot() for parallel vectors is not squared length");
 
 		rhs = new Vector(-(y + z) * t / x, t, t); // orthogonal vector for lhs
 
 		// TC12: Test dot product of orthogonal vectors
-		assertTrue(Util.isZero(lhs.dotProduct(rhs)), "dotProduct() for orthogonal vectors is not zero");
+		assertTrue(Util.isZero(lhs.dot(rhs)), "dot() for orthogonal vectors is not zero");
 	}
 
 	/**
@@ -146,7 +146,7 @@ public class VectorTest {
 				"normalize() the normalized vector is not parallel to the original one");
 
 		// TC03: Test normal vector direction
-		assertFalse(lhs.dotProduct(lhs.normalize()) < 0,
+		assertFalse(lhs.dot(lhs.normalize()) < 0,
 				"normalize() the normalized vector is opposite to the original one");
 
 		// =============== Boundary Values Tests ==================
