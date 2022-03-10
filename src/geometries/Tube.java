@@ -41,7 +41,12 @@ public class Tube implements Geometry {
 	}
 
 	@Override
-	public Vector getNormal(Point p) {
-		return null;
+	public  Vector getNormal(Point p) {
+		
+		Vector unit = getAxisRay().getDir().normalize();  //unit vector the same direction as the ray
+		double t =   unit.dot(p.sub(getAxisRay().getP0())); //projection
+		Point pointOnRay = getAxisRay().getP0().add(unit.scale(t));
+
+		return p.sub(pointOnRay).normalize();
 	}
 }

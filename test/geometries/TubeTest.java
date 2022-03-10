@@ -17,6 +17,20 @@ public class TubeTest {
 	public void getNormalTest() {
 		// ============ Equivalence Partitions Tests ==============
 		// TC01:
+		Point point1 = new Point(0, 0, 0);
+		Vector vector1 = new Vector(1, 0, 0);
+		double radius1 = 1.0;
+		Ray ray1 = new Ray(point1, vector1);
+		Tube tube1 = new Tube(ray1, radius1);
+
+		double alpha = Util.random(-10, 10);
+		double y = Math.cos(alpha);
+		double z = Math.sqrt(1 - Math.pow(y, 2));
+
+		Point pointCheck = new Point(1, y, z);
+		Vector norm = (pointCheck.sub(new Point(1, 0, 0))).normalize();
+
+		assertEquals(norm, tube1.getNormal(pointCheck), "getNormal() wrong normal vector");
 
 		// =============== Boundary Values Tests ==================
 		// TC11: Test when connection between the point on the body and the ray’s head

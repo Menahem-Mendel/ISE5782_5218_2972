@@ -64,7 +64,7 @@ public class Point {
 	 * @param rhs point
 	 * @return distance between two points
 	 */
-	public double dist(Point rhs) {
+	public double dist(Point rhs) {     
 		if(this.equals(rhs)){
 			return 0;
 		}
