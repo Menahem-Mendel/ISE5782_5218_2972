@@ -39,7 +39,7 @@ public class Point {
 	}
 
 	/**
-	 * sub two points
+	 * sub returns new Vector by substructing two points
 	 * 
 	 * @param rhs point
 	 * @return vector of subion
@@ -49,7 +49,7 @@ public class Point {
 	}
 
 	/**
-	 * dist returns squared distance between two points
+	 * distquared returns squared distance between two points
 	 * 
 	 * @param rhs point
 	 * @return squared distance between two points
@@ -65,6 +65,9 @@ public class Point {
 	 * @return distance between two points
 	 */
 	public double dist(Point rhs) {
+		if(this.equals(rhs)){
+			return 0;
+		}
 		return sub(rhs).length();
 	}
 
