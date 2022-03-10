@@ -14,8 +14,8 @@ public class Tube implements Geometry {
 	/**
 	 * Tube build ctor
 	 * 
-	 * @param ray
-	 * @param r
+	 * @param ray of direction
+	 * @param r   radius
 	 */
 	public Tube(Ray ray, double r) {
 		axisRay = ray;
@@ -23,7 +23,7 @@ public class Tube implements Geometry {
 	}
 
 	/**
-	 * getAxisRay get axis ray
+	 * getAxisRay returns axis ray
 	 * 
 	 * @return ray axis
 	 */
@@ -32,7 +32,7 @@ public class Tube implements Geometry {
 	}
 
 	/**
-	 * getRadius get radius of the tube base
+	 * getRadius returns radius of the tube base
 	 * 
 	 * @return radius
 	 */

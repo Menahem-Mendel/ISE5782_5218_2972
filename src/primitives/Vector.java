@@ -40,7 +40,7 @@ public class Vector extends Point {
 	}
 
 	/**
-	 * scale returns scaled vector by the factor parametere
+	 * scale returns scaled vector by the factor parameter
 	 * 
 	 * @param rhs scalar
 	 * @return scaled vector
@@ -68,7 +68,7 @@ public class Vector extends Point {
 	 * @return vector squared length
 	 */
 	public double lengthSquared() {
-		return Math.abs(dotProduct(this));
+		return Math.abs(dot(this));
 	}
 
 	/**
@@ -90,12 +90,12 @@ public class Vector extends Point {
 	}
 
 	/**
-	 * dotProduct returns dot product of two vectors
+	 * dot returns dot product of two vectors
 	 * 
 	 * @param rhs vector
 	 * @return dot product
 	 */
-	public double dotProduct(Vector rhs) {
+	public double dot(Vector rhs) {
 		return xyz.d1 * rhs.xyz.d1 +
 				xyz.d2 * rhs.xyz.d2 +
 				xyz.d3 * rhs.xyz.d3;

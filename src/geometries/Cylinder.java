@@ -13,7 +13,7 @@ public class Cylinder extends Tube {
 	/**
 	 * Cylinder build ctor
 	 * 
-	 * @param ray ray
+	 * @param ray of direction
 	 * @param rad radius
 	 * @param h   height
 	 */
@@ -23,7 +23,7 @@ public class Cylinder extends Tube {
 	}
 
 	/**
-	 * getHeight get the height of the cylinder
+	 * getHeight returns the height of the cylinder
 	 * 
 	 * @return height
 	 */

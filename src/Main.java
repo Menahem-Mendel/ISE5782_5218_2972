@@ -38,10 +38,10 @@ public final class Main {
             out.println("ERROR: length() wrong value");
 
         // test Dot-Product
-        if (!isZero(v1.dotProduct(v3)))
-            out.println("ERROR: dotProduct() for orthogonal vectors is not zero");
-        if (!isZero(v1.dotProduct(v2) + 28))
-            out.println("ERROR: dotProduct() wrong value");
+        if (!isZero(v1.dot(v3)))
+            out.println("ERROR: dot() for orthogonal vectors is not zero");
+        if (!isZero(v1.dot(v2) + 28))
+            out.println("ERROR: dot() wrong value");
 
         // test Cross-Product
         try { // test zero vector
@@ -52,7 +52,7 @@ public final class Main {
         Vector vr = v1.cross(v3);
         if (!isZero(vr.length() - v1.length() * v3.length()))
             out.println("ERROR: cross() wrong result length");
-        if (!isZero(vr.dotProduct(v1)) || !isZero(vr.dotProduct(v3)))
+        if (!isZero(vr.dot(v1)) || !isZero(vr.dot(v3)))
             out.println("ERROR: cross() result is not orthogonal to its operands");
 
         // test vector normalization vs vector length and cross-product
@@ -65,7 +65,7 @@ public final class Main {
             out.println("ERROR: the normalized vector is not parallel to the original one");
         } catch (Exception e) {
         }
-        if (v.dotProduct(u) < 0)
+        if (v.dot(u) < 0)
             out.println("ERROR: the normalized vector is opposite to the original one");
 
         // Test operations with points and vectors

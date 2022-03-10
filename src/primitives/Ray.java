@@ -24,7 +24,7 @@ public class Ray {
 	}
 
 	/**
-	 * getP0 get starting point
+	 * getP0 returns starting point
 	 * 
 	 * @return starting point
 	 */
@@ -33,7 +33,7 @@ public class Ray {
 	}
 
 	/**
-	 * getDir get directional vector
+	 * getDir returns directional vector
 	 * 
 	 * @return vector direction
 	 */

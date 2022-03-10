@@ -38,7 +38,7 @@ public class Plane implements Geometry {
 	}
 
 	/**
-	 * getQ0 get center point of the plane
+	 * getQ0 returns the center point of the plane
 	 * 
 	 * @return center point
 	 */
@@ -47,7 +47,7 @@ public class Plane implements Geometry {
 	}
 
 	/**
-	 * getNormal get vector normal of the plane
+	 * getNormal returns the plane normal vector
 	 * 
 	 * @return vector normal
 	 */
