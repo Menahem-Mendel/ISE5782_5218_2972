@@ -40,7 +40,7 @@ public class Vector extends Point {
 	}
 
 	/**
-	 * scale returns scaled vector by the factor parametere
+	 * scale returns scaled vector by the factor parameter
 	 * 
 	 * @param rhs scalar
 	 * @return scaled vector

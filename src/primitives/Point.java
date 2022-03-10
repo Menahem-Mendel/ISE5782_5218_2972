@@ -29,7 +29,7 @@ public class Point {
 	}
 
 	/**
-	 * add vector to a point
+	 * add returns point of sum of vector and point
 	 * 
 	 * @param rhs vector
 	 * @return vector of sum
@@ -39,7 +39,7 @@ public class Point {
 	}
 
 	/**
-	 * sub two points
+	 * sub returns subtraction of points
 	 * 
 	 * @param rhs point
 	 * @return vector of subion

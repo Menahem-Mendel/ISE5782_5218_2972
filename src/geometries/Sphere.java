@@ -23,7 +23,7 @@ public class Sphere implements Geometry {
     }
 
     /**
-     * getCenter get center of the Sphere
+     * getCenter returns the center point of the sphere
      * 
      * @return center point
      */
@@ -32,7 +32,7 @@ public class Sphere implements Geometry {
     }
 
     /**
-     * getRadius get the radius of the Sphere
+     * getRadius returns the radius of the sphere
      * 
      * @return radius
      */
