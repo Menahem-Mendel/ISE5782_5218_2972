@@ -26,7 +26,7 @@ public class PointTest {
 	}
 
 	/**
-	 * Test Method for {@link primitives.Point#sub(Point rhs)}
+	 * Test  Method for {@link primitives.Point#sub(Point rhs)}
 	 */
 	@RepeatedTest(10)
 	public void subTest() {
