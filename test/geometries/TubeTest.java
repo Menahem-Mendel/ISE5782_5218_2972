@@ -36,9 +36,10 @@ public class TubeTest {
 		// TC11: Test when connection between the point on the body and the ray’s head
 		// creates a 90 degrees with the ray
 
-		Point point2 = new Point(0,y,z);
+		Point point2 = new Point(0, y, z);
 
-		assertEquals(point2.sub(new Point(0,0,0)), tube1.getNormal(point2), "getNormal() wrong normal vector when 90 deg with ray");
+		assertEquals(point2.sub(new Point(0, 0, 0)), tube1.getNormal(point2),
+				"getNormal() wrong normal vector when 90 deg with ray");
 
 	}
 }

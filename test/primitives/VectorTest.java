@@ -159,7 +159,7 @@ public class VectorTest {
 	public void lengthTest() {
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test vector length
-		assertTrue(Util.isZero(lhs.length() - Math.sqrt(x * x + y * y + z * z)), "length() wrong value");
+		assertEquals(Math.sqrt(x * x + y * y + z * z), lhs.length(), DELTA, "length() wrong value");
 
 		// =============== Boundary Values Tests ==================
 	}

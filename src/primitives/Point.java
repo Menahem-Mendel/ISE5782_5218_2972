@@ -55,7 +55,11 @@ public class Point {
 	 * @return squared distance between two points
 	 */
 	public double distSquared(Point rhs) {
-		return sub(rhs).lengthSquared();
+		try {
+			return sub(rhs).lengthSquared();
+		} catch (IllegalArgumentException e) {
+			return 0;
+		}
 	}
 
 	/**
@@ -64,11 +68,8 @@ public class Point {
 	 * @param rhs point
 	 * @return distance between two points
 	 */
-	public double dist(Point rhs) {     
-		if(this.equals(rhs)){
-			return 0;
-		}
-		return sub(rhs).length();
+	public double dist(Point rhs) {
+		return Math.sqrt(distSquared(rhs));
 	}
 
 	@Override
