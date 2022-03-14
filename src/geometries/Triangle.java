@@ -7,7 +7,7 @@ import primitives.*;
  * 
  */
 public class Triangle extends Polygon {
-	
+
 	/**
 	 * Triangle represents triangle in 3D space
 	 * 
@@ -19,8 +19,4 @@ public class Triangle extends Polygon {
 		super(p1, p2, p3);
 	}
 
-	@Override
-	public Vector getNormal(Point p) {
-		return super.getNormal(p);
-	}
 }

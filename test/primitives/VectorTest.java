@@ -45,11 +45,7 @@ public class VectorTest {
 	public void ctorTest() {
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test correct vector
-		try {
-			new Vector(x, y, z);
-		} catch (IllegalArgumentException e) {
-			fail("Failed constructing a correct vector");
-		}
+		assertDoesNotThrow(() -> new Vector(x, y, z), "Failed constructing a correct vector");
 
 		// =============== Boundary Values Tests ==================
 		// TC11: Test zero vector
