@@ -84,7 +84,7 @@ public class TubeTest {
 		// =============== Boundary Values Tests ==================
 		// TC11: Test when connection between the point on the body and the ray’s head
 		// creates a 90 degrees with the ray
-		rhs = point.add(ex.scale(r).add(ey.scale(r)));
+		rhs = point.add(ex.scale(ax).add(ey.scale(ay)));
 		res = rhs.sub(new Point(0, 0, 0)).normalize();
 		assertEquals(res, lhs.getNormal(rhs), "getNormal() wrong normal vector when 90 deg with ray");
 	}
