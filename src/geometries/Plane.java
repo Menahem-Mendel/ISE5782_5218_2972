@@ -1,5 +1,7 @@
 package geometries;
 
+import java.util.List;
+
 import primitives.*;
 
 /**
@@ -38,9 +40,9 @@ public class Plane implements Geometry {
 	}
 
 	/**
-	 * getQ0 returns the center point of the plane
+	 * getQ0 returns the referense point of the plane
 	 * 
-	 * @return center point
+	 * @return referense point
 	 */
 	public Point getQ0() {
 		return q0;
@@ -58,5 +60,11 @@ public class Plane implements Geometry {
 	@Override
 	public Vector getNormal(Point p) {
 		return getNormal();
+	}
+
+	@Override
+	public List<Point> findIntsersections(Ray ray) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

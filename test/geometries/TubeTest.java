@@ -73,7 +73,7 @@ public class TubeTest {
 		double ax = r * Math.cos(alpha);
 		double ay = r * Math.sin(alpha);
 
-		Point rhs = point.add(ex.scale(ax).add(ey.scale(ay)).add(vec.scale(t)));
+		Point rhs = point.add(ex.scale(ax).add(ey.scale(ay)).add(vec.scale(t))); // ex*x + ey*y + ez*z
 		Vector res = vec.scale(t).sub(rhs).scale(-1).normalize();
 
 		// ============ Equivalence Partitions Tests ==============

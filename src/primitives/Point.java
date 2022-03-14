@@ -54,6 +54,7 @@ public class Point {
 	 * @param rhs point
 	 * @return squared distance between two points
 	 */
+	// !!!
 	public double distSquared(Point rhs) {
 		try {
 			return sub(rhs).lengthSquared();
