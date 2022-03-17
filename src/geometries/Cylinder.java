@@ -1,5 +1,7 @@
 package geometries;
 
+import java.util.List;
+
 import primitives.*;
 
 /**
@@ -46,5 +48,10 @@ public class Cylinder extends Tube {
 		} else {
 			return super.getNormal(p);
 		}
+	}
+
+	@Override
+	public List<Point> findIntsersections(Ray ray) {
+		return null;
 	}
 }

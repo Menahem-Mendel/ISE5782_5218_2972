@@ -1,5 +1,7 @@
 package geometries;
 
+import java.util.List;
+
 import primitives.*;
 
 /**
@@ -50,5 +52,10 @@ public class Tube implements Geometry {
 		Point o = Util.isZero(t) ? p0 : p0.add(dir.scale(t));
 
 		return p.sub(o).normalize();
+	}
+
+	@Override
+	public List<Point> findIntsersections(Ray ray) {
+		return null;
 	}
 }
