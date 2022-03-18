@@ -37,9 +37,9 @@ public class Cylinder extends Tube {
 	public Vector getNormal(Point p) {
 		Vector ray = getAxisRay().getDir();
 		Point center1 = getAxisRay().getP0(); // center of the first base
-		Point center2 = getAxisRay().getP0().add(ray.scale(getHeight())); // second base, adding to
-																			// center 1 vector direction
-																			// multiply by height
+		Point center2 = getAxisRay().getP0().add(ray.scale(h)); // second base, adding to
+																// center 1 vector direction
+																// multiply by height
 
 		if (Util.isZero(p.dist(center1)) || Util.isZero(p.sub(center1).dot(ray) - 0)) {
 			return ray.scale(-1);
@@ -51,7 +51,7 @@ public class Cylinder extends Tube {
 	}
 
 	@Override
-	public List<Point> findIntsersections(Ray ray) {
+	public List<Point> findIntersections(Ray ray) {
 		return null;
 	}
 }

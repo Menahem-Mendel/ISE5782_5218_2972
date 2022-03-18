@@ -72,6 +72,30 @@ public class Point {
 		return Math.sqrt(distSquared(rhs));
 	}
 
+	/**
+	 * 
+	 * @return value of cordinate x
+	 */
+	public double getX() {
+		return xyz.d1;
+	}
+
+	/**
+	 * 
+	 * @return value of cordinate y
+	 */
+	public double getY() {
+		return xyz.d2;
+	}
+
+	/**
+	 * 
+	 * @return value of cordinate z
+	 */
+	public double getZ() {
+		return xyz.d3;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

@@ -49,13 +49,13 @@ public class Tube implements Geometry {
 		Vector u = p.sub(p0); // vector to a point from ray head
 
 		double t = dir.dot(u);
-		Point o = Util.isZero(t) ? p0 : p0.add(dir.scale(t));
+		Point o = Util.isZero(t) ? p0 : p0.add(dir.scale(t));  // REFACTORING TO RAY, AND MAKING THERE A TEST
 
 		return p.sub(o).normalize();
 	}
 
 	@Override
-	public List<Point> findIntsersections(Ray ray) {
+	public List<Point> findIntersections (Ray ray) {
 		return null;
 	}
 }

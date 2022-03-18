@@ -15,6 +15,6 @@ public interface Intersectable  {
      * @param ray that goes through geometries
      * @return List of Points the ray touch the geometry
      */
-    public List<Point> findIntsersections(Ray ray);
+    public List<Point> findIntersections (Ray ray);
     
 }
