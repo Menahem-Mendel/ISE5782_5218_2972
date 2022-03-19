@@ -1,6 +1,7 @@
 package geometries;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import primitives.Point;
@@ -17,8 +18,9 @@ public class Geometries implements  Intersectable{
      * default ctor
      */
     public Geometries(){
-
-        list = new ArrayList<Intersectable>();
+        
+        //LinkedList because adding is O(1)
+        list = new LinkedList<Intersectable>();
     }
 
     /**
@@ -27,7 +29,7 @@ public class Geometries implements  Intersectable{
      */
     public Geometries(Intersectable... geometries){
 
-        list = new ArrayList<Intersectable>();
+        list = new LinkedList<Intersectable>();
 
         for (int i = 0; i < geometries.length; i++){
             list.add((geometries[i]));
