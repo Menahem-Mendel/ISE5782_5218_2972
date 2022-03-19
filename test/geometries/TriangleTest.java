@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Random;
 
+import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 
@@ -48,4 +49,33 @@ public class TriangleTest {
 
 		// =============== Boundary Values Tests ==================
 	}
+
+	/**
+     * Test method for {@link geometries.Sphere#findIntersections(primitives.Ray)}.
+     */
+    @Test
+    public void testFindIntersections() {
+       
+
+        // ============ Equivalence Partitions Tests ==============
+
+        // TC01: intersection inside the triangle
+       
+
+        // TC02: infront of one of the vertices
+
+	    // TC03: infront of one of the edges
+
+       
+        // =============== Boundary Values Tests ==================
+
+        
+        // TC11: on one of the vertices
+
+		// TC11: on one of the edges
+
+		// TC11: on the continuation of one of the vertices
+       
+    }
+
 }
