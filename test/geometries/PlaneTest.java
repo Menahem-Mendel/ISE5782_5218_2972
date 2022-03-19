@@ -72,4 +72,39 @@ public class PlaneTest {
 
 		// =============== Boundary Values Tests ==================
 	}
+
+	/**
+     * Test method for {@link geometries.Sphere#findIntersections(primitives.Ray)}.
+     */
+    @Test
+    public void testFindIntersections() {
+       
+
+        // ============ Equivalence Partitions Tests ==============
+
+        // TC01: Ray's line is above the plane (but not 90 deg with the plane)(0 points)
+       
+
+        // TC02: Ray's line is below the plane (but not 90 deg with the plane)(1 points)
+       
+        // =============== Boundary Values Tests ==================
+
+        // **** Group: Ray's line parallel the plane 
+        // TC11: Ray is outside the plane (0 points)
+        // TC12: Ray is inside the plane (0 points)
+
+        // **** Group: Ray's line 90 deg with plane
+        // TC13: Ray starts before the plane (1 points)
+        // TC14: Ray starts at plane (0 points)
+        // TC15: Ray starts after plane (0 points)
+
+        // **** Group: Ray's line starts at plane (not parallel and no 90 deg to the plane)
+        // TC16:  Ray's line starts at plane (not parallel and no 90 deg to the plane)
+    
+
+        // **** Group:  Ray's line starts at the point which defines the plane 
+        // TC17:  Ray's line starts at the point which defines the plane 
+
+    }
+
 }
