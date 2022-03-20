@@ -11,59 +11,58 @@ import org.junit.jupiter.api.Test;
 import primitives.*;
 
 public class SphereTest {
-	final double MIN = -10;
-	final double MAX = 10;
+    final double MIN = -10;
+    final double MAX = 10;
 
-	final double DELTA = 0.00001;
+    final double DELTA = 0.00001;
 
-	double x, y, z;
+    double x, y, z;
 
-	Point p;
-	double r;
+    Point p;
+    double r;
 
-	Sphere sphere;
+    Sphere sphere;
 
-	@BeforeEach
-	public void init() {
-		x = Util.random(MIN, MAX);
-		y = Util.random(MIN, MAX);
-		z = Util.random(MIN, MAX);
+    @BeforeEach
+    public void init() {
+        x = Util.random(MIN, MAX);
+        y = Util.random(MIN, MAX);
+        z = Util.random(MIN, MAX);
 
-		r = Util.random(MIN, MAX);
+        r = Util.random(MIN, MAX);
 
-		p = new Point(x, y, z);
+        p = new Point(x, y, z);
 
-		sphere = new Sphere(p, r);
-	}
+        sphere = new Sphere(p, r);
+    }
 
-	/**
-	 * Test method for {@link geometries.Sphere#getNormal(primitives.Point)}
-	 */
-	@RepeatedTest(10)
-	public void getNormalTest() {
-		double alpha = 2 * Math.PI * Util.random(0, 1);
-		double beta = Math.acos(1 - 2 * Util.random(0, 1));
+    /**
+     * Test method for {@link geometries.Sphere#getNormal(primitives.Point)}
+     */
+    @RepeatedTest(10)
+    public void getNormalTest() {
+        double alpha = 2 * Math.PI * Util.random(0, 1);
+        double beta = Math.acos(1 - 2 * Util.random(0, 1));
 
-		double ax = r * Math.cos(alpha);
-		double ay = r * Math.sin(alpha) * Math.cos(beta);
-		double az = r * Math.sin(alpha) * Math.sin(beta);
+        double ax = r * Math.cos(alpha);
+        double ay = r * Math.sin(alpha) * Math.cos(beta);
+        double az = r * Math.sin(alpha) * Math.sin(beta);
 
-		Point ap = new Point(ax, ay, az);
+        Point ap = new Point(ax, ay, az);
 
-		// ============ Equivalence Partitions Tests ==============
-		// TC01: Test normal vector
-		assertEquals(ap.sub(p).normalize(), sphere.getNormal(ap), "getNormal() wrong normal vector");
+        // ============ Equivalence Partitions Tests ==============
+        // TC01: Test normal vector
+        assertEquals(ap.sub(p).normalize(), sphere.getNormal(ap), "getNormal() wrong normal vector");
 
-		// =============== Boundary Values Tests ==================
-	}
+        // =============== Boundary Values Tests ==================
+    }
 
-
-	/**
+    /**
      * Test method for {@link geometries.Sphere#findIntersections(primitives.Ray)}.
      */
     @Test
     public void testFindIntersections() {
-        Sphere sphere = new Sphere(1d, new Point (1, 0, 0));
+        Sphere sphere = new Sphere( new Point (1, 0, 0), 1d);
 
         // ============ Equivalence Partitions Tests ==============
 
@@ -82,9 +81,9 @@ public class SphereTest {
         assertEquals(List.of(p1, p2), result, "Ray crosses sphere");
 
         // TC03: Ray starts inside the sphere (1 point)
-        ...
+        
         // TC04: Ray starts after the sphere (0 points)
-        ...
+       
 
         // =============== Boundary Values Tests ==================
 
@@ -109,8 +108,5 @@ public class SphereTest {
         // TC19: Ray's line is outside, ray is orthogonal to ray start to sphere's center line
 
     }
-
-
-
 
 }
