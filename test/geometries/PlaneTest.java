@@ -74,37 +74,53 @@ public class PlaneTest {
 	}
 
 	/**
-     * Test method for {@link geometries.Sphere#findIntersections(primitives.Ray)}.
-     */
-    @Test
-    public void testFindIntersections() {
-       
+	 * Test method for {@link geometries.Sphere#findIntersections(primitives.Ray)}.
+	 */
+	@Test
+	public void testFindIntersections() {
 
-        // ============ Equivalence Partitions Tests ==============
+		Plane plane = new Plane(new Point(2, 0, 0), new Point(0, 2, 0), new Point(0, 0, 2));
+		// ============ Equivalence Partitions Tests ==============
 
-        // TC01: Ray's line is above the plane (but not 90 deg with the plane)(0 points)
-       
+		// TC01: Ray's line is above the plane (but not 90 deg with the plane)(0 points)
 
-        // TC02: Ray's line is below the plane (but not 90 deg with the plane)(1 points)
-       
-        // =============== Boundary Values Tests ==================
+		assertNull(plane.findIntersections(new Ray(new Point(3, 3, 0), new Vector(1, 0, 0))),
+				"Ray's line out of plane");
 
-        // **** Group: Ray's line parallel the plane 
-        // TC11: Ray is outside the plane (0 points)
-        // TC12: Ray is inside the plane (0 points)
+		// TC02: Ray's line is below the plane (but not 90 deg with the plane)(1 points)
 
-        // **** Group: Ray's line 90 deg with plane
-        // TC13: Ray starts before the plane (1 points)
-        // TC14: Ray starts at plane (0 points)
-        // TC15: Ray starts after plane (0 points)
+		Point point = new Point(2, 0, 0);
+		assertEquals(point, plane.findIntersections(new Ray(new Point(1, 0, 0), new Vector(1, 0, 0))), //
+				"findIntersections() wrong point intersection");
 
-        // **** Group: Ray's line starts at plane (not parallel and no 90 deg to the plane)
-        // TC16:  Ray's line starts at plane (not parallel and no 90 deg to the plane)
-    
+		// =============== Boundary Values Tests ==================
 
-        // **** Group:  Ray's line starts at the point which defines the plane 
-        // TC17:  Ray's line starts at the point which defines the plane 
+		Plane plane2 = new Plane(new Point(1, 0, 1), new Point(0, 1, 1), new Point(-1, 0, 1)); 
 
-    }
+		// **** Group: Ray's line parallel the plane
+
+		// TC11: Ray is outside the plane (0 points)
+
+		assertNull(plane2.findIntersections(new Ray(new Point(1,1,2), new Vector(1, 0, 0))),
+		"Ray's line out of plane");
+		// TC12: Ray is inside the plane (0 points)
+
+		assertNull(plane2.findIntersections(new Ray(new Point(1,1,1), new Vector(1, 0, 0))),
+		"Ray's line out of plane");
+
+		// **** Group: Ray's line 90 deg with plane
+		
+		// TC13: Ray starts before the plane (1 points)
+		// TC14: Ray starts at plane (0 points)
+		// TC15: Ray starts after plane (0 points)
+
+		// **** Group: Ray's line starts at plane (not parallel and no 90 deg to the
+		// plane)
+		// TC16: Ray's line starts at plane (not parallel and no 90 deg to the plane)
+
+		// **** Group: Ray's line starts at the point which defines the plane
+		// TC17: Ray's line starts at the point which defines the plane
+
+	}
 
 }
