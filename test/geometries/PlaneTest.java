@@ -90,7 +90,7 @@ public class PlaneTest {
 		// TC02: Ray's line is below the plane (but not 90 deg with the plane)(1 points)
 
 		Point point = new Point(2, 0, 0);
-		assertEquals(point, plane.findIntersections(new Ray(new Point(1, 0, 0), new Vector(1, 0, 0))), //
+		assertEquals(point, (plane.findIntersections(new Ray(new Point(1, 0, 0), new Vector(1, 0, 0)))).get(0), //
 				"findIntersections() wrong point intersection");
 
 		// =============== Boundary Values Tests ==================
@@ -114,7 +114,7 @@ public class PlaneTest {
 		// TC13: Ray starts before the plane (1 points)
 
 		Point point2 = new Point(1, 0, 1);
-		assertEquals(point2, plane2.findIntersections(new Ray(new Point(1, 0, 0), new Vector(0, 0, 1))), //
+		assertEquals(point2, (plane2.findIntersections(new Ray(new Point(1, 0, 0), new Vector(0, 0, 1)))).get(0), //
 				"findIntersections() wrong point intersection when ray starts befor the plane");
 
 		// TC14: Ray starts at plane (0 points)

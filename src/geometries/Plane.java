@@ -1,5 +1,6 @@
 package geometries;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import primitives.*;
@@ -64,7 +65,29 @@ public class Plane implements Geometry {
 	}
 
 	@Override
-	public List<Point> findIntersections (Ray ray) {
-		return null;
+	public List<Point> findIntersections(Ray ray) {
+
+		double nv = normal.dot(ray.getDir());
+		if (Util.isZero(nv)) { // if ray parallel to plane
+			return null;
+
+		}
+		if (Util.alignZero(ray.getP0().dist(q0)) == 0) {
+			return null;
+		}
+		if (Util.alignZero((ray.getP0().sub(q0)).dot(normal)) == 0) {
+			return null;
+		}
+
+		double t = Util.alignZero(normal.dot(q0.sub(ray.getP0())) / nv);
+		if (t > 0) {
+			Point p = ray.getP0().add(ray.getDir().scale(t));
+			List<Point> result = new LinkedList<>();
+			result.add(p);
+			return result;
+		} else {
+			return null;
+		}
+
 	}
 }
