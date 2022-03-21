@@ -6,7 +6,7 @@ import primitives.*;
  * Geometry interface describes every geometry in multi-dimensional space
  * 
  */
-public interface Geometry extends Intersectable{
+public interface Geometry extends Intersectable {
 
 	/**
 	 * getNormal returns normal vector of a particular point on the figure

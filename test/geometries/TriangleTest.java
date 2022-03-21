@@ -2,6 +2,7 @@ package geometries;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
 import java.util.Random;
 
 import org.junit.Test;
@@ -51,31 +52,45 @@ public class TriangleTest {
 	}
 
 	/**
-     * Test method for {@link geometries.Sphere#findIntersections(primitives.Ray)}.
-     */
-    @Test
-    public void testFindIntersections() {
-       
+	 * Test method for {@link geometries.Sphere#findIntersections(primitives.Ray)}.
+	 */
+	@Test
+	public void testFindIntersections() {
+		Triangle tr = new Triangle(new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0));
+		Plane pl = new Plane(new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0));
+		Ray ray;
 
-        // ============ Equivalence Partitions Tests ==============
+		// ============ Equivalence Partitions Tests ==============
+		// TC01: intersection inside the triangle
+		ray = new Ray(new Point(1, 1, 1), new Vector(-1, -1, -1));
+		assertEquals(List.of(new Point(1d / 3, 1d / 3, 1d / 3)), tr.findIntersections(ray),
+				"intersection inside the triangle");
 
-        // TC01: intersection inside the triangle
-       
+		// TC02: infront of one of the vertices
+		ray = new Ray(new Point(0, 0, 2), new Vector(-1, -1, 0));
+		assertEquals(List.of(new Point(-0.5, -0.5, 2)), pl.findIntersections(ray), "infront of one of the vertices");
+		assertNull(tr.findIntersections(ray), "infront of one of the vertices");
 
-        // TC02: infront of one of the vertices
+		// TC03: infront of one of the edges
+		ray = new Ray(new Point(0, 0, -1), new Vector(1, 1, 0));
+		assertEquals(List.of(new Point(1, 1, -1)), pl.findIntersections(ray), "infront of one of the edges");
+		assertNull(tr.findIntersections(ray), "infront of one of the edges");
 
-	    // TC03: infront of one of the edges
+		// =============== Boundary Values Tests ==================
+		// TC11: on one of the vertices
+		ray = new Ray(new Point(0, 0, 0), new Vector(1, 0, 0));
+		assertEquals(List.of(new Point(1, 0, 0)), pl.findIntersections(ray),
+				"on the continuation of one of the vertices");
+		assertNull(tr.findIntersections(ray), "on the continuation of one of the vertices");
 
-       
-        // =============== Boundary Values Tests ==================
+		// TC12: on one of the edges
+		ray = new Ray(new Point(0, 0, 0), new Vector(0.5, 0.5, 0));
+		assertEquals(List.of(new Point(0.5, 0.5, 0)), pl.findIntersections(ray), "infront of one of the vertices");
+		assertNull(tr.findIntersections(ray), "infront of one of the vertices");
 
-        
-        // TC11: on one of the vertices
-
-		// TC11: on one of the edges
-
-		// TC11: on the continuation of one of the vertices
-       
-    }
-
+		// TC13: on the continuation of one of the vertices
+		ray = new Ray(new Point(0, 0, 0), new Vector(2, -1, 0));
+		assertEquals(List.of(new Point(2, -1, 0)), pl.findIntersections(ray), "infront of one of the vertices");
+		assertNull(tr.findIntersections(ray), "infront of one of the vertices");
+	}
 }

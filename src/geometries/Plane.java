@@ -66,28 +66,33 @@ public class Plane implements Geometry {
 
 	@Override
 	public List<Point> findIntersections(Ray ray) {
+		Vector dir = ray.getDir();
+		Point p0 = ray.getP0();
 
-		double nv = normal.dot(ray.getDir());
-		if (Util.isZero(nv)) { // if ray parallel to plane
-			return null;
+		double nv = normal.dot(dir);
 
-		}
-		if (Util.alignZero(ray.getP0().dist(q0)) == 0) {
-			return null;
-		}
-		if (Util.alignZero((ray.getP0().sub(q0)).dot(normal)) == 0) {
+		// if ray parallel to plane
+		if (Util.isZero(nv)) {
 			return null;
 		}
 
-		double t = Util.alignZero(normal.dot(q0.sub(ray.getP0())) / nv);
-		if (t > 0) {
-			Point p = ray.getP0().add(ray.getDir().scale(t));
-			List<Point> result = new LinkedList<>();
-			result.add(p);
-			return result;
-		} else {
+		if (Util.isZero(p0.dist(q0))) {
+			return null;
+		} else if (Util.isZero(p0.sub(q0).dot(normal))) {
 			return null;
 		}
 
+		double t = Util.alignZero(normal.dot(q0.sub(p0)) / nv);
+
+		if (t <= 0)
+			return null;
+
+		Point p = p0.add(dir.scale(t));
+
+		List<Point> result = new LinkedList<>();
+
+		result.add(p);
+
+		return result;
 	}
 }
