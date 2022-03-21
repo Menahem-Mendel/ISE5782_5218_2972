@@ -1,20 +1,20 @@
 package geometries;
+
 import java.util.*;
 
 import primitives.*;
-
 
 /**
  * Intersectable interface describe the intersections with Geomteries
  * 
  */
-public interface Intersectable  {
+public interface Intersectable {
 
     /**
      * 
      * @param ray that goes through geometries
-     * @return List of Points the ray touch the geometry
+     * @return List of Points the ray cross the geometry
      */
-    public List<Point> findIntersections (Ray ray);
-    
+    public List<Point> findIntersections(Ray ray);
+
 }

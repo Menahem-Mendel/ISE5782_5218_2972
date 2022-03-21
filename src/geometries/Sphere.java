@@ -1,5 +1,6 @@
 package geometries;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import primitives.*;
@@ -48,7 +49,55 @@ public class Sphere implements Geometry {
     }
 
     @Override
-    public List<Point> findIntersections (Ray ray) {
-        return null;
+    public List<Point> findIntersections(Ray ray) {
+        double t1, t2; // distances from p0 to the crossed points
+        double t_m; // distance from p0 to the center of the chord
+        double t_h; // distance from crossed points to the chord
+        double d; // distance from the center of the sphere to the chord
+        Point p0 = ray.getP0(); // head point of the ray
+        Vector dir = ray.getDir(); // vector direction of the ray
+        Vector u; // vector from p0 to the center of the sphere
+
+        Point p1, p2; // intersection points
+        p1 = p2 = null;
+
+        // if the ray starts at the center add epsilon
+        if (!center.equals(p0)) {
+            u = center.sub(p0);
+            t_m = dir.dot(u);
+            d = Math.sqrt(u.lengthSquared() - t_m * t_m);
+
+            // there are no intersections
+            if (d >= radius)
+                return null;
+
+            t_h = Math.sqrt(radius * radius - d * d);
+
+            t1 = t_m + t_h;
+            t2 = t_m - t_h;
+        } else {
+            t1 = radius;
+            t2 = -1;
+        }
+
+        // p1 = p0 + direction * t1
+        if (!Util.isZero(t1) && t1 > 0)
+            p1 = p0.add(dir.scale(t1));
+
+        // p2 = p0 + direction * t2
+        if (!Util.isZero(t2) && t2 > 0)
+            p2 = p0.add(dir.scale(t2));
+
+        // if it is no intersections points
+        if (p1 == null && p2 == null)
+            return null;
+
+        List<Point> intsersection = new ArrayList<Point>();
+        if (p1 != null)
+            intsersection.add(p1);
+        if (p2 != null)
+            intsersection.add(p2);
+
+        return intsersection;
     }
 }

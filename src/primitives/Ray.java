@@ -54,4 +54,8 @@ public class Ray {
 	public String toString() {
 		return "->" + String.format("%s, %s", p0.toString(), dir.toString());
 	}
+
+	public Point getPoint(double t) {
+		return Util.isZero(t) ? p0 : p0.add(dir.scale(t));
+	}
 }
