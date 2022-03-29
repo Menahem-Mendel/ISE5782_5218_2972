@@ -17,7 +17,7 @@ public class RayTest {
 		Ray r = new Ray(p0, dir);
 		double t = 2d;
 
-		assertEquals(new Point(2, 0, 0), r.getPoint(t), "");
+		// TC01: ...
+		assertEquals(new Point(2, 0, 0), r.getPoint(t), "getPoint wrong return value");
 	}
-
 }

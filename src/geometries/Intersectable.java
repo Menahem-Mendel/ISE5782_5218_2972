@@ -11,6 +11,7 @@ import primitives.*;
 public interface Intersectable {
 
     /**
+     * findIntersections finds the intersection points
      * 
      * @param ray that goes through geometries
      * @return List of Points the ray cross the geometry

@@ -65,7 +65,8 @@ public class Sphere implements Geometry {
         if (!center.equals(p0)) {
             u = center.sub(p0);
             t_m = dir.dot(u);
-            d = Math.sqrt(u.lengthSquared() - t_m * t_m);
+            double temp = Util.alignZero(u.lengthSquared() - t_m * t_m);
+            d = (temp != 0) ? Math.sqrt(temp) : temp;
 
             // there are no intersections
             if (d >= radius)
@@ -77,7 +78,7 @@ public class Sphere implements Geometry {
             t2 = t_m - t_h;
         } else {
             t1 = radius;
-            t2 = -1;
+            t2 = -1; // because it's negative value we will not compute it
         }
 
         // p1 = p0 + direction * t1
@@ -92,12 +93,12 @@ public class Sphere implements Geometry {
         if (p1 == null && p2 == null)
             return null;
 
-        List<Point> intsersection = new ArrayList<Point>();
+        List<Point> ret = new ArrayList<Point>();
         if (p1 != null)
-            intsersection.add(p1);
+            ret.add(p1);
         if (p2 != null)
-            intsersection.add(p2);
+            ret.add(p2);
 
-        return intsersection;
+        return (ret.size() > 0) ? ret : null;
     }
 }
