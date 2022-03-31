@@ -2,8 +2,6 @@ package geometries;
 
 import java.util.List;
 
-import javax.naming.OperationNotSupportedException;
-
 import primitives.*;
 
 /**

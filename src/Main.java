@@ -4,8 +4,6 @@
  * name: josef wolf        id: 317732972   mail: yossiwolf@hotmail.com
  */
 import primitives.*;
-import static java.lang.System.out;
-import static primitives.Util.*;
 
 import geometries.Sphere;
 
