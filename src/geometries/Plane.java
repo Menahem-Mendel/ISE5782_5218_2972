@@ -87,7 +87,7 @@ public class Plane implements Geometry {
 		if (t <= 0)
 			return null;
 
-		Point p = ray.getPoint(t));
+		Point p = ray.getPoint(t);
 
 		List<Point> result = new LinkedList<>();
 
