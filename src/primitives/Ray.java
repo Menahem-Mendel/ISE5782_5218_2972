@@ -56,9 +56,10 @@ public class Ray {
 	}
 
 	/**
+	 * getPoint get the point on the line (p0 + t*dir)
 	 * 
-	 * @param t
-	 * @return
+	 * @param t dir scale
+	 * @return point on the line
 	 */
 	public Point getPoint(double t) {
 		return Util.isZero(t) ? p0 : p0.add(dir.scale(t));
