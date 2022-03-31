@@ -76,23 +76,14 @@ public class Plane implements Geometry {
 			return null;
 		}
 
-		if (Util.isZero(p0.dist(q0))) {
-			return null;
-		} else if (Util.isZero(p0.sub(q0).dot(normal))) {
+		Vector u;
+		try {
+			u = q0.sub(p0);
+		} catch (IllegalArgumentException ignore) {
 			return null;
 		}
 
-		double t = Util.alignZero(normal.dot(q0.sub(p0)) / nv);
-
-		if (t <= 0)
-			return null;
-
-		Point p = ray.getPoint(t);
-
-		List<Point> result = new LinkedList<>();
-
-		result.add(p);
-
-		return result;
+		double t = Util.alignZero(normal.dot(u) / nv);
+		return t <= 0 ? null : List.of(ray.getPoint(t));
 	}
 }

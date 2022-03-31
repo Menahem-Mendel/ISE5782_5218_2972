@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import primitives.*;
+import static primitives.Util.*;
 
 /**
  * Sphere class represents a sphere in two-dimensional space
@@ -13,6 +14,7 @@ public class Sphere implements Geometry {
 
     private final Point center;
     private final double radius;
+    private final double radius2;
 
     /**
      * Sphere build ctor
@@ -23,6 +25,7 @@ public class Sphere implements Geometry {
     public Sphere(Point p, double r) {
         center = p;
         radius = r;
+        radius2 = r * r;
     }
 
     /**
@@ -50,55 +53,30 @@ public class Sphere implements Geometry {
 
     @Override
     public List<Point> findIntersections(Ray ray) {
-        double t1, t2; // distances from p0 to the crossed points
-        double t_m; // distance from p0 to the center of the chord
-        double t_h; // distance from crossed points to the chord
-        double d; // distance from the center of the sphere to the chord
-        Point p0 = ray.getP0(); // head point of the ray
-        Vector dir = ray.getDir(); // vector direction of the ray
         Vector u; // vector from p0 to the center of the sphere
-
-        Point p1, p2; // intersection points
-        p1 = p2 = null;
-
-        // if the ray starts at the center add epsilon
-        if (!center.equals(p0)) {
-            u = center.sub(p0);
-            t_m = dir.dot(u);
-            double temp = Util.alignZero(u.lengthSquared() - t_m * t_m);
-            d = (temp != 0) ? Math.sqrt(temp) : temp;
-
-            // there are no intersections
-            if (d >= radius)
-                return null;
-
-            t_h = Math.sqrt(radius * radius - d * d);
-
-            t1 = t_m + t_h;
-            t2 = t_m - t_h;
-        } else {
-            t1 = radius;
-            t2 = -1; // because it's negative value we will not compute it
+        try {
+            u = center.sub(ray.getP0());
+        } catch (IllegalArgumentException ignore) {
+            // the ray starts at the center
+            return List.of(ray.getPoint(radius));
         }
 
-        // p1 = p0 + direction * t1
-        if (!Util.isZero(t1) && t1 > 0)
-            p1 = ray.getPoint(t1);
+        double tm = ray.getDir().dot(u);// distance from p0 to the center of the chord
 
-        // p2 = p0 + direction * t2
-        if (!Util.isZero(t2) && t2 > 0)
-            p2 = ray.getPoint(t2);
+        // squared distance from the center of the sphere to the chord
+        double d2 = Util.alignZero(u.lengthSquared() - tm * tm);
 
-        // if it is no intersections points
-        if (p1 == null && p2 == null)
+        double th2 = radius2 - d2;// squared distance from crossed points to the chord
+        // there are no intersections
+        if (alignZero(th2) <= 0)
             return null;
 
-        List<Point> ret = new ArrayList<Point>();
-        if (p1 != null)
-            ret.add(p1);
-        if (p2 != null)
-            ret.add(p2);
+        double th = Math.sqrt(th2); // distance from crossed points to the chord
+        double t2 = alignZero(tm + th); // distance from p0 to the furhter point
+        if (t2 <= 0)
+            return null;
 
-        return (ret.size() > 0) ? ret : null;
+        double t1 = alignZero(tm - th); // distance from p0 to the nearer point
+        return t1 <= 0 ? List.of(ray.getPoint(t2)) : List.of(ray.getPoint(t1), ray.getPoint(t2));
     }
 }

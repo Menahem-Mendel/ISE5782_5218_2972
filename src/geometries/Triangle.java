@@ -3,6 +3,7 @@ package geometries;
 import java.util.List;
 
 import primitives.*;
+import static primitives.Util.*;
 
 /**
  * Triangle class represents triangl in 3D space
@@ -24,33 +25,31 @@ public class Triangle extends Polygon {
 	@Override
 	public List<Point> findIntersections(Ray ray) {
 		List<Point> result = plane.findIntersections(ray);
-
 		if (result == null)
 			return null;
 
-		Point P0 = ray.getP0();
+		Point p0 = ray.getP0();
 		Vector v = ray.getDir();
 
-		Point p1 = vertices.get(0);
-		Point p2 = vertices.get(1);
-		Point p3 = vertices.get(2);
-
-		Vector v1 = p1.sub(P0);
-		Vector v2 = p2.sub(P0);
-		Vector v3 = p3.sub(P0);
-
+		Vector v1 = vertices.get(0).sub(p0);
+		Vector v2 = vertices.get(1).sub(p0);
 		Vector n1 = v1.cross(v2);
+		double s1 = alignZero(v.dot(n1));
+		if (s1 == 0)
+			return null;
+
+		Vector v3 = vertices.get(2).sub(p0);
 		Vector n2 = v2.cross(v3);
+		double s2 = alignZero(v.dot(n2));
+		if (s1 * s2 <= 0)
+			return null;
+
 		Vector n3 = v3.cross(v1);
+		double s3 = alignZero(v.dot(n3));
+		if (s1 * s3 <= 0)
+			return null;
 
-		double s1 = v.dot(n1);
-		double s2 = v.dot(n2);
-		double s3 = v.dot(n3);
-
-		if ((s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0))
-			return result;
-
-		return null;
+		return result;
 	}
 
 }

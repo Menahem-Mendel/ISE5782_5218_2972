@@ -1,6 +1,5 @@
 package geometries;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,7 +11,7 @@ import primitives.Ray;
  */
 public class Geometries implements Intersectable {
 
-	private List<Intersectable> list;
+	private List<Intersectable> list = new LinkedList<Intersectable>();
 
 	/**
 	 * Geometries build ctor
@@ -20,11 +19,8 @@ public class Geometries implements Intersectable {
 	 * @param geometries list who contains geometries
 	 */
 	public Geometries(Intersectable... geometries) {
-		list = new LinkedList<Intersectable>();
-
-		for (int i = 0; i < geometries.length; i++) {
-			list.add(geometries[i]);
-		}
+		if (geometries.length > 0)
+			add(geometries);
 	}
 
 	/**
@@ -33,25 +29,24 @@ public class Geometries implements Intersectable {
 	 * @param geometries list containing geometries
 	 */
 	public void add(Intersectable... geometries) {
-		for (int i = 0; i < geometries.length; i++) {
-			list.add(geometries[i]);
-		}
+		list.addAll(List.of(geometries));
 	}
 
 	@Override
 	public List<Point> findIntersections(Ray ray) {
-		List<Point> ret = new LinkedList<Point>();
-		List<Point> elems = new LinkedList<Point>();
+		List<Point> ret = null;
 
-		for (int i = 0; i < list.size(); i++) {
-			elems = list.get(i).findIntersections(ray);
-
+		for (var g : list) {
+			List<Point> elems = g.findIntersections(ray);
 			if (elems == null)
 				continue;
 
-			ret.addAll(elems);
+			if (ret == null)
+				ret = new LinkedList<>(elems);
+			else
+				ret.addAll(elems);
 		}
 
-		return (ret.size() > 0) ? ret : null;
+		return ret;
 	}
 }

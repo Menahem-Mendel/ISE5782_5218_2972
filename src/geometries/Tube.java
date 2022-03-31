@@ -2,6 +2,8 @@ package geometries;
 
 import java.util.List;
 
+import javax.naming.OperationNotSupportedException;
+
 import primitives.*;
 
 /**
@@ -44,18 +46,12 @@ public class Tube implements Geometry {
 
 	@Override
 	public Vector getNormal(Point p) {
-		Vector dir = axisRay.getDir(); // ray direction
-		Point p0 = axisRay.getP0();
-		Vector u = p.sub(p0); // vector to a point from ray head
-
-		double t = dir.dot(u);
-		Point o = axisRay.getPoint(t);
-
-		return p.sub(o).normalize();
+		double t = axisRay.getDir().dot(p.sub(axisRay.getP0()));
+		return p.sub(axisRay.getPoint(t)).normalize();
 	}
 
 	@Override
 	public List<Point> findIntersections(Ray ray) {
-		return null;
+		throw new UnsupportedOperationException("not yet implemented");
 	}
 }

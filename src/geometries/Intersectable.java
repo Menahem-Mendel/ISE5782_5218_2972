@@ -6,7 +6,12 @@ import primitives.*;
 
 /**
  * Intersectable interface describe the intersections with Geomteries
- * 
+ * variables + methods camelCase
+ * variables: class (static), instance (object), local, parameters
+ * variables - main word is a subject, methods - main word is a verb
+ * types CamelCase
+ * CONSTANT_NAMES
+ * packagesnames
  */
 public interface Intersectable {
 
