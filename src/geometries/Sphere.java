@@ -83,11 +83,11 @@ public class Sphere implements Geometry {
 
         // p1 = p0 + direction * t1
         if (!Util.isZero(t1) && t1 > 0)
-            p1 = p0.add(dir.scale(t1));
+            p1 = ray.getPoint(t1);
 
         // p2 = p0 + direction * t2
         if (!Util.isZero(t2) && t2 > 0)
-            p2 = p0.add(dir.scale(t2));
+            p2 = ray.getPoint(t2);
 
         // if it is no intersections points
         if (p1 == null && p2 == null)
