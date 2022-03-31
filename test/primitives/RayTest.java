@@ -7,6 +7,7 @@ import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 public class RayTest {
+
 	/**
 	 * Test method for {@link primitives.Ray#getPoint(double)}.
 	 */
@@ -17,7 +18,7 @@ public class RayTest {
 		Ray r = new Ray(p0, dir);
 		double t = 2d;
 
-		// TC01: ...
+		// TC01: getPoint x2 scale directional vector
 		assertEquals(new Point(2, 0, 0), r.getPoint(t), "getPoint wrong return value");
 	}
 }

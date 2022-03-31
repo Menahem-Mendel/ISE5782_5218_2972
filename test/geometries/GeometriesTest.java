@@ -12,6 +12,10 @@ import primitives.*;
 
 public class GeometriesTest {
 
+    /**
+     * Test method for
+     * {@link geometries.Geometries#findIntersections(primitives.Ray)}
+     */
     @Test
     public void findIntersectionsTest() {
         Triangle tr = new Triangle(
@@ -70,7 +74,7 @@ public class GeometriesTest {
         Ray r = new Ray(new Point(0, 0, 0), new Vector(1, 1, 1));
         List<Point> result = gg[0].findIntersections(r);
         int expected = sp.findIntersections(r).size() + tr.findIntersections(r).size();
-        assertEquals(expected, result.size());
+        assertEquals(expected, result.size(), "Ray's line goes through few geometries but not all of them");
         // =============== Boundary Values Tests ==================
 
         // TC11: empty collection of geometries
@@ -83,16 +87,15 @@ public class GeometriesTest {
         assertNull(result, "Ray's line does not go through any geometry in the collection");
 
         // TC13: Ray's line goes through only one geometry element in the collection
-
         r = new Ray(new Point(0, 0, 0), new Vector(-1, -1, -1));
         result = gg[3].findIntersections(r);
         expected = pln.findIntersections(r).size();
-        assertEquals(expected, result.size());
+        assertEquals(expected, result.size(), "Ray's line goes through only one geometry element in the collection");
 
         // TC14: Ray's line goes through all elements in the collection
         r = new Ray(new Point(-2, -2, -2), new Vector(1, 1, 1));
         result = gg[4].findIntersections(r);
         expected = sp.findIntersections(r).size() + tr.findIntersections(r).size() + pln.findIntersections(r).size();
-        assertEquals(expected, result.size());
+        assertEquals(expected, result.size(), "Ray's line goes through all elements in the collection");
     }
 }
