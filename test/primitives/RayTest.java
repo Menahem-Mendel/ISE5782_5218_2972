@@ -17,6 +17,10 @@ public class RayTest {
 		double t = 2d;
 
 		// TC01: getPoint x2 scale directional vector
-		assertEquals(new Point(2, 0, 0), r.getPoint(t), "getPoint wrong return value");
+		assertEquals(new Point(2, 0, 0), r.getPoint(t), "getPoint x2 scale wrong value");
+
+		// =============== Boundary Values Tests ==================
+		// TC02: get Point x0 scale directional vector
+		assertEquals(p0, r.getPoint(0), "getPoint x0 scale wrong value");
 	}
 }

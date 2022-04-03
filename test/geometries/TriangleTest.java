@@ -47,8 +47,6 @@ public class TriangleTest {
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test normal vector
 		assertEquals(vcp, triangle.getNormal(pp[r.nextInt(3)]), "getNormal() wrong normal vector");
-
-		// =============== Boundary Values Tests ==================
 	}
 
 	/**

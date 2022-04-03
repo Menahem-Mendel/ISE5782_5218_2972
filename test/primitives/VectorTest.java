@@ -144,8 +144,6 @@ public class VectorTest {
 		// TC03: Test normal vector direction
 		assertFalse(lhs.dot(lhs.normalize()) < 0,
 				"normalize() the normalized vector is opposite to the original one");
-
-		// =============== Boundary Values Tests ==================
 	}
 
 	/**
@@ -156,8 +154,6 @@ public class VectorTest {
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test vector length
 		assertEquals(Math.sqrt(x * x + y * y + z * z), lhs.length(), DELTA, "length() wrong value");
-
-		// =============== Boundary Values Tests ==================
 	}
 
 	/**
@@ -168,8 +164,6 @@ public class VectorTest {
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test vector length squared
 		assertTrue(Util.isZero(lhs.lengthSquared() - (x * x + y * y + z * z)), "lengthSquared() wrong value");
-
-		// =============== Boundary Values Tests ==================
 	}
 
 	/**

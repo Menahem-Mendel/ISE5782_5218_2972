@@ -53,8 +53,6 @@ public class SphereTest {
                 // ============ Equivalence Partitions Tests ==============
                 // TC01: Test normal vector
                 assertEquals(ap.sub(p).normalize(), sphere.getNormal(ap), "getNormal() wrong normal vector");
-
-                // =============== Boundary Values Tests ==================
         }
 
         /**

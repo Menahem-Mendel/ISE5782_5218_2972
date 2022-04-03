@@ -21,12 +21,6 @@ public class GeometriesTest {
 				new Point(0, 1, 0),
 				new Point(0, 0, 1));
 
-		// Polygon pl = new Polygon(
-		// new Point(2, 0, 0),
-		// new Point(2, 0, 2),
-		// new Point(0, 2, 0),
-		// new Point(0, 2, 2));
-
 		Sphere sp = new Sphere(
 				new Point(5, 5, 5),
 				3);
@@ -35,12 +29,6 @@ public class GeometriesTest {
 				new Point(-1, 0, 0),
 				new Point(0, -1, 0),
 				new Point(0, 0, -1));
-
-		// Cylinder cl = new Cylinder(
-		// new Ray(
-		// new Point(-5, -5, -5),
-		// new Vector(-1, -1, -1)),
-		// 3, 3);
 
 		Geometries[] gg = {
 				new Geometries(
@@ -67,14 +55,13 @@ public class GeometriesTest {
 		};
 
 		// ============ Equivalence Partitions Tests ==============
-
 		// TC01: Ray's line goes through few geometries but not all of them
 		Ray r = new Ray(new Point(0, 0, 0), new Vector(1, 1, 1));
 		List<Point> result = gg[0].findIntersections(r);
 		int expected = sp.findIntersections(r).size() + tr.findIntersections(r).size();
 		assertEquals(expected, result.size(), "Ray's line goes through few geometries but not all of them");
-		// =============== Boundary Values Tests ==================
 
+		// =============== Boundary Values Tests ==================
 		// TC11: empty collection of geometries
 		result = gg[1].findIntersections(r);
 		assertNull(result, "empty collection of geometries");

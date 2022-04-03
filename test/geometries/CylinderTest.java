@@ -47,12 +47,4 @@ public class CylinderTest {
 		Vector vec5 = new Vector(-1, 0, 0);
 		assertEquals(vec5, cylinder1.getNormal(pointCheck5), "getNormal() wrong normal vector");
 	}
-
-	/**
-	 * Test method for {@link geometries.Cylinder#findIntersections(primitives.Ray)}
-	 */
-	@Test
-	public void findIntersectionsTest() {
-
-	}
 }
