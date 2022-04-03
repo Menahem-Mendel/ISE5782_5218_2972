@@ -23,7 +23,7 @@ public class PointTest {
 	Point lhs;
 
 	@BeforeEach
-	public void init() {
+	private void init() {
 		x = Util.random(MIN, MAX);
 		y = Util.random(MIN, MAX);
 		z = Util.random(MIN, MAX);

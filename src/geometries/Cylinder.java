@@ -50,6 +50,6 @@ public class Cylinder extends Tube {
 
 	@Override
 	public List<Point> findIntersections(Ray ray) {
-		return null;
+		throw new UnsupportedOperationException("not yet implemented");
 	}
 }

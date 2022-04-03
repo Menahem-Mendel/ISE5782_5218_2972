@@ -38,6 +38,7 @@ public class Geometries implements Intersectable {
 
 		for (var g : list) {
 			List<Point> elems = g.findIntersections(ray);
+
 			if (elems == null)
 				continue;
 
