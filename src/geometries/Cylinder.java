@@ -35,18 +35,17 @@ public class Cylinder extends Tube {
 
 	@Override
 	public Vector getNormal(Point p) {
-		Vector dir = getAxisRay().getDir();
-		Point center1 = getAxisRay().getP0();
-		Point center2 = center1.add(dir.scale(h)); // second base, adding to center 1 vector direction multiply by
-													// height
+		Vector dir = axisRay.getDir();
+		Point p0 = axisRay.getP0(); // base center
+		Point p1 = p0.add(dir.scale(h)); // second base center
 
-		if (Util.isZero(p.dist(center1)) || Util.isZero(p.sub(center1).dot(dir))) {
+		if (Util.isZero(p.dist(p0)) || Util.isZero(p.sub(p0).dot(dir))) {
 			return dir.scale(-1);
-		} else if (Util.isZero(p.dist(center2)) || Util.isZero(p.sub(center2).dot(dir))) {
+		} else if (Util.isZero(p.dist(p1)) || Util.isZero(p.sub(p1).dot(dir))) {
 			return dir;
-		} else {
-			return super.getNormal(p);
 		}
+
+		return super.getNormal(p);
 	}
 
 	@Override

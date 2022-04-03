@@ -10,8 +10,8 @@ import primitives.*;
  */
 public class Tube implements Geometry {
 
-	private final Ray axisRay;
-	private final double radius;
+	protected final Ray axisRay;
+	protected final double radius;
 
 	/**
 	 * Tube build ctor
