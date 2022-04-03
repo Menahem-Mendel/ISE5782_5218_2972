@@ -20,7 +20,7 @@ class CameraTest {
 	 * {@link elements.Camera#constructRay(int, int, int, int)}.
 	 */
 	@Test
-	void testConstructRay() {
+	void ctorRayTest() {
 		Camera camera = new Camera(ZERO_POINT, new Vector(0, 0, -1), new Vector(0, -1, 0)).setVPDistance(10);
 		String badRay = "Bad ray";
 
@@ -53,7 +53,5 @@ class CameraTest {
 		// BV06: 4X4 Side (0,1)
 		assertEquals(new Ray(ZERO_POINT, new Vector(1, -3, -10)),
 				camera.setVPSize(8, 8).constructRay(4, 4, 1, 0), badRay);
-
 	}
-
 }
