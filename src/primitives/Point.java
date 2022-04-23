@@ -54,9 +54,9 @@ public class Point {
 	 * @param rhs point
 	 * @return squared distance between two points
 	 */
-	public double distSquared(Point rhs) {
+	public double distSq(Point rhs) {
 		try {
-			return sub(rhs).lengthSquared();
+			return sub(rhs).lengthSq();
 		} catch (IllegalArgumentException e) {
 			return 0;
 		}
@@ -69,10 +69,20 @@ public class Point {
 	 * @return distance between two points
 	 */
 	public double dist(Point rhs) {
-		return Math.sqrt(distSquared(rhs));
+		return Math.sqrt(distSq(rhs));
 	}
 
 	/**
+	 * getXYZ returns Double3 value of the point
+	 * 
+	 * @return xyz Double3
+	 */
+	public Double3 getXYZ() {
+		return xyz;
+	}
+
+	/**
+	 * getX returns x
 	 * 
 	 * @return value of cordinate x
 	 */
@@ -81,6 +91,7 @@ public class Point {
 	}
 
 	/**
+	 * getY returns y
 	 * 
 	 * @return value of cordinate y
 	 */
@@ -89,6 +100,7 @@ public class Point {
 	}
 
 	/**
+	 * getZ returns z
 	 * 
 	 * @return value of cordinate z
 	 */
