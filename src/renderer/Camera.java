@@ -135,8 +135,8 @@ public class Camera {
 		double rY = height / nY;
 		double rX = width / nX;
 
-		double yI = -(i - (nY - 1d) / 2d) * rY;
-		double xJ = (j - (nX - 1d) / 2d) * rX;
+		double yI = -(i - Util.alignZero((double) (nY - 1) / 2)) * rY;
+		double xJ = (j - Util.alignZero((double) (nX - 1) / 2)) * rX;
 
 		if (!Util.isZero(xJ))
 			pIJ = pIJ.add(vRight.scale(xJ));

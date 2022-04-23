@@ -4,8 +4,10 @@
  * name: josef wolf        id: 317732972   mail: yossiwolf@hotmail.com
  */
 import primitives.*;
+import renderer.ImageWriter;
+import primitives.Color;
 
-import geometries.Sphere;
+import static java.awt.Color.*;
 
 /**
  * Test program for the 1st stage
@@ -20,12 +22,22 @@ public final class Main {
      * @param args irrelevant here
      */
     public static void main(String[] args) {
-        Sphere sp = new Sphere(
-                new Point(5, 5, 5),
-                3);
+        ImageWriter imageWriter = new ImageWriter("testImage", 800, 500);
+        int delta = 50;
 
-        Ray r = new Ray(new Point(0, 0, 0), new Vector(1, 1, 1));
+        for (int i = 0; i < imageWriter.getNx(); i++)
+            for (int j = 0; j < imageWriter.getNy(); j++)
+                imageWriter.writePixel(i, j, new Color(YELLOW));
 
-        System.out.println(sp.findIntersections(r));
+        for (int i = 0; i < imageWriter.getNx(); i += delta)
+            for (int j = 0; j < imageWriter.getNy(); j++)
+                imageWriter.writePixel(i, j, new Color(RED));
+
+        for (int i = 0; i < imageWriter.getNx(); i++)
+            for (int j = 0; j < imageWriter.getNy(); j += delta)
+                imageWriter.writePixel(i, j, new Color(RED));
+
+        imageWriter.writeToImage();
+        System.out.println();
     }
 }

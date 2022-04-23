@@ -21,7 +21,7 @@ public class ImageWriter {
 	private int nX;
 	private int nY;
 
-	private static final String FOLDER_PATH = System.getProperty("user.dir") + "/img";
+	private static final String FOLDER_PATH = System.getProperty("user.dir") + File.separator + "img";
 
 	private BufferedImage image;
 	private String imageName;
@@ -71,11 +71,11 @@ public class ImageWriter {
 	 */
 	public void writeToImage() {
 		try {
-			File file = new File(FOLDER_PATH + '/' + imageName + ".png");
+			File file = new File(FOLDER_PATH + File.separator + imageName + ".png");
 			ImageIO.write(image, "png", file);
 		} catch (IOException e) {
 			logger.log(Level.SEVERE, "I/O error", e);
-			throw new IllegalStateException("I/O error - may be missing directory " + FOLDER_PATH, e);
+			throw new IllegalStateException("I/O error - may be missing directory" + FOLDER_PATH, e);
 		}
 	}
 

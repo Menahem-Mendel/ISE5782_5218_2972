@@ -2,8 +2,8 @@ package renderer;
 
 import org.junit.jupiter.api.Test;
 
-import elements.AmbientLight;
 import geometries.*;
+import lighting.AmbientLight;
 import primitives.*;
 import renderer.*;
 import scene.Scene;
@@ -36,26 +36,6 @@ public class RenderTest {
 				.setVPDistance(100)
 				.setVPSize(500, 500)
 				.setImageWriter(new ImageWriter("base render test", 1000, 1000))
-				.setRayTracer(new RayTracerBasic(scene));
-
-		camera.renderImage();
-		camera.printGrid(100, new Color(java.awt.Color.YELLOW));
-		camera.writeToImage();
-	}
-
-	/**
-	 * Test for XML based scene - for bonus
-	 */
-	@Test
-	public void basicRenderXml() {
-		Scene scene = new Scene("XML Test scene");
-		// enter XML file name and parse from XML file into scene object
-		// ...
-
-		Camera camera = new Camera(ZERO, new Vector(0, 0, -1), new Vector(0, 1, 0))
-				.setVPDistance(100)
-				.setVPSize(500, 500)
-				.setImageWriter(new ImageWriter("xml render test", 1000, 1000))
 				.setRayTracer(new RayTracerBasic(scene));
 
 		camera.renderImage();
