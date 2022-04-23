@@ -109,7 +109,7 @@ public class PointTest {
 	}
 
 	/**
-	 * Test Method for {@link primitives.Point#distSquared(primitives.Point)}
+	 * Test Method for {@link primitives.Point#distSq(primitives.Point)}
 	 */
 	@RepeatedTest(10)
 	public void distSquaredTest() {
@@ -123,15 +123,15 @@ public class PointTest {
 
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: squared distance of two points
-		assertTrue(Util.isZero(lhs.distSquared(rhs) - res), "distSquared() wrong result");
+		assertTrue(Util.isZero(lhs.distSq(rhs) - res), "distSquared() wrong result");
 
 		// =============== Boundary Values Tests ==================
 		// TC11: squared distance from a point to the same point
-		assertTrue(Util.isZero(lhs.distSquared(lhs) - 0), "distSquared() distance from point to himself should be 0");
+		assertTrue(Util.isZero(lhs.distSq(lhs) - 0), "distSquared() distance from point to himself should be 0");
 
 		// TC12: squared distance of opposite points
 		rhs = new Point(-x, -y, -z);
-		assertEquals(4 * lhs.distSquared(new Point(0, 0, 0)), lhs.distSquared(rhs), DELTA,
+		assertEquals(4 * lhs.distSq(new Point(0, 0, 0)), lhs.distSq(rhs), DELTA,
 				"distSquared() wrong distance calculating");
 	}
 }

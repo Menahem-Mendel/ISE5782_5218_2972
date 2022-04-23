@@ -102,7 +102,7 @@ public class VectorTest {
 		rhs = lhs.scale(t);
 
 		// TC11: Test dot product of two parallel vectors
-		assertTrue(Util.isZero(lhs.dot(rhs) - lhs.lengthSquared() * t),
+		assertTrue(Util.isZero(lhs.dot(rhs) - lhs.lengthSq() * t),
 				"dot() for parallel vectors is not squared length");
 
 		rhs = new Vector(-(y + z) * t / x, t, t); // orthogonal vector for lhs
@@ -157,13 +157,13 @@ public class VectorTest {
 	}
 
 	/**
-	 * Test method for {@link primitives.Vector#lengthSquared()}.
+	 * Test method for {@link primitives.Vector#lengthSq()}.
 	 */
 	@RepeatedTest(10)
 	public void lengthSquaredTest() {
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test vector length squared
-		assertTrue(Util.isZero(lhs.lengthSquared() - (x * x + y * y + z * z)), "lengthSquared() wrong value");
+		assertTrue(Util.isZero(lhs.lengthSq() - (x * x + y * y + z * z)), "lengthSquared() wrong value");
 	}
 
 	/**
