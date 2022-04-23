@@ -1,5 +1,7 @@
 package primitives;
 
+import java.util.List;
+
 /**
  * Ray represents directional vector which starts from the starting point
  *
@@ -63,5 +65,24 @@ public class Ray {
 	 */
 	public Point getPoint(double t) {
 		return Util.isZero(t) ? p0 : p0.add(dir.scale(t));
+	}
+
+	/**
+	 * findClosestPoint finds closest point to the ray's head
+	 * 
+	 * @param lst list of points
+	 * @return closest point to the ray's head
+	 */
+	public Point findClosestPoint(List<Point> lst) {
+		if (lst.isEmpty())
+			return null;
+
+		Point closest = lst.get(0);
+
+		for (Point p : lst)
+			if (closest.distSq(p0) > p.distSq(p0))
+				closest = p;
+
+		return closest;
 	}
 }
