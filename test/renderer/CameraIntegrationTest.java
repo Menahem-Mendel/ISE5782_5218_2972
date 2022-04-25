@@ -27,22 +27,22 @@ public class CameraIntegrationTest {
 
 		c.setVPDistance(1).setVPSize(w, h);
 
-		for (int i = 0; i < h; ++i) {
+		for (int i = 0; i < h; ++i)
 			for (int j = 0; j < w; ++j) {
 				var intersections = g.findIntersections(c.constructRay(w, h, j, i));
 
-				if (intersections != null)
-					points.addAll(intersections);
+				if (intersections == null)
+					continue;
 
-				count += intersections != null ? intersections.size() : 0;
+				points.addAll(intersections);
+				count += intersections.size();
 			}
-		}
 
 		return count;
 	}
 
 	/**
-	 * Integration test for
+	 * Integration test for ray to {@link Sphere}
 	 */
 	@Test
 	public void cameraRaySphereIntegrationTest() {
@@ -72,7 +72,7 @@ public class CameraIntegrationTest {
 	}
 
 	/**
-	 * Integration test for
+	 * Integration test for ray to {@link Plane}
 	 */
 	@Test
 	public void cameraRayPlaneIntegrationTest() {
@@ -98,7 +98,7 @@ public class CameraIntegrationTest {
 	}
 
 	/**
-	 * Integration test for
+	 * Integration test for ray to {@link Triangle}
 	 */
 	@Test
 	public void cameraRayTriangleIntegrationTest() {
