@@ -21,6 +21,14 @@ public class CameraIntegrationTest {
 
 	Camera cam = new Camera(new Point(0, 0, 0), to, up);
 
+	/**
+	 * finding a number of integrations
+	 * 
+	 * @param c camera 
+	 * @param g intersectable object
+	 * 
+	 * @return number of integration points between camera's rays to the intersectable
+	 */
 	private int countIntersections(Camera c, Intersectable g) {
 		int count = 0;
 		var points = new LinkedList<>();
