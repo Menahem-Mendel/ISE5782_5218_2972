@@ -4,10 +4,16 @@
  * name: josef wolf        id: 317732972   mail: yossiwolf@hotmail.com
  */
 import primitives.*;
+import renderer.Camera;
 import renderer.ImageWriter;
+import renderer.RayTracerBasic;
+import scene.Scene;
 import primitives.Color;
 
 import static java.awt.Color.*;
+
+import geometries.*;
+import lighting.AmbientLight;
 
 /**
  * Test program for the 1st stage
@@ -22,22 +28,23 @@ public final class Main {
      * @param args irrelevant here
      */
     public static void main(String[] args) {
-        ImageWriter imageWriter = new ImageWriter("testImage", 800, 500);
-        int delta = 50;
+        Scene scene = new Scene("Test scene")//
+        .setAmbientLight(new AmbientLight(new Color(255, 191, 191), new Point(1, 1, 1).getXYZ()))
+        .setBackground(new Color(75, 127, 90));
 
-        for (int i = 0; i < imageWriter.getNx(); i++)
-            for (int j = 0; j < imageWriter.getNy(); j++)
-                imageWriter.writePixel(i, j, new Color(YELLOW));
+scene.geometries.add(new Sphere(new Point(0, 0, -100), 50),
+        new Triangle(new Point(-100, 0, -100), new Point(0, 100, -100), new Point(-100, 100, -100)),
+        new Triangle(new Point(-100, 0, -100), new Point(0, -100, -100), new Point(-100, -100, -100)),
+        new Triangle(new Point(100, 0, -100), new Point(0, -100, -100), new Point(100, -100, -100)));
 
-        for (int i = 0; i < imageWriter.getNx(); i += delta)
-            for (int j = 0; j < imageWriter.getNy(); j++)
-                imageWriter.writePixel(i, j, new Color(RED));
+Camera camera = new Camera(new Point(0,0,0), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+        .setVPDistance(100)
+        .setVPSize(500, 500)
+        .setImageWriter(new ImageWriter("base render test", 1000, 1000))
+        .setRayTracer(new RayTracerBasic(scene));
 
-        for (int i = 0; i < imageWriter.getNx(); i++)
-            for (int j = 0; j < imageWriter.getNy(); j += delta)
-                imageWriter.writePixel(i, j, new Color(RED));
-
-        imageWriter.writeToImage();
-        System.out.println();
+camera.renderImage();
+camera.printGrid(100, new Color(java.awt.Color.YELLOW));
+camera.writeToImage();
     }
 }
