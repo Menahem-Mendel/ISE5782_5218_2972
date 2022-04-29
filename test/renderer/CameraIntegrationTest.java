@@ -24,10 +24,11 @@ public class CameraIntegrationTest {
 	/**
 	 * finding a number of integrations
 	 * 
-	 * @param c camera 
+	 * @param c camera
 	 * @param g intersectable object
 	 * 
-	 * @return number of integration points between camera's rays to the intersectable
+	 * @return number of integration points between camera's rays to the
+	 *         intersectable
 	 */
 	private int countIntersections(Camera c, Intersectable g) {
 		int count = 0;
@@ -39,11 +40,11 @@ public class CameraIntegrationTest {
 			for (int j = 0; j < w; ++j) {
 				var intersections = g.findIntersections(c.constructRay(w, h, j, i));
 
-				if (intersections == null)
-					continue;
+				if (intersections != null) {
 
-				points.addAll(intersections);
-				count += intersections.size();
+					points.addAll(intersections);
+					count += intersections.size();
+				}
 			}
 
 		return count;
