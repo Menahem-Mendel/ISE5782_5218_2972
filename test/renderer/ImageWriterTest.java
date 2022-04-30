@@ -8,7 +8,14 @@ import primitives.Color;
 
 import static java.awt.Color.*;
 
+/**
+ * Test for ImageWriterTest, printing image one color with a grid
+ */
 public class ImageWriterTest {
+
+	/**
+	 * printing a simple image of one color with a grid
+	 */
 	@Test
 	void testWriteToImage() {
 		ImageWriter imageWriter = new ImageWriter("testImage", 800, 500);
