@@ -157,8 +157,7 @@ public class Camera {
 
 		for (int i = 0; i < imageWriter.getNx(); i++)
 			for (int j = 0; j < imageWriter.getNy(); j++) {
-				Ray ray = constructRay(imageWriter.getNx(), imageWriter.getNy(), i, j);
-				Color color = castRay(ray);
+				Color color = castRay(imageWriter.getNx(), imageWriter.getNy(), i, j);
 				imageWriter.writePixel(i, j, color);
 			}
 	}
@@ -174,11 +173,16 @@ public class Camera {
 	}
 
 	/**
+	 * creates ray and returns its color
 	 * 
-	 * @param ray
-	 * @return
+	 * @param Nx number of colums
+	 * @param Ny number of rows
+	 * @param i pixel column index
+	 * @param j pixel row index
+	 * @return color
 	 */
-	private Color castRay(Ray ray) {
+	private Color castRay(int Nx, int Ny,int i ,int j) {
+		Ray ray = constructRay(Nx, Ny, i, j);
 		return rayTracerBase.traceRay(ray);
 	}
 
