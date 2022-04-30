@@ -32,6 +32,12 @@ public class RayTracerBasic extends RayTracerBase {
 		return calcColor(r.findClosestPoint(intersections));
 	}
 
+	/**
+	 * calculates color of given point
+	 * 
+	 * @param p Point
+	 * @return Color
+	 */
 	private Color calcColor(Point p) {
 		return scene.ambientLight.getIntensity();
 	}

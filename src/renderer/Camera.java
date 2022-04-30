@@ -147,6 +147,9 @@ public class Camera {
 		return new Ray(p0, pIJ.sub(p0));
 	}
 
+	/**
+	 * loop over all pixels on view plane, wirting the correct color of each pixel
+	 */
 	public void renderImage() {
 		if (p0 == null || vRight == null || vTo == null || vUp == null || height == 0 || width == 0 || dist == 0
 				|| rayTracerBase == null || imageWriter == null)
@@ -160,6 +163,9 @@ public class Camera {
 			}
 	}
 
+	/**
+	 *  call by delegation the method writeToImage
+	 */
 	public void writeToImage() {
 		if (imageWriter == null)
 			throw new MissingResourceException("Some of the fields aren't initialized", "Camera", "imageWriter");
@@ -167,10 +173,21 @@ public class Camera {
 		imageWriter.writeToImage();
 	}
 
+	/**
+	 * 
+	 * @param ray
+	 * @return
+	 */
 	private Color castRay(Ray ray) {
 		return rayTracerBase.traceRay(ray);
 	}
 
+	/**
+	 * print image's grid
+	 * 
+	 * @param interval size of the grid
+	 * @param color of the grid
+	 */
 	public void printGrid(int interval, Color color) {
 		if (imageWriter == null)
 			throw new MissingResourceException("this image not initialized yet", "Camera", "");
