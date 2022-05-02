@@ -6,5 +6,10 @@
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
         "lib/**/*.jar"
-    ]
+    ],
+    "java.test.defaultConfig": "proj",
+    "java.test.config": {
+        "name": "proj",
+        "workingDirectory": "${workspaceFolder}"
+    }
 }

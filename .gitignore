@@ -2,6 +2,9 @@
 ## Java
 ##############################
 
+/img
+*.png
+
 # Compiled class file
 *.class
 
