@@ -1,19 +1,18 @@
 package renderer;
 
-import primitives.Color;
-import primitives.Ray;
+import primitives.*;
 import scene.Scene;
 
 /**
- * RayTracerBase traces the path of the ray
+ * Abstract class for all possible ray tacers
  */
 public abstract class RayTracerBase {
-	protected Scene scene;
+	protected final Scene scene;
 
 	/**
-	 * RayTracerBase build ctor
+	 * Initializes a ray tracer with a given scene
 	 * 
-	 * @param sc scene
+	 * @param sc scene to trace a ray through
 	 */
 	public RayTracerBase(Scene sc) {
 		scene = sc;
@@ -22,8 +21,8 @@ public abstract class RayTracerBase {
 	/**
 	 * traceRay returns color of ray trace
 	 * 
-	 * @param r ray
-	 * @return color
+	 * @param r ray to trace
+	 * @return color of the ray
 	 */
 	public abstract Color traceRay(Ray r);
 }

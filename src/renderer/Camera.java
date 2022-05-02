@@ -98,7 +98,7 @@ public class Camera {
 	/**
 	 * setImageWriter sets the image writer object
 	 * 
-	 * @param image
+	 * @param image image writer object
 	 * @return camera object
 	 */
 	public Camera setImageWriter(ImageWriter image) {
@@ -110,7 +110,7 @@ public class Camera {
 	/**
 	 * setRayTracer sets the ray tracer object
 	 * 
-	 * @param ray
+	 * @param ray tracer for the rays
 	 * @return camera object
 	 */
 	public Camera setRayTracer(RayTracerBase ray) {
@@ -135,8 +135,8 @@ public class Camera {
 		double rY = height / nY;
 		double rX = width / nX;
 
-		double yI = -(i - Util.alignZero((double) (nY - 1) / 2)) * rY;
-		double xJ = (j - Util.alignZero((double) (nX - 1) / 2)) * rX;
+		double yI = -(i - Util.alignZero((nY - 1) / 2d)) * rY;
+		double xJ = (j - Util.alignZero((nX - 1) / 2d)) * rX;
 
 		if (!Util.isZero(xJ))
 			pIJ = pIJ.add(vRight.scale(xJ));
@@ -163,7 +163,7 @@ public class Camera {
 	}
 
 	/**
-	 *  call by delegation the method writeToImage
+	 * call by delegation the method writeToImage
 	 */
 	public void writeToImage() {
 		if (imageWriter == null)
@@ -177,11 +177,11 @@ public class Camera {
 	 * 
 	 * @param Nx number of colums
 	 * @param Ny number of rows
-	 * @param i pixel column index
-	 * @param j pixel row index
+	 * @param i  pixel column index
+	 * @param j  pixel row index
 	 * @return color
 	 */
-	private Color castRay(int Nx, int Ny,int i ,int j) {
+	private Color castRay(int Nx, int Ny, int i, int j) {
 		Ray ray = constructRay(Nx, Ny, i, j);
 		return rayTracerBase.traceRay(ray);
 	}
@@ -190,7 +190,7 @@ public class Camera {
 	 * print image's grid
 	 * 
 	 * @param interval size of the grid
-	 * @param color of the grid
+	 * @param color    of the grid
 	 */
 	public void printGrid(int interval, Color color) {
 		if (imageWriter == null)

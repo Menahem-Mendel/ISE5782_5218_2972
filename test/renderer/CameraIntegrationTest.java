@@ -30,6 +30,28 @@ public class CameraIntegrationTest {
 	 * @return number of integration points between camera's rays to the
 	 *         intersectable
 	 */
+	private void assertIntersections(Camera c, Intersectable g, int expected) {
+		c.setVPDistance(1).setVPSize(w, h);
+
+		int count = 0;
+		for (int i = 0; i < h; ++i)
+			for (int j = 0; j < w; ++j) {
+				var intersections = g.findIntersections(c.constructRay(w, h, j, i));
+				if (intersections != null)
+					count += intersections.size();
+			}
+		assertEquals(expected, count, "Wrong amount of intersections");
+	}
+
+	/**
+	 * finding a number of integrations
+	 * 
+	 * @param c camera
+	 * @param g intersectable object
+	 * 
+	 * @return number of integration points between camera's rays to the
+	 *         intersectable
+	 */
 	private int countIntersections(Camera c, Intersectable g) {
 		int count = 0;
 		var points = new LinkedList<>();
@@ -55,6 +77,12 @@ public class CameraIntegrationTest {
 	 */
 	@Test
 	public void cameraRaySphereIntegrationTest() {
+
+		// TC01: small sphere 2 points
+		// TC02: big sphere 18 points
+		// TC03: medium sphere 10 points
+		// TC04: inside sphere 9 points
+		// TC05: beyond sphere 0 points
 		int expected[] = { 2, 18, 10, 9, 0 };
 		Sphere ss[] = {
 				new Sphere(new Point(0, 0, -3), 1),
@@ -63,21 +91,8 @@ public class CameraIntegrationTest {
 				new Sphere(new Point(0, 0, -1.5), 4),
 				new Sphere(new Point(0, 0, 0.5), 0.5),
 		};
-
-		// TC01: small sphere 2 points
-		assertEquals(expected[0], countIntersections(cam, ss[0]), "Wrong amount of intersections");
-
-		// TC02: big sphere 18 points
-		assertEquals(expected[1], countIntersections(cam, ss[1]), "Wrong amount of intersections");
-
-		// TC03: medium sphere 10 points
-		assertEquals(expected[2], countIntersections(cam, ss[2]), "Wrong amount of intersections");
-
-		// TC04: inside sphere 9 points
-		assertEquals(expected[3], countIntersections(cam, ss[3]), "Wrong amount of intersections");
-
-		// TC05: beyond sphere 0 points
-		assertEquals(expected[4], countIntersections(cam, ss[4]), "Wrong amount of intersections");
+		for (int i = 0; i < 5; ++i)
+			assertIntersections(cam, ss[i], expected[i]);
 	}
 
 	/**

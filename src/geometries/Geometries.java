@@ -11,7 +11,7 @@ import primitives.Ray;
  */
 public class Geometries implements Intersectable {
 
-	private List<Intersectable> list = new LinkedList<Intersectable>();
+	private List<Intersectable> list = new LinkedList<>();
 
 	/**
 	 * Geometries build ctor

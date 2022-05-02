@@ -44,17 +44,14 @@ public class Ray {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (obj == null || !(obj instanceof Ray other))
 			return false;
-		if (!(obj instanceof Ray))
-			return false;
-		Ray other = (Ray) obj;
 		return p0.equals(other.p0) && dir.equals(other.dir);
 	}
 
 	@Override
 	public String toString() {
-		return "->" + String.format("%s, %s", p0.toString(), dir.toString());
+		return String.format("-> %s, %s", p0, dir);
 	}
 
 	/**
