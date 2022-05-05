@@ -39,11 +39,10 @@ public class Cylinder extends Tube {
 		Point p0 = axisRay.getP0(); // base center
 		Point p1 = p0.add(dir.scale(h)); // second base center
 
-		if (Util.isZero(p.dist(p0)) || Util.isZero(p.sub(p0).dot(dir))) {
+		if (Util.isZero(p.dist(p0)) || Util.isZero(p.sub(p0).dot(dir)))
 			return dir.scale(-1);
-		} else if (Util.isZero(p.dist(p1)) || Util.isZero(p.sub(p1).dot(dir))) {
+		else if (Util.isZero(p.dist(p1)) || Util.isZero(p.sub(p1).dot(dir)))
 			return dir;
-		}
 
 		return super.getNormal(p);
 	}

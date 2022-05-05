@@ -18,14 +18,14 @@ public class RayTest {
 	 */
 	@Test
 	public void getPointTest() {
-
 		double t = 2d;
 
+		// ============ Equivalence Partitions Tests ==============
 		// TC01: getPoint x2 scale directional vector
 		assertEquals(new Point(2, 0, 0), r.getPoint(t), "getPoint x2 scale wrong value");
 
 		// =============== Boundary Values Tests ==================
-		// TC02: get Point x0 scale directional vector
+		// TC11: get Point x0 scale directional vector
 		assertEquals(p0, r.getPoint(0), "getPoint x0 scale wrong value");
 	}
 
@@ -34,54 +34,48 @@ public class RayTest {
 	 */
 	@Test
 	public void findClosestPoint() {
+		Point expected = new Point(1, 1, 1);
+		List<Point> lst;
 
 		// ============ Equivalence Partitions Tests ==============
-
 		// TC01: the closest point is in the middle of the list
-
-		Point expected = new Point(1, 1, 1);
-		List<Point> lst = new ArrayList<Point>() {
+		lst = new ArrayList<>() {
 			{
 				add(new Point(2, 2, 2));
-				add(new Point(1, 1, 1));
+				add(expected);
 				add(new Point(3, 3, 3));
 			}
 		};
 
-		Point closest = r.findClosestPoint(lst);
-
-		assertEquals(expected, closest, "got wrong closest point, correct in middle of the list");
+		assertEquals(expected, r.findClosestPoint(lst), "got wrong closest point, correct in middle of the list");
 
 		// =============== Boundary Values Tests ==================
-
 		// TC02: an empty list of points
-		List<Point> lst2 = new ArrayList<Point>();
-		closest = r.findClosestPoint(lst2);
-		assertNull(closest, "wrong closest point in empty list");
+		lst = new ArrayList<>();
+
+		assertNull(r.findClosestPoint(lst), "wrong closest point in empty list");
 
 		// TC03: the closest point is in the head of the list
-		List<Point> lst3 = new ArrayList<Point>() {
+		lst = new ArrayList<>() {
 			{
-				add(new Point(1, 1, 1));
+				add(expected);
 				add(new Point(2, 2, 2));
 				add(new Point(3, 3, 3));
 			}
 		};
 
-		closest = r.findClosestPoint(lst3);
-		assertEquals(expected, closest, "got wrong closest point, correct in head of the list");
+		assertEquals(expected, r.findClosestPoint(lst), "got wrong closest point, correct in head of the list");
 
 		// TC04: the closest point is in the last point of the list
-		List<Point> lst4 = new ArrayList<Point>() {
+		lst = new ArrayList<>() {
 			{
 				add(new Point(2, 2, 2));
 				add(new Point(3, 3, 3));
-				add(new Point(1, 1, 1));
+				add(expected);
 			}
 		};
 
-		closest = r.findClosestPoint(lst4);
-		assertEquals(expected, closest, "got wrong closest point, correct in the end of the list");
+		assertEquals(expected, r.findClosestPoint(lst), "got wrong closest point, correct in the end of the list");
 
 	}
 

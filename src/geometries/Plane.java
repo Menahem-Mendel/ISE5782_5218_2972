@@ -71,9 +71,8 @@ public class Plane implements Geometry {
 		double nv = normal.dot(dir);
 
 		// if ray parallel to plane
-		if (Util.isZero(nv)) {
+		if (Util.isZero(nv))
 			return null;
-		}
 
 		Vector u;
 		try {

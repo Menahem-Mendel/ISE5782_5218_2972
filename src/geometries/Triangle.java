@@ -25,6 +25,7 @@ public class Triangle extends Polygon {
 	@Override
 	public List<Point> findIntersections(Ray ray) {
 		List<Point> result = plane.findIntersections(ray);
+
 		if (result == null)
 			return null;
 
@@ -35,17 +36,20 @@ public class Triangle extends Polygon {
 		Vector v2 = vertices.get(1).sub(p0);
 		Vector n1 = v1.cross(v2);
 		double s1 = alignZero(v.dot(n1));
+
 		if (s1 == 0)
 			return null;
 
 		Vector v3 = vertices.get(2).sub(p0);
 		Vector n2 = v2.cross(v3);
 		double s2 = alignZero(v.dot(n2));
+
 		if (s1 * s2 <= 0)
 			return null;
 
 		Vector n3 = v3.cross(v1);
 		double s3 = alignZero(v.dot(n3));
+
 		if (s1 * s3 <= 0)
 			return null;
 

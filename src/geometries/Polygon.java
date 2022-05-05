@@ -76,9 +76,11 @@ public class Polygon implements Geometry {
 			// Test that the point is in the same plane as calculated originally
 			if (!isZero(vertices[i].sub(vertices[0]).dot(n)))
 				throw new IllegalArgumentException("All vertices of a polygon must lay in the same plane");
+
 			// Test the consequent edges have
 			edge1 = edge2;
 			edge2 = vertices[i].sub(vertices[i - 1]);
+
 			if (positive != (edge1.cross(edge2).dot(n) > 0))
 				throw new IllegalArgumentException("All vertices must be ordered and the polygon must be convex");
 		}

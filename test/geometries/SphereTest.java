@@ -63,7 +63,6 @@ public class SphereTest {
                 Sphere sphere = new Sphere(new Point(1, 0, 0), 1d);
 
                 // ============ Equivalence Partitions Tests ==============
-
                 // TC01: Ray's line is outside the sphere (0 points)
                 assertNull(sphere.findIntersections(new Ray(new Point(-1, 0, 0), new Vector(1, 1, 0))),
                                 "Ray's line out of sphere");
@@ -87,7 +86,6 @@ public class SphereTest {
                                 "Ray shouldn't cross any point after the sphere");
 
                 // =============== Boundary Values Tests ==================
-
                 // **** Group: Ray's line crosses the sphere (but not the center)
                 // TC11: Ray starts at sphere and goes inside (1 points)
                 result = sphere.findIntersections(new Ray(p1, new Vector(3, 1, 0)));

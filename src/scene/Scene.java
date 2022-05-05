@@ -5,16 +5,17 @@ import lighting.AmbientLight;
 import primitives.Color;
 
 /**
- * class Scene contains tetailes about our scene 
+ * class Scene contains tetailes about our scene
  */
 public class Scene {
-	public String name;
-	public Color background = Color.BLACK;
-	public AmbientLight ambientLight = new AmbientLight();
-	public Geometries geometries = new Geometries();
+	public String name; // name of the scene
+	public Color background = Color.BLACK; // background color of the scene
+	public AmbientLight ambientLight = new AmbientLight(); // ambient light in the scene
+	public Geometries geometries = new Geometries(); // geometries on the scene
 
 	/**
 	 * ctor, build an empty Geometries
+	 * 
 	 * @param n name of the scene
 	 */
 	public Scene(String n) {

@@ -24,7 +24,7 @@ public class ImageWriter {
 	private static final String FOLDER_PATH = System.getProperty("user.dir") + File.separator + "img";
 
 	private BufferedImage image;
-	private String imageName;
+	private String fname;
 
 	private Logger logger = Logger.getLogger("ImageWriter");
 
@@ -32,12 +32,12 @@ public class ImageWriter {
 	/**
 	 * Image Writer constructor accepting image name and View Plane parameters,
 	 * 
-	 * @param imageName the name of jpeg file
-	 * @param nX        amount of pixels by Width
-	 * @param nY        amount of pixels by height
+	 * @param fname the name of jpeg file
+	 * @param nX    amount of pixels by Width
+	 * @param nY    amount of pixels by height
 	 */
-	public ImageWriter(String imageName, int nX, int nY) {
-		this.imageName = imageName;
+	public ImageWriter(String fname, int nX, int nY) {
+		this.fname = fname;
 		this.nX = nX;
 		this.nY = nY;
 
@@ -71,7 +71,7 @@ public class ImageWriter {
 	 */
 	public void writeToImage() {
 		try {
-			File file = new File(FOLDER_PATH + File.separator + imageName + ".png");
+			File file = new File(FOLDER_PATH + File.separator + fname + ".png");
 			ImageIO.write(image, "png", file);
 		} catch (IOException e) {
 			logger.log(Level.SEVERE, "I/O error", e);

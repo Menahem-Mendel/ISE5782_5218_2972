@@ -1,6 +1,7 @@
 package renderer;
 
 import java.util.MissingResourceException;
+import java.util.stream.Stream;
 
 import primitives.*;
 
@@ -151,15 +152,16 @@ public class Camera {
 	 * loop over all pixels on view plane, wirting the correct color of each pixel
 	 */
 	public void renderImage() {
-		if (p0 == null || vRight == null || vTo == null || vUp == null || height == 0 || width == 0 || dist == 0
-				|| rayTracerBase == null || imageWriter == null)
+		if (Stream.of(p0, vRight, vTo, vUp, rayTracerBase, imageWriter).anyMatch(x -> x == null)
+				|| Stream.of(height, width, dist).anyMatch(x -> x == 0))
 			throw new MissingResourceException("Some of the fields aren't initialized", "Camera", "");
 
-		for (int i = 0; i < imageWriter.getNx(); i++)
-			for (int j = 0; j < imageWriter.getNy(); j++) {
-				Color color = castRay(imageWriter.getNx(), imageWriter.getNy(), i, j);
-				imageWriter.writePixel(i, j, color);
-			}
+		int nx = imageWriter.getNx();
+		int ny = imageWriter.getNy();
+
+		for (int i = 0; i < nx; i++)
+			for (int j = 0; j < ny; j++)
+				imageWriter.writePixel(i, j, castRay(nx, ny, i, j));
 	}
 
 	/**
@@ -183,25 +185,29 @@ public class Camera {
 	 */
 	private Color castRay(int Nx, int Ny, int i, int j) {
 		Ray ray = constructRay(Nx, Ny, i, j);
+
 		return rayTracerBase.traceRay(ray);
 	}
 
 	/**
 	 * print image's grid
 	 * 
-	 * @param interval size of the grid
-	 * @param color    of the grid
+	 * @param delta size of the grid
+	 * @param color of the grid
 	 */
-	public void printGrid(int interval, Color color) {
+	public void printGrid(int delta, Color color) {
 		if (imageWriter == null)
 			throw new MissingResourceException("this image not initialized yet", "Camera", "");
 
-		for (int i = 0; i < imageWriter.getNx(); i += interval)
-			for (int j = 0; j < imageWriter.getNy(); j++)
+		int nx = imageWriter.getNx();
+		int ny = imageWriter.getNy();
+
+		for (int i = 0; i < nx; i += delta)
+			for (int j = 0; j < ny; j++)
 				imageWriter.writePixel(i, j, color);
 
-		for (int i = 0; i < imageWriter.getNx(); i++)
-			for (int j = 0; j < imageWriter.getNy(); j += interval)
+		for (int i = 0; i < nx; i++)
+			for (int j = 0; j < ny; j += delta)
 				imageWriter.writePixel(i, j, color);
 	}
 }

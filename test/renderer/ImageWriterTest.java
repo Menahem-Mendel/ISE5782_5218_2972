@@ -18,18 +18,15 @@ public class ImageWriterTest {
 	void testWriteToImage() {
 		ImageWriter imageWriter = new ImageWriter("testImage", 800, 500);
 		int delta = 50;
+		int nx = imageWriter.getNx();
+		int ny = imageWriter.getNy();
 
-		for (int i = 0; i < imageWriter.getNx(); i++)
-			for (int j = 0; j < imageWriter.getNy(); j++)
-				imageWriter.writePixel(i, j, new Color(YELLOW));
-
-		for (int i = 0; i < imageWriter.getNx(); i += delta)
-			for (int j = 0; j < imageWriter.getNy(); j++)
-				imageWriter.writePixel(i, j, new Color(RED));
-
-		for (int i = 0; i < imageWriter.getNx(); i++)
-			for (int j = 0; j < imageWriter.getNy(); j += delta)
-				imageWriter.writePixel(i, j, new Color(RED));
+		for (int i = 0; i < nx; ++i)
+			for (int j = 0; j < ny; ++j)
+				if (i % delta != 0 && j % delta != 0)
+					imageWriter.writePixel(i, j, new Color(YELLOW));
+				else
+					imageWriter.writePixel(i, j, new Color(RED));
 
 		imageWriter.writeToImage();
 	}

@@ -53,6 +53,7 @@ public class Sphere implements Geometry {
     @Override
     public List<Point> findIntersections(Ray ray) {
         Vector u; // vector from p0 to the center of the sphere
+
         try {
             u = center.sub(ray.getP0());
         } catch (IllegalArgumentException ignore) {
@@ -60,18 +61,20 @@ public class Sphere implements Geometry {
             return List.of(ray.getPoint(radius));
         }
 
-        double tm = ray.getDir().dot(u);// distance from p0 to the center of the chord
+        double tm = ray.getDir().dot(u); // distance from p0 to the center of the chord
 
-        // squared distance from the center of the sphere to the chord
-        double d2 = Util.alignZero(u.lengthSq() - tm * tm);
+        double d2 = Util.alignZero(u.lengthSq() - tm * tm); // squared distance from the center of the sphere to the
+                                                            // chord
 
-        double th2 = radius2 - d2;// squared distance from crossed points to the chord
-        // there are no intersections
+        double th2 = radius2 - d2; // squared distance from crossed points to the chord
+
+        // if there are no intersections
         if (alignZero(th2) <= 0)
             return null;
 
         double th = Math.sqrt(th2); // distance from crossed points to the chord
         double t2 = alignZero(tm + th); // distance from p0 to the furhter point
+
         if (t2 <= 0)
             return null;
 

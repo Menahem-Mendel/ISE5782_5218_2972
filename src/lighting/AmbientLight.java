@@ -13,11 +13,11 @@ public class AmbientLight {
 	/**
 	 * AmbientLight build ctor
 	 * 
-	 * @param Ia original color of the light
-	 * @param Ka attenuation factor of the original light
+	 * @param iA original color of the light
+	 * @param kA attenuation factor of the original light
 	 */
-	public AmbientLight(Color Ia, Double3 Ka) {
-		intensity = Ia.scale(Ka); // Ip = Ka * Ia
+	public AmbientLight(Color iA, Double3 kA) {
+		intensity = iA.scale(kA); // Ip = Ka * Ia
 	}
 
 	/**
