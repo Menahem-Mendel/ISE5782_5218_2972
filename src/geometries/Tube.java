@@ -8,7 +8,7 @@ import primitives.*;
  * Tube class represents infinite cylinder in 3D space
  * 
  */
-public class Tube implements Geometry {
+public class Tube extends Geometry {
 
 	protected final Ray axisRay;
 	protected final double radius;
@@ -49,7 +49,7 @@ public class Tube implements Geometry {
 	}
 
 	@Override
-	public List<Point> findIntersections(Ray ray) {
+	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
 		throw new UnsupportedOperationException("not yet implemented");
 	}
 }

@@ -9,7 +9,7 @@ import primitives.Ray;
 /**
  * Geometries can hold few different geometries
  */
-public class Geometries implements Intersectable {
+public class Geometries extends Intersectable {
 
 	private List<Intersectable> list = new LinkedList<>();
 
@@ -33,11 +33,11 @@ public class Geometries implements Intersectable {
 	}
 
 	@Override
-	public List<Point> findIntersections(Ray ray) {
-		List<Point> ret = null;
+	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+		List<GeoPoint> ret = null;
 
 		for (var g : list) {
-			List<Point> elems = g.findIntersections(ray);
+			List<GeoPoint> elems = g.findGeoIntersectionsHelper(ray);
 
 			if (elems == null)
 				continue;

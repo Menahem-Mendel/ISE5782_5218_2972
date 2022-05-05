@@ -71,11 +71,11 @@ public class Camera {
 	 *                                  values
 	 */
 	public Camera setVPSize(double w, double h) {
-		if (w <= 0)
+		if (Util.alignZero(w) <= 0)
 			throw new IllegalArgumentException(Errors.NON_POS);
 		width = w;
 
-		if (h <= 0)
+		if (Util.alignZero(h) <= 0)
 			throw new IllegalArgumentException(Errors.NON_POS);
 		height = h;
 
@@ -89,7 +89,7 @@ public class Camera {
 	 * @return camera object
 	 */
 	public Camera setVPDistance(double d) {
-		if (d <= 0)
+		if (Util.alignZero(d) <= 0)
 			throw new IllegalArgumentException(Errors.NON_POS);
 		dist = d;
 

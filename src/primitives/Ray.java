@@ -2,6 +2,8 @@ package primitives;
 
 import java.util.List;
 
+import geometries.Intersectable.GeoPoint;
+
 /**
  * Ray represents directional vector which starts from the starting point
  *
@@ -66,19 +68,31 @@ public class Ray {
 
 	/**
 	 * findClosestPoint finds closest point to the ray's head
+	 * !!!
 	 * 
 	 * @param lst list of points
 	 * @return closest point to the ray's head
 	 */
-	public Point findClosestPoint(List<Point> lst) {
+	public Point findClosestPoint(List<Point> points) {
+		return points == null || points.isEmpty() ? null
+				: findClosestGeoPoint(points.stream().map(p -> new GeoPoint(p, null)).toList()).point;
+	}
+
+	/**
+	 * findClosestGeoPoint finds closest geo point to the ray's head
+	 * 
+	 * @param lst list of geo points
+	 * @return closest geo point to the ray's head
+	 */
+	public GeoPoint findClosestGeoPoint(List<GeoPoint> lst) {
 		if (lst.isEmpty())
 			return null;
 
-		Point closest = lst.get(0);
+		GeoPoint closest = lst.get(0);
 
-		for (Point p : lst)
-			if (closest.distSq(p0) > p.distSq(p0))
-				closest = p;
+		for (GeoPoint gp : lst)
+			if (closest.point.distSq(p0) > gp.point.distSq(p0))
+				closest = gp;
 
 		return closest;
 	}

@@ -1,5 +1,6 @@
 package geometries;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import primitives.*;
@@ -9,7 +10,7 @@ import static primitives.Util.*;
  * Sphere class represents a sphere in two-dimensional space
  * 
  */
-public class Sphere implements Geometry {
+public class Sphere extends Geometry {
 
     private final Point center;
     private final double radius;
@@ -51,14 +52,14 @@ public class Sphere implements Geometry {
     }
 
     @Override
-    public List<Point> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         Vector u; // vector from p0 to the center of the sphere
 
         try {
             u = center.sub(ray.getP0());
         } catch (IllegalArgumentException ignore) {
             // the ray starts at the center
-            return List.of(ray.getPoint(radius));
+            return List.of(new GeoPoint(ray.getPoint(radius), this));
         }
 
         double tm = ray.getDir().dot(u); // distance from p0 to the center of the chord
@@ -79,6 +80,7 @@ public class Sphere implements Geometry {
             return null;
 
         double t1 = alignZero(tm - th); // distance from p0 to the nearer point
-        return t1 <= 0 ? List.of(ray.getPoint(t2)) : List.of(ray.getPoint(t1), ray.getPoint(t2));
+        return t1 <= 0 ? List.of(new GeoPoint(ray.getPoint(t2), this))
+                : List.of(new GeoPoint(ray.getPoint(t1), this), new GeoPoint(ray.getPoint(t2), this));
     }
 }
