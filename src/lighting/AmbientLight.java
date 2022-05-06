@@ -5,7 +5,6 @@ import primitives.Double3;
 
 /**
  * AmbientLight class
- * 
  */
 public class AmbientLight {
 	private final Color intensity;
@@ -22,7 +21,6 @@ public class AmbientLight {
 
 	/**
 	 * AmbientLight empty build ctor sets the intensity to black
-	 * 
 	 */
 	public AmbientLight() {
 		intensity = Color.BLACK;

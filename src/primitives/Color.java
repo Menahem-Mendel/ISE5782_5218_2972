@@ -1,17 +1,14 @@
 package primitives;
 
 /**
- * Wrapper class for java.jwt.Color The constructors operate with any
- * non-negative RGB values. The colors are maintained without upper limit of
- * 255. Some additional operations are added that are useful for manipulating
- * light's colors
+ * Wrapper class for java.jwt.Color The constructors operate with any non-negative RGB values. The colors are maintained without upper limit of 255. Some
+ * additional operations are added that are useful for manipulating light's colors
  * 
  * @author Dan Zilberstein
  */
 public class Color {
 	/**
-	 * The internal fields tx`o maintain RGB components as double numbers from 0 to
-	 * whatever...
+	 * The internal fields tx`o maintain RGB components as double numbers from 0 to whatever...
 	 */
 	private final Double3 rgb;
 
@@ -28,8 +25,7 @@ public class Color {
 	}
 
 	/**
-	 * Constructor to generate a color according to RGB components Each component in
-	 * range 0..255 (for printed white color) or more [for lights]
+	 * Constructor to generate a color according to RGB components Each component in range 0..255 (for printed white color) or more [for lights]
 	 *
 	 * @param r Red component
 	 * @param g Green component
@@ -42,8 +38,7 @@ public class Color {
 	}
 
 	/**
-	 * Constructor to generate a color according to RGB components Each component in
-	 * range 0..255 (for printed white color) or more [for lights]
+	 * Constructor to generate a color according to RGB components Each component in range 0..255 (for printed white color) or more [for lights]
 	 *
 	 * @param rgb triad of Red/Green/Blue components
 	 */
@@ -63,8 +58,7 @@ public class Color {
 	}
 
 	/**
-	 * Color getter - returns the color after converting it into java.awt.Color
-	 * object During the conversion any component bigger than 255 is set to 255
+	 * Color getter - returns the color after converting it into java.awt.Color object During the conversion any component bigger than 255 is set to 255
 	 *
 	 * @return java.awt.Color object based on this Color RGB components
 	 */

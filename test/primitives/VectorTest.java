@@ -49,7 +49,8 @@ public class VectorTest {
 
 		// =============== Boundary Values Tests ==================
 		// TC11: Test zero vector
-		assertThrows(IllegalArgumentException.class, () -> new Vector(0, 0, 0), "Constructed a zero vector");
+		assertThrows(IllegalArgumentException.class, () -> new Vector(0, 0, 0),
+				"Constructed a zero vector");
 	}
 
 	/**
@@ -72,8 +73,8 @@ public class VectorTest {
 				"cross() wrong result vector length");
 
 		// TC02: Test cross-product result orthogonality to its operands
-		assertTrue(Util.isZero(vcp.dot(lhs)), "cross() result is not orthogonal to 1st operand");
-		assertTrue(Util.isZero(vcp.dot(rhs)), "cross() result is not orthogonal to 2nd operand");
+		assertEquals(0, vcp.dot(lhs), DELTA, "cross() result is not orthogonal to 1st operand");
+		assertEquals(0, vcp.dot(rhs), DELTA, "cross() result is not orthogonal to 2nd operand");
 
 		// =============== Boundary Values Tests ==================
 		// TC11: Test zero vector from cross-product of co-lined vectors
@@ -96,19 +97,19 @@ public class VectorTest {
 
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test dot product for different vectors
-		assertTrue(Util.isZero(lhs.dot(rhs) - dp), "dot() wrong result");
+		assertEquals(dp, lhs.dot(rhs), DELTA, "dot() wrong result");
 
 		// =============== Boundary Values Tests ==================
+		// TC11: Test dot product of two parallel vectors
 		rhs = lhs.scale(t);
 
-		// TC11: Test dot product of two parallel vectors
-		assertTrue(Util.isZero(lhs.dot(rhs) - lhs.lengthSq() * t),
+		assertEquals(lhs.lengthSq() * t, lhs.dot(rhs), DELTA,
 				"dot() for parallel vectors is not squared length");
 
+		// TC12: Test dot product of orthogonal vectors
 		rhs = new Vector(-(y + z) * t / x, t, t); // orthogonal vector for lhs
 
-		// TC12: Test dot product of orthogonal vectors
-		assertTrue(Util.isZero(lhs.dot(rhs)), "dot() for orthogonal vectors is not zero");
+		assertEquals(0, lhs.dot(rhs), DELTA, "dot() for orthogonal vectors is not zero");
 	}
 
 	/**
@@ -135,7 +136,8 @@ public class VectorTest {
 	public void normalizeTest() {
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test normalized vector
-		assertTrue(Util.isZero(lhs.normalize().length() - 1), "normalize() the normalized vector is not a unit vector");
+		assertEquals(1, lhs.normalize().length(), DELTA,
+				"normalize() the normalized vector is not a unit vector");
 
 		// TC02: Test normal vector cross product with original vector
 		assertThrows(IllegalArgumentException.class, () -> lhs.cross(lhs.normalize()),
@@ -163,7 +165,7 @@ public class VectorTest {
 	public void lengthSquaredTest() {
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test vector length squared
-		assertTrue(Util.isZero(lhs.lengthSq() - (x * x + y * y + z * z)), "lengthSquared() wrong value");
+		assertEquals(x * x + y * y + z * z, lhs.lengthSq(), DELTA, "lengthSquared() wrong value");
 	}
 
 	/**

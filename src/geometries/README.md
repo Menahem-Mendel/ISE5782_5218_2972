@@ -32,5 +32,5 @@ Sphere: is a three dimensional figure which can be described by a radius and cen
 
 ```java
 // sphere with radius 7 and center on the origin
-Sphere s = new Sphere(new Point(0, 0, 0), 7);
+Sphere s = new Sphere(Point.ZERO, 7);
 ```

@@ -44,8 +44,10 @@ public class PointTest {
 
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: add general tests
-		assertEquals(new Point(rhs.xyz.d1 + lhs.xyz.d1, rhs.xyz.d2 + lhs.xyz.d2, rhs.xyz.d3 + lhs.xyz.d3), lhs.add(rhs),
-				"add() problem adding a vector to a point");
+		assertEquals(
+				new Point(rhs.xyz.d1 + lhs.xyz.d1, rhs.xyz.d2 + lhs.xyz.d2,
+						rhs.xyz.d3 + lhs.xyz.d3),
+				lhs.add(rhs), "add() problem adding a vector to a point");
 	}
 
 	/**
@@ -66,15 +68,18 @@ public class PointTest {
 
 		// =============== Boundary Values Tests ==================
 		// TC11: subtract the point itself, so the point of vector might be (0,0,0)
-		assertThrows(IllegalArgumentException.class, () -> lhs.sub(lhs), "sub() can't create zero vector");
+		assertThrows(IllegalArgumentException.class, () -> lhs.sub(lhs),
+				"sub() can't create zero vector");
 
 		// TC12: point subtract (0,0,0)
 		res = new Vector(x, y, z);
-		assertEquals(res, lhs.sub(new Point(0, 0, 0)), "sub() the vector should have the same value as the point");
+		assertEquals(res, lhs.sub(Point.ZERO),
+				"sub() the vector should have the same value as the point");
 
 		// TC13: (0,0,0) subtract a point
 		res = new Vector(-x, -y, -z);
-		assertEquals(res, new Point(0, 0, 0).sub(lhs), "sub() the vector should have the opposite value of the point");
+		assertEquals(res, Point.ZERO.sub(lhs),
+				"sub() the vector should have the opposite value of the point");
 
 		// TC14: point subtract the opposite point
 		res = new Vector(2 * x, 2 * y, 2 * z);
@@ -101,11 +106,12 @@ public class PointTest {
 
 		// =============== Boundary Values Tests ==================
 		// TC11: distance from a point to the same point
-		assertTrue(Util.isZero(lhs.dist(lhs) - 0), "dist() distance from point to himself should be 0");
+		assertEquals(0, lhs.dist(lhs), DELTA, "dist() distance from point to himself should be 0");
 
 		// TC12: distance of opposite points
 		rhs = new Point(-x, -y, -z);
-		assertEquals(2 * lhs.dist(new Point(0, 0, 0)), lhs.dist(rhs), DELTA, "dist() wrong distance calculating");
+		assertEquals(2 * lhs.dist(Point.ZERO), lhs.dist(rhs), DELTA,
+				"dist() wrong distance calculating");
 	}
 
 	/**
@@ -123,15 +129,16 @@ public class PointTest {
 
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: squared distance of two points
-		assertTrue(Util.isZero(lhs.distSq(rhs) - res), "distSquared() wrong result");
+		assertEquals(res, lhs.distSq(rhs), DELTA, "distSquared() wrong result");
 
 		// =============== Boundary Values Tests ==================
 		// TC11: squared distance from a point to the same point
-		assertTrue(Util.isZero(lhs.distSq(lhs) - 0), "distSquared() distance from point to himself should be 0");
+		assertEquals(0, lhs.distSq(lhs), DELTA,
+				"distSquared() distance from point to himself should be 0");
 
 		// TC12: squared distance of opposite points
 		rhs = new Point(-x, -y, -z);
-		assertEquals(4 * lhs.distSq(new Point(0, 0, 0)), lhs.distSq(rhs), DELTA,
+		assertEquals(4 * lhs.distSq(Point.ZERO), lhs.distSq(rhs), DELTA,
 				"distSquared() wrong distance calculating");
 	}
 }

@@ -6,7 +6,6 @@ import geometries.Intersectable.GeoPoint;
 
 /**
  * Ray represents directional vector which starts from the starting point
- *
  */
 public class Ray {
 
@@ -67,15 +66,15 @@ public class Ray {
 	}
 
 	/**
-	 * findClosestPoint finds closest point to the ray's head
-	 * !!!
+	 * findClosestPoint finds closest point to the ray's head !!!
 	 * 
 	 * @param lst list of points
 	 * @return closest point to the ray's head
 	 */
 	public Point findClosestPoint(List<Point> points) {
 		return points == null || points.isEmpty() ? null
-				: findClosestGeoPoint(points.stream().map(p -> new GeoPoint(p, null)).toList()).point;
+				: findClosestGeoPoint(
+						points.stream().map(p -> new GeoPoint(p, null)).toList()).point;
 	}
 
 	/**

@@ -17,7 +17,7 @@ public class CameraIntegrationTest {
 	Vector to = new Vector(0, 0, -1);
 	Vector up = new Vector(0, 1, 0);
 
-	Camera cam = new Camera(new Point(0, 0, 0), to, up);
+	Camera cam = new Camera(Point.ZERO, to, up);
 
 	private class Item {
 		private int expected;
@@ -34,9 +34,7 @@ public class CameraIntegrationTest {
 	 * 
 	 * @param c camera
 	 * @param g intersectable object
-	 * 
-	 * @return number of integration points between camera's rays to the
-	 *         intersectable
+	 * @return number of integration points between camera's rays to the intersectable
 	 */
 	private void assertIntersections(int expected, Camera c, Intersectable g) {
 		int count = 0;
@@ -58,23 +56,11 @@ public class CameraIntegrationTest {
 	 */
 	@Test
 	public void cameraRaySphereIntegrationTest() {
-		Item items[] = {
-				new Item(
-						2,
-						new Sphere(new Point(0, 0, -3), 1)),
-				new Item(
-						18,
-						new Sphere(new Point(0, 0, -3), 2.5)),
-				new Item(
-						10,
-						new Sphere(new Point(0, 0, -2.5), 2)),
-				new Item(
-						9,
-						new Sphere(new Point(0, 0, -1.5), 4)),
-				new Item(
-						0,
-						new Sphere(new Point(0, 0, 0.5), 0.5)),
-		};
+		Item items[] = { new Item(2, new Sphere(new Point(0, 0, -3), 1)),
+				new Item(18, new Sphere(new Point(0, 0, -3), 2.5)),
+				new Item(10, new Sphere(new Point(0, 0, -2.5), 2)),
+				new Item(9, new Sphere(new Point(0, 0, -1.5), 4)),
+				new Item(0, new Sphere(new Point(0, 0, 0.5), 0.5)), };
 
 		// TC01: small sphere 2 points
 		// TC02: big sphere 18 points
@@ -90,20 +76,10 @@ public class CameraIntegrationTest {
 	 */
 	@Test
 	public void cameraRayPlaneIntegrationTest() {
-		Item items[] = {
-				new Item(
-						9,
-						new Plane(new Point(0, 0, -2.5), new Vector(0, 0, 1))),
-				new Item(
-						9,
-						new Plane(new Point(0, 0, -2), new Vector(0, -0.5, 1))),
-				new Item(
-						6,
-						new Plane(new Point(0, 0, -3.5), new Vector(0, -1, 1))),
-				new Item(
-						0,
-						new Plane(new Point(0, 0, 1), new Vector(0, 0, 1))),
-		};
+		Item items[] = { new Item(9, new Plane(new Point(0, 0, -2.5), new Vector(0, 0, 1))),
+				new Item(9, new Plane(new Point(0, 0, -2), new Vector(0, -0.5, 1))),
+				new Item(6, new Plane(new Point(0, 0, -3.5), new Vector(0, -1, 1))),
+				new Item(0, new Plane(new Point(0, 0, 1), new Vector(0, 0, 1))), };
 
 		// TC01: plane against camera 9 points
 		// TC02: plane with small angle 9 points
@@ -119,16 +95,14 @@ public class CameraIntegrationTest {
 	@Test
 	public void cameraRayTriangleIntegrationTest() {
 		Item items[] = {
-				new Item(
-						1,
-						new Triangle(new Point(0, 1, -2.5), new Point(1, -1, -2.5), new Point(-1, -1, -2.5))),
-				new Item(
-						2,
-						new Triangle(new Point(0, 20, -2.5), new Point(1, -1, -2.5), new Point(-1, -1, -2.5))),
-				new Item(
-						0,
-						new Triangle(new Point(0, 20, 1), new Point(1, -1, 1), new Point(-1, -1, 1))),
-		};
+				new Item(1,
+						new Triangle(new Point(0, 1, -2.5), new Point(1, -1, -2.5),
+								new Point(-1, -1, -2.5))),
+				new Item(2,
+						new Triangle(new Point(0, 20, -2.5), new Point(1, -1, -2.5),
+								new Point(-1, -1, -2.5))),
+				new Item(0, new Triangle(new Point(0, 20, 1), new Point(1, -1, 1),
+						new Point(-1, -1, 1))), };
 
 		// TC01: small triangle 1 point
 		// TC02: medium triangle 2 points

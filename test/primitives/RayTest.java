@@ -2,16 +2,26 @@ package primitives;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 public class RayTest {
 
-	Point p0 = new Point(0, 0, 0);
+	class Item {
+		Object expected;
+		Object actual;
+		String text;
+
+		Item(Object expected, List<Point> lst, String text) {
+			this.expected = expected;
+			this.actual = r.findClosestPoint(lst);
+			this.text = text;
+		}
+	};
+
 	Vector dir = new Vector(1, 0, 0);
-	Ray r = new Ray(p0, dir);
+	Ray r = new Ray(Point.ZERO, dir);
 
 	/**
 	 * Test method for {@link primitives.Ray#getPoint(double)}.
@@ -26,7 +36,7 @@ public class RayTest {
 
 		// =============== Boundary Values Tests ==================
 		// TC11: get Point x0 scale directional vector
-		assertEquals(p0, r.getPoint(0), "getPoint x0 scale wrong value");
+		assertEquals(Point.ZERO, r.getPoint(0), "getPoint x0 scale wrong value");
 	}
 
 	/**
@@ -34,49 +44,26 @@ public class RayTest {
 	 */
 	@Test
 	public void findClosestPoint() {
-		Point expected = new Point(1, 1, 1);
-		List<Point> lst;
+		Point p1 = new Point(1, 1, 1);
+		Point p2 = new Point(2, 2, 2);
+		Point p3 = new Point(3, 3, 3);
+
+		Item items[] = {
+				new Item(p1, List.of(p2, p1, p3),
+						"got wrong closest point, correct in middle of the list"),
+				new Item(null, List.of(), "wrong closest point in empty list"),
+				new Item(p1, List.of(p1, p2, p3),
+						"got wrong closest point, correct in head of the list"),
+				new Item(p1, List.of(p2, p3, p1),
+						"got wrong closest point, correct in the end of the list") };
 
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: the closest point is in the middle of the list
-		lst = new ArrayList<>() {
-			{
-				add(new Point(2, 2, 2));
-				add(expected);
-				add(new Point(3, 3, 3));
-			}
-		};
-
-		assertEquals(expected, r.findClosestPoint(lst), "got wrong closest point, correct in middle of the list");
-
 		// =============== Boundary Values Tests ==================
 		// TC02: an empty list of points
-		lst = new ArrayList<>();
-
-		assertNull(r.findClosestPoint(lst), "wrong closest point in empty list");
-
 		// TC03: the closest point is in the head of the list
-		lst = new ArrayList<>() {
-			{
-				add(expected);
-				add(new Point(2, 2, 2));
-				add(new Point(3, 3, 3));
-			}
-		};
-
-		assertEquals(expected, r.findClosestPoint(lst), "got wrong closest point, correct in head of the list");
-
 		// TC04: the closest point is in the last point of the list
-		lst = new ArrayList<>() {
-			{
-				add(new Point(2, 2, 2));
-				add(new Point(3, 3, 3));
-				add(expected);
-			}
-		};
-
-		assertEquals(expected, r.findClosestPoint(lst), "got wrong closest point, correct in the end of the list");
-
+		for (var item : items)
+			assertEquals(item.expected, item.actual, item.text);
 	}
-
 }

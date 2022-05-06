@@ -20,7 +20,7 @@ public class PlaneTest {
 
 	@BeforeEach
 	public void init() {
-		for (int i = 0; i < 3; i++) {
+		for (int i = 0; i < 3; ++i) {
 			double x = Util.random(MIN, MAX);
 			double y = Util.random(MIN, MAX);
 			double z = Util.random(MIN, MAX);
@@ -32,8 +32,7 @@ public class PlaneTest {
 	}
 
 	/**
-	 * Test method for
-	 * {@link geometries.Plane#Plane(primitives.Point, primitives.Point, primitives.Point)}
+	 * Test method for {@link geometries.Plane#Plane(primitives.Point, primitives.Point, primitives.Point)}
 	 */
 	@Test
 	public void ctorTest() {
@@ -47,8 +46,7 @@ public class PlaneTest {
 
 		// =============== Boundary Values Tests ==================
 		// TC11: Test when the first and second points are equal
-		assertThrows(IllegalArgumentException.class,
-				() -> new Plane(pp[0], pp[0], pp[2]),
+		assertThrows(IllegalArgumentException.class, () -> new Plane(pp[0], pp[0], pp[2]),
 				"Constructed a plane when two points are equal");
 
 		// TC12: Test when all points are on the same line
@@ -86,7 +84,8 @@ public class PlaneTest {
 		// TC02: Ray's line is below the plane (but not 90 deg with the plane)(1 points)
 		Point point = new Point(2, 0, 0);
 
-		assertEquals(point, (plane.findIntersections(new Ray(new Point(1, 0, 0), new Vector(1, 0, 0)))).get(0), //
+		assertEquals(point,
+				(plane.findIntersections(new Ray(new Point(1, 0, 0), new Vector(1, 0, 0)))).get(0), //
 				"findIntersections() wrong point intersection");
 
 		// =============== Boundary Values Tests ==================
@@ -105,7 +104,8 @@ public class PlaneTest {
 		// TC13: Ray starts before the plane (1 points)
 		Point point2 = new Point(1, 0, 1);
 
-		assertEquals(point2, (plane2.findIntersections(new Ray(new Point(1, 0, 0), new Vector(0, 0, 1)))).get(0), //
+		assertEquals(point2,
+				(plane2.findIntersections(new Ray(new Point(1, 0, 0), new Vector(0, 0, 1)))).get(0), //
 				"findIntersections() wrong point intersection when ray starts befor the plane");
 
 		// TC14: Ray starts at plane (0 points)

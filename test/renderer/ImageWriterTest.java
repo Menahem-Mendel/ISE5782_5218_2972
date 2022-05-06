@@ -30,5 +30,4 @@ public class ImageWriterTest {
 
 		imageWriter.writeToImage();
 	}
-
 }

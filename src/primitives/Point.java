@@ -2,7 +2,6 @@ package primitives;
 
 /**
  * Point class is a single unit representing the dot in space
- * 
  */
 public class Point {
 
