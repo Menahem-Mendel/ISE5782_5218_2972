@@ -66,7 +66,7 @@ public class Ray {
 	}
 
 	/**
-	 * findClosestPoint finds closest point to the ray's head !!!
+	 * findClosestPoint finds closest point to the ray's head
 	 * 
 	 * @param lst list of points
 	 * @return closest point to the ray's head
@@ -84,7 +84,7 @@ public class Ray {
 	 * @return closest geo point to the ray's head
 	 */
 	public GeoPoint findClosestGeoPoint(List<GeoPoint> lst) {
-		if (lst.isEmpty())
+		if (lst == null || lst.isEmpty())
 			return null;
 
 		GeoPoint closest = lst.get(0);
