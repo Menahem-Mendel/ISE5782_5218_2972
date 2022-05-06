@@ -6,7 +6,7 @@ package primitives;
 public class Point {
 
 	protected final Double3 xyz;
-	public static final Point ZERO = new Point(Double3.ZERO);
+	public static final Point ZERO = new Point(Double3.ZERO); // zero point
 
 	/**
 	 * Point build ctor
@@ -122,6 +122,6 @@ public class Point {
 
 	@Override
 	public String toString() {
-		return xyz.toString();
+		return String.format("%s", xyz);
 	}
 }

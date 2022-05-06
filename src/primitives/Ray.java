@@ -52,7 +52,7 @@ public class Ray {
 
 	@Override
 	public String toString() {
-		return String.format("-> %s, %s", p0, dir);
+		return String.format("%s, %s", p0, dir);
 	}
 
 	/**

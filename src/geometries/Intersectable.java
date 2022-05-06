@@ -52,7 +52,7 @@ public abstract class Intersectable {
 
 		@Override
 		public String toString() {
-			return String.format("GeoPoint { point: %s,\ngeometry: %s }", point, geometry);
+			return String.format("GeoPoint [geometry=%s, point=%s]", geometry, point);
 		}
 	}
 
