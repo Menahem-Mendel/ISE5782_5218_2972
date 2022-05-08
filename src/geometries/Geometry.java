@@ -9,6 +9,16 @@ import primitives.*;
 public abstract class Geometry extends Intersectable {
 
 	protected Color emission = Color.BLACK;
+	private Material material =new Material();
+
+	public Material getMateria(){
+		return material;
+	}
+
+	public Geometry setMaterial(Material m){
+		material = m;
+		return this;
+	}
 
 	/**
 	 * getNormal returns normal vector of a particular point on the figure

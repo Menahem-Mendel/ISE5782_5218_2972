@@ -4,11 +4,9 @@
  * name: josef wolf        id: 317732972   mail: yossiwolf@hotmail.com
  */
 import primitives.*;
-import renderer.Camera;
-import renderer.ImageWriter;
-import renderer.RayTracerBasic;
-import scene.Scene;
-import primitives.Color;
+import renderer.*;
+import scene.*;
+import lighting.*;
 
 import geometries.*;
 import lighting.AmbientLight;
@@ -20,33 +18,32 @@ import lighting.AmbientLight;
  */
 public final class Main {
 
+        private static final java.awt.Color BLUE = null;
+
         /**
          * Main program to tests initial functionality of the 1st stage
          * 
          * @param args irrelevant here
          */
         public static void main(String[] args) {
-                Scene scene = new Scene("Test scene")//
-                                .setAmbientLight(
-                                                new AmbientLight(new Color(255, 191, 191), new Point(1, 1, 1).getXYZ()))
-                                .setBackground(new Color(75, 127, 90));
+                 Scene scene1 = new Scene("Test scene");
+                 Camera camera1 = new Camera(new Point(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+                                .setVPSize(150, 150) //
+                                .setVPDistance(1000);
+                Color trCL = new Color(800, 500, 250); // Triangles test Color of Light
+                 Color spCL = new Color(800, 500, 0); // Sphere test Color of Light
 
-                scene.geometries.add(new Sphere(new Point(0, 0, -100), 50),
-                                new Triangle(new Point(-100, 0, -100), new Point(0, 100, -100),
-                                                new Point(-100, 100, -100)),
-                                new Triangle(new Point(-100, 0, -100), new Point(0, -100, -100),
-                                                new Point(-100, -100, -100)),
-                                new Triangle(new Point(100, 0, -100), new Point(0, -100, -100),
-                                                new Point(100, -100, -100)));
+                 Geometry sphere = new Sphere(new Point(0, 0, -50), 50d) //
+			.setEmission(new Color(BLUE).reduce(2)) //
+			.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(300));
 
-                Camera camera = new Camera(new Point(0, 0, 0), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
-                                .setVPDistance(100)
-                                .setVPSize(500, 500)
-                                .setImageWriter(new ImageWriter("base render test2", 1000, 1000))
-                                .setRayTracer(new RayTracerBasic(scene));
+                scene1.geometries.add(sphere);
+                scene1.lights.add(new DirectionalLight(spCL, new Vector(1, 1, -0.5)));
 
-                camera.renderImage();
-                camera.printGrid(100, new Color(java.awt.Color.YELLOW));
-                camera.writeToImage();
+                ImageWriter imageWriter = new ImageWriter("lightSphereDirectional", 500, 500);
+                camera1.setImageWriter(imageWriter) //
+                                .setRayTracer(new RayTracerBasic(scene1)) //
+                                .renderImage() //
+                                .writeToImage(); //
         }
 }

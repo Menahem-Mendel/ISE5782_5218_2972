@@ -1,17 +1,21 @@
 package scene;
 
+import java.util.List;
+
 import geometries.Geometries;
 import lighting.AmbientLight;
+import lighting.LightSource;
 import primitives.Color;
 
 /**
  * class Scene contains tetailes about our scene
  */
 public class Scene {
-	public String name; // name of the scene
+	public final String name; // name of the scene
 	public Color background = Color.BLACK; // background color of the scene
 	public AmbientLight ambientLight = new AmbientLight(); // ambient light in the scene
 	public Geometries geometries = new Geometries(); // geometries on the scene
+	public List<LightSource> lights;
 
 	/**
 	 * ctor, build an empty Geometries
