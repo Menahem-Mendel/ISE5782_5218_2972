@@ -1,5 +1,6 @@
 package scene;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import geometries.Geometries;
@@ -15,7 +16,7 @@ public class Scene {
 	public Color background = Color.BLACK; // background color of the scene
 	public AmbientLight ambientLight = new AmbientLight(); // ambient light in the scene
 	public Geometries geometries = new Geometries(); // geometries on the scene
-	public List<LightSource> lights;
+	public List<LightSource> lights = new LinkedList<>();
 
 	/**
 	 * ctor, build an empty Geometries

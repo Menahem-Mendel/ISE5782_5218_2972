@@ -5,20 +5,18 @@
  * name: josef wolf id: 317732972 mail: yossiwolf@hotmail.com
  * @formatter:on
  */
-<<<<<<< HEAD
+
 import primitives.*;
 import renderer.*;
 import scene.*;
+import geometries.*;
 import lighting.*;
-=======
->>>>>>> d6418e84447d449acb6a3a2f9d06136516695b14
 
 public final class Main {
 
-<<<<<<< HEAD
-        private static final java.awt.Color BLUE = null;
+    private static final java.awt.Color BLUE = null;
 
-        /**
+    /**
          * Main program to tests initial functionality of the 1st stage
          * 
          * @param args irrelevant here
@@ -44,6 +42,3 @@ public final class Main {
                                 .renderImage() //
                                 .writeToImage(); //
         }
-=======
->>>>>>> d6418e84447d449acb6a3a2f9d06136516695b14
-}

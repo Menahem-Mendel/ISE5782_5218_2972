@@ -149,7 +149,7 @@ public class Camera {
 	/**
 	 * loop over all pixels on view plane, wirting the correct color of each pixel
 	 */
-	public void renderImage() {
+	public Camera renderImage() {
 		if (Stream.of(p0, vRight, vTo, vUp, rayTracerBase, imageWriter).anyMatch(x -> x == null)
 				|| Stream.of(height, width, dist).anyMatch(x -> x == 0))
 			throw new MissingResourceException("Some of the fields aren't initialized", "Camera",
@@ -161,6 +161,9 @@ public class Camera {
 		for (int i = 0; i < nx; ++i)
 			for (int j = 0; j < ny; ++j)
 				imageWriter.writePixel(i, j, castRay(nx, ny, i, j));
+
+        return this;        
+                
 	}
 
 	/**
