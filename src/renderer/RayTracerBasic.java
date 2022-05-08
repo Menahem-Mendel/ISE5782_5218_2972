@@ -40,6 +40,12 @@ public class RayTracerBasic extends RayTracerBase {
                 .add(calcLocalEffeects(p, ray));
     }
 
+    /**
+     * calcLocalEffeects calculates color with phong model
+     * @param g GeoPoint
+     * @param r Ray
+     * @return color
+     */
     private Color calcLocalEffeects(GeoPoint g, Ray r) {
         Vector v = r.getDir();
         Vector n = g.geometry.getNormal(g.point);
@@ -65,6 +71,16 @@ public class RayTracerBasic extends RayTracerBase {
 
     }
 
+    /**
+     * calcSpecular calculates specular light
+     * @param ks double describes material
+     * @param l vector direction of light
+     * @param n vector geometry normal
+     * @param v vector direction of the given ray
+     * @param nShine int describes nShininess
+     * @param lightIntensity color current color
+     * @return color result
+     */
     private Color calcSpecular(double ks, Vector l, Vector n, Vector v, int nShine,
             Color lightIntensity) {
         Vector r = l.sub(n.scale(l.dot(n) * 2));
@@ -73,6 +89,14 @@ public class RayTracerBasic extends RayTracerBase {
         return lightIntensity.scale(ks*vrn);
     }
 
+    /**
+     * calcDiffusive calculates diffusive light
+     * @param kd double describes material
+     * @param l vector direction of light
+     * @param n vector geometry normal
+     * @param lightIntensity color current color
+     * @return color result
+     */
     private Color calcDiffusive(double kd, Vector l, Vector n, Color lightIntensity) {
         double ln = Math.abs(l.dot(n));
         return lightIntensity.scale(kd * ln);

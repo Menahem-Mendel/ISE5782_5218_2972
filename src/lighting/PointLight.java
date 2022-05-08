@@ -4,12 +4,22 @@ import primitives.Color;
 import primitives.Point;
 import primitives.Vector;
 
+/**
+ * PointLight class represents a light source who lights equally all over
+ */
 public class PointLight extends Light implements LightSource {
     private final Point position;
-    private double kC = 1;
-    private double kL = 0;
-    private double kQ = 0;
 
+    private double kC = 1; // constant factor
+    private double kL = 0; // linear factor
+    private double kQ = 0; // quadrat factor
+
+    /**
+     * PointLight ctor
+     * 
+     * @param color color intensity
+     * @param posit position
+     */
     public PointLight(Color color, Point posit) {
         super(color);
         position = posit;
@@ -19,7 +29,7 @@ public class PointLight extends Light implements LightSource {
     public Color getIntensity(Point p) {
         double d = position.dist(p);
         double attenuation = 1d / (kC + kL * d + kQ * d * d);
-        return intensity.scale(attenuation);
+        return getIntensity().scale(attenuation);
     }
 
     @Override
@@ -27,18 +37,36 @@ public class PointLight extends Light implements LightSource {
         return p.sub(position).normalize();
     }
 
-    public PointLight setKc(double c){
-        kC=c;
+    /**
+     * setKc sets the constant parameter
+     * 
+     * @param c kC
+     * @return current PointLight
+     */
+    public PointLight setKc(double c) {
+        kC = c;
         return this;
     }
 
-    public PointLight setKl(double l){
-        kL=l;
+    /**
+     * setKc sets the linear parameter
+     * 
+     * @param l kL
+     * @return current PointLight
+     */
+    public PointLight setKl(double l) {
+        kL = l;
         return this;
     }
 
-    public PointLight setKq(double q){
-        kQ=q;
+    /**
+     * setKc sets the quadrat parameter
+     * 
+     * @param q kQ
+     * @return current PointLight
+     */
+    public PointLight setKq(double q) {
+        kQ = q;
         return this;
     }
 }

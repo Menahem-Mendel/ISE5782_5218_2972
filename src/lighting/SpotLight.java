@@ -2,10 +2,19 @@ package lighting;
 
 import primitives.*;
 
+/**
+ * SpotLight class represents a light source who has direction
+ */
 public class SpotLight extends PointLight {
 
     private final Vector direction;
 
+    /**
+     * bulid ctor for SpotLight
+     * @param color color
+     * @param posit position
+     * @param dir direction
+     */
     public SpotLight(Color color, Point posit, Vector dir) {
         super(color, posit);
         direction = dir.normalize();

@@ -16,7 +16,7 @@ public class Scene {
 	public Color background = Color.BLACK; // background color of the scene
 	public AmbientLight ambientLight = new AmbientLight(); // ambient light in the scene
 	public Geometries geometries = new Geometries(); // geometries on the scene
-	public List<LightSource> lights = new LinkedList<>();
+	public List<LightSource> lights = new LinkedList<>(); // list of lights
 
 	/**
 	 * ctor, build an empty Geometries
