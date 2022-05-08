@@ -2,13 +2,11 @@ package renderer;
 
 import geometries.Intersectable.GeoPoint;
 import primitives.Color;
-import primitives.Point;
 import primitives.Ray;
 import scene.Scene;
 
 /**
  * RayTracerBasic it's a basic implementation of the RayTracerBase class
- * 
  */
 public class RayTracerBasic extends RayTracerBase {
 
@@ -25,7 +23,8 @@ public class RayTracerBasic extends RayTracerBase {
 	public Color traceRay(Ray r) {
 		var intersections = scene.geometries.findGeoIntersectionsHelper(r);
 
-		return intersections == null ? scene.background : calcColor(r.findClosestGeoPoint(intersections));
+		return intersections == null ? scene.background
+				: calcColor(r.findClosestGeoPoint(intersections));
 	}
 
 	/**
@@ -35,7 +34,7 @@ public class RayTracerBasic extends RayTracerBase {
 	 * @return Color of the point
 	 */
 	private Color calcColor(GeoPoint p) {
-		// !!! wtf the point color
+		// !!! wtf is point color
 		return scene.ambientLight.getIntensity().add(p.geometry.getEmission()).add();
 	}
 }

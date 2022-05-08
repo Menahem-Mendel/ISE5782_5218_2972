@@ -6,7 +6,6 @@ import primitives.*;
 
 /**
  * Cylinder class represents cylinder in 3D space
- * 
  */
 public class Cylinder extends Tube {
 

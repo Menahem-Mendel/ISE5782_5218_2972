@@ -1,23 +1,21 @@
 
-/**
- * name: mendel gelfand    id: 342795218   mail: mendelgel@gmail.com
- * name: josef wolf        id: 317732972   mail: yossiwolf@hotmail.com
+/** 
+ * @formatter:off
+ * name: mendel gelfand id: 342795218 mail: mendelgel@gmail.com
+ * name: josef wolf id: 317732972 mail: yossiwolf@hotmail.com
+ * @formatter:on
  */
+<<<<<<< HEAD
 import primitives.*;
 import renderer.*;
 import scene.*;
 import lighting.*;
+=======
+>>>>>>> d6418e84447d449acb6a3a2f9d06136516695b14
 
-import geometries.*;
-import lighting.AmbientLight;
-
-/**
- * Test program for the 1st stage
- *
- * @author Dan Zilberstein
- */
 public final class Main {
 
+<<<<<<< HEAD
         private static final java.awt.Color BLUE = null;
 
         /**
@@ -46,4 +44,6 @@ public final class Main {
                                 .renderImage() //
                                 .writeToImage(); //
         }
+=======
+>>>>>>> d6418e84447d449acb6a3a2f9d06136516695b14
 }

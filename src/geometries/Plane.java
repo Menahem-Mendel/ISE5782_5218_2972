@@ -6,7 +6,6 @@ import primitives.*;
 
 /**
  * Plane class represents two-dimensional plane in 3D Cartesian coordinate
- * 
  */
 public class Plane extends Geometry {
 

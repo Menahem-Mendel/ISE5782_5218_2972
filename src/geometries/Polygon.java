@@ -6,8 +6,7 @@ import primitives.*;
 import static primitives.Util.*;
 
 /**
- * Polygon class represents two-dimensional polygon in 3D Cartesian coordinate
- * system
+ * Polygon class represents two-dimensional polygon in 3D Cartesian coordinate system
  * 
  * @author Dan
  */
@@ -23,23 +22,16 @@ public class Polygon extends Geometry {
 	private final int size;
 
 	/**
-	 * Polygon constructor based on vertices list. The list must be ordered by edge
-	 * path. The polygon must be convex.
+	 * Polygon constructor based on vertices list. The list must be ordered by edge path. The polygon must be convex.
 	 * 
 	 * @param vertices list of vertices according to their order by edge path
-	 * @throws IllegalArgumentException in any case of illegal combination of
-	 *                                  vertices:
+	 * @throws IllegalArgumentException in any case of illegal combination of vertices:
 	 *                                  <ul>
 	 *                                  <li>Less than 3 vertices</li>
-	 *                                  <li>Consequent vertices are in the same
-	 *                                  point
-	 *                                  <li>The vertices are not in the same
-	 *                                  plane</li>
-	 *                                  <li>The order of vertices is not according
-	 *                                  to edge path</li>
-	 *                                  <li>Three consequent vertices lay in the
-	 *                                  same line (180&#176; angle between two
-	 *                                  consequent edges)
+	 *                                  <li>Consequent vertices are in the same point
+	 *                                  <li>The vertices are not in the same plane</li>
+	 *                                  <li>The order of vertices is not according to edge path</li>
+	 *                                  <li>Three consequent vertices lay in the same line (180&#176; angle between two consequent edges)
 	 *                                  <li>The polygon is concave (not convex)</li>
 	 *                                  </ul>
 	 */
@@ -75,14 +67,16 @@ public class Polygon extends Geometry {
 		for (var i = 1; i < vertices.length; ++i) {
 			// Test that the point is in the same plane as calculated originally
 			if (!isZero(vertices[i].sub(vertices[0]).dot(n)))
-				throw new IllegalArgumentException("All vertices of a polygon must lay in the same plane");
+				throw new IllegalArgumentException(
+						"All vertices of a polygon must lay in the same plane");
 
 			// Test the consequent edges have
 			edge1 = edge2;
 			edge2 = vertices[i].sub(vertices[i - 1]);
 
 			if (positive != (edge1.cross(edge2).dot(n) > 0))
-				throw new IllegalArgumentException("All vertices must be ordered and the polygon must be convex");
+				throw new IllegalArgumentException(
+						"All vertices must be ordered and the polygon must be convex");
 		}
 	}
 

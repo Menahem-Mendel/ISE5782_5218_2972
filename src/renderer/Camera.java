@@ -6,8 +6,7 @@ import java.util.stream.Stream;
 import primitives.*;
 
 /**
- * Camera represents point from which we are looking and a view plane which
- * shows all objects behind
+ * Camera represents point from which we are looking and a view plane which shows all objects behind
  */
 public class Camera {
 	private Point p0;
@@ -67,8 +66,7 @@ public class Camera {
 	 * @param w view plane width
 	 * @param h view plane height
 	 * @return camera object
-	 * @throws IllegalArgumentException if width of height is have non-positive
-	 *                                  values
+	 * @throws IllegalArgumentException if width of height is have non-positive values
 	 */
 	public Camera setVPSize(double w, double h) {
 		if (Util.alignZero(w) <= 0)
@@ -154,13 +152,14 @@ public class Camera {
 	public void renderImage() {
 		if (Stream.of(p0, vRight, vTo, vUp, rayTracerBase, imageWriter).anyMatch(x -> x == null)
 				|| Stream.of(height, width, dist).anyMatch(x -> x == 0))
-			throw new MissingResourceException("Some of the fields aren't initialized", "Camera", "");
+			throw new MissingResourceException("Some of the fields aren't initialized", "Camera",
+					"");
 
 		int nx = imageWriter.getNx();
 		int ny = imageWriter.getNy();
 
-		for (int i = 0; i < nx; i++)
-			for (int j = 0; j < ny; j++)
+		for (int i = 0; i < nx; ++i)
+			for (int j = 0; j < ny; ++j)
 				imageWriter.writePixel(i, j, castRay(nx, ny, i, j));
 	}
 
@@ -169,7 +168,8 @@ public class Camera {
 	 */
 	public void writeToImage() {
 		if (imageWriter == null)
-			throw new MissingResourceException("Some of the fields aren't initialized", "Camera", "imageWriter");
+			throw new MissingResourceException("Some of the fields aren't initialized", "Camera",
+					"imageWriter");
 
 		imageWriter.writeToImage();
 	}
@@ -203,10 +203,10 @@ public class Camera {
 		int ny = imageWriter.getNy();
 
 		for (int i = 0; i < nx; i += delta)
-			for (int j = 0; j < ny; j++)
+			for (int j = 0; j < ny; ++j)
 				imageWriter.writePixel(i, j, color);
 
-		for (int i = 0; i < nx; i++)
+		for (int i = 0; i < nx; ++i)
 			for (int j = 0; j < ny; j += delta)
 				imageWriter.writePixel(i, j, color);
 	}

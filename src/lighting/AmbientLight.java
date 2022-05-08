@@ -5,7 +5,6 @@ import primitives.Double3;
 
 /**
  * AmbientLight class
- * 
  */
 public class AmbientLight extends Light {
 
@@ -21,7 +20,6 @@ public class AmbientLight extends Light {
 
 	/**
 	 * AmbientLight empty build ctor sets the intensity to black
-	 * 
 	 */
 	public AmbientLight() {
 		super(Color.BLACK);

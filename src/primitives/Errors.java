@@ -2,7 +2,6 @@ package primitives;
 
 /**
  * Errors class represents predefined error messages.
- * 
  */
 public final class Errors {
 

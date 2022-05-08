@@ -1,6 +1,5 @@
 package geometries;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import primitives.*;
@@ -8,7 +7,6 @@ import static primitives.Util.*;
 
 /**
  * Triangle class represents triangl in 3D space
- * 
  */
 public class Triangle extends Polygon {
 

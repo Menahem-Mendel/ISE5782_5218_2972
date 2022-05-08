@@ -10,18 +10,15 @@ import primitives.*;
  * Testing Camera Class
  * 
  * @author Dan
- *
  */
 class CameraTest {
-	static final Point ZERO = new Point(0, 0, 0);
-
 	/**
-	 * Test method for
-	 * {@link elements.Camera#constructRay(int, int, int, int)}.
+	 * Test method for {@link elements.Camera#constructRay(int, int, int, int)}.
 	 */
 	@Test
 	void ctorRayTest() {
-		Camera camera = new Camera(ZERO, new Vector(0, 0, -1), new Vector(0, -1, 0)).setVPDistance(10);
+		Camera camera = new Camera(Point.ZERO, new Vector(0, 0, -1), new Vector(0, -1, 0))
+				.setVPDistance(10);
 
 		class Item {
 			Ray expected;
@@ -34,28 +31,20 @@ class CameraTest {
 		}
 
 		Item items[] = {
-				new Item(
-						new Ray(ZERO, new Vector(1, -1, -10)),
+				new Item(new Ray(Point.ZERO, new Vector(1, -1, -10)),
 						camera.setVPSize(8, 8).constructRay(4, 4, 1, 1)),
-				new Item(
-						new Ray(ZERO, new Vector(0, 0, -10)),
+				new Item(new Ray(Point.ZERO, new Vector(0, 0, -10)),
 						camera.setVPSize(6, 6).constructRay(3, 3, 1, 1)),
-				new Item(
-						new Ray(ZERO, new Vector(0, -2, -10)),
+				new Item(new Ray(Point.ZERO, new Vector(0, -2, -10)),
 						camera.setVPSize(6, 6).constructRay(3, 3, 1, 0)),
-				new Item(
-						new Ray(ZERO, new Vector(2, 0, -10)),
+				new Item(new Ray(Point.ZERO, new Vector(2, 0, -10)),
 						camera.setVPSize(6, 6).constructRay(3, 3, 0, 1)),
-				new Item(
-						new Ray(ZERO, new Vector(2, -2, -10)),
+				new Item(new Ray(Point.ZERO, new Vector(2, -2, -10)),
 						camera.setVPSize(6, 6).constructRay(3, 3, 0, 0)),
-				new Item(
-						new Ray(ZERO, new Vector(3, -3, -10)),
+				new Item(new Ray(Point.ZERO, new Vector(3, -3, -10)),
 						camera.setVPSize(8, 8).constructRay(4, 4, 0, 0)),
-				new Item(
-						new Ray(ZERO, new Vector(1, -3, -10)),
-						camera.setVPSize(8, 8).constructRay(4, 4, 1, 0)),
-		};
+				new Item(new Ray(Point.ZERO, new Vector(1, -3, -10)),
+						camera.setVPSize(8, 8).constructRay(4, 4, 1, 0)), };
 
 		// ============ Equivalence Partitions Tests ==============
 		// EP01: 4X4 Inside (1,1)

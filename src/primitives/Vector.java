@@ -2,7 +2,6 @@ package primitives;
 
 /*
  * Vector class represents a vector in 3D space
- * 
  */
 public class Vector extends Point {
 
@@ -56,8 +55,7 @@ public class Vector extends Point {
 	 * @return vector cross product
 	 */
 	public Vector cross(Vector rhs) {
-		return new Vector(
-				xyz.d2 * rhs.xyz.d3 - xyz.d3 * rhs.xyz.d2,
+		return new Vector(xyz.d2 * rhs.xyz.d3 - xyz.d3 * rhs.xyz.d2,
 				-(xyz.d1 * rhs.xyz.d3 - xyz.d3 * rhs.xyz.d1),
 				xyz.d1 * rhs.xyz.d2 - xyz.d2 * rhs.xyz.d1);
 	}
@@ -96,9 +94,7 @@ public class Vector extends Point {
 	 * @return dot product
 	 */
 	public double dot(Vector rhs) {
-		return xyz.d1 * rhs.xyz.d1 +
-				xyz.d2 * rhs.xyz.d2 +
-				xyz.d3 * rhs.xyz.d3;
+		return xyz.d1 * rhs.xyz.d1 + xyz.d2 * rhs.xyz.d2 + xyz.d3 * rhs.xyz.d3;
 	}
 
 	@Override
@@ -115,6 +111,6 @@ public class Vector extends Point {
 
 	@Override
 	public String toString() {
-		return "->" + super.toString();
+		return String.format("-> %s", xyz);
 	}
 }
