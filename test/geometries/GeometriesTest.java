@@ -37,7 +37,8 @@ public class GeometriesTest {
 	};
 
 	/**
-	 * Test method for {@link geometries.Geometries#findIntersections(primitives.Ray)}
+	 * Test method for
+	 * {@link geometries.Geometries#findIntersections(primitives.Ray)}
 	 */
 	@Test
 	public void findIntersectionsTest() {

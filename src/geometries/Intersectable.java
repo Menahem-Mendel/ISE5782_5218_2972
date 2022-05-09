@@ -6,8 +6,10 @@ import java.util.stream.Collectors;
 import primitives.*;
 
 /**
- * Intersectable interface describe the intersections with Geomteries variables + methods camelCase variables: class (static), instance (object), local,
- * parameters variables - main word is a subject, methods - main word is a verb types CamelCase CONSTANT_NAMES packagesnames
+ * Intersectable interface describe the intersections with Geomteries variables
+ * + methods camelCase variables: class (static), instance (object), local,
+ * parameters variables - main word is a subject, methods - main word is a verb
+ * types CamelCase CONSTANT_NAMES packagesnames
  */
 public abstract class Intersectable {
 
@@ -24,7 +26,7 @@ public abstract class Intersectable {
 	}
 
 	/**
-	 * GeoPoint class represents ...
+	 * GeoPoint class represents point with its object
 	 */
 	public static class GeoPoint {
 		public Geometry geometry; // geometry

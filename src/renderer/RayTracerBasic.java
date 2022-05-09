@@ -28,22 +28,20 @@ public class RayTracerBasic extends RayTracerBase {
                 : calcColor(r.findClosestGeoPoint(intersections), r);
     }
 
- 
     /**
      * calculates color of a given point
      * 
-     * @param p intersection point to color 
-     * @param ray a given ray 
+     * @param p   intersection point to color
+     * @param ray a given ray
      * @return Color of the point
      */
     private Color calcColor(GeoPoint p, Ray ray) {
-        // !!! wtf is point color
-        return scene.ambientLight.getIntensity().add(p.geometry.getEmission())
-                .add(calcLocalEffeects(p, ray));
+        return scene.ambientLight.getIntensity().add(p.geometry.getEmission()).add(calcLocalEffeects(p, ray));
     }
 
     /**
      * calcLocalEffeects calculates color with phong model
+     * 
      * @param g GeoPoint
      * @param r Ray
      * @return color
@@ -75,27 +73,29 @@ public class RayTracerBasic extends RayTracerBase {
 
     /**
      * calcSpecular calculates specular light
-     * @param ks double describes material
-     * @param l vector direction of light
-     * @param n vector geometry normal
-     * @param v vector direction of the given ray
-     * @param nShine int describes nShininess
+     * 
+     * @param ks             double describes material
+     * @param l              vector direction of light
+     * @param n              vector geometry normal
+     * @param v              vector direction of the given ray
+     * @param nShine         int describes nShininess
      * @param lightIntensity color current color
      * @return color result
      */
     private Color calcSpecular(double ks, Vector l, Vector n, Vector v, int nShine,
             Color lightIntensity) {
         Vector r = l.sub(n.scale(l.dot(n) * 2));
-        double vrMinus= v.scale(-1).dot(r);
-        double vrn = Math.pow(vrMinus,nShine);
-        return lightIntensity.scale(ks*vrn);
+        double vrMinus = v.scale(-1).dot(r);
+        double vrn = Math.pow(vrMinus, nShine);
+        return lightIntensity.scale(ks * vrn);
     }
 
     /**
      * calcDiffusive calculates diffusive light
-     * @param kd double describes material
-     * @param l vector direction of light
-     * @param n vector geometry normal
+     * 
+     * @param kd             double describes material
+     * @param l              vector direction of light
+     * @param n              vector geometry normal
      * @param lightIntensity color current color
      * @return color result
      */

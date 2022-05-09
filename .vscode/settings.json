@@ -12,8 +12,4 @@
         "name": "proj",
         "workingDirectory": "${workspaceFolder}"
     },
-    "java.format.settings.url": ".vscode/java-formatter.xml",
-    "[java]": {
-        "editor.detectIndentation": false
-    }
 }

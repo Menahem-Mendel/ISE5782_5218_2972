@@ -9,7 +9,7 @@ public interface LightSource {
 
     /**
      * 
-     * @param p Point 
+     * @param p Point
      * @return color Intensity
      */
     public Color getIntensity(Point p);

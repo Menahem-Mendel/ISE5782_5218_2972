@@ -32,7 +32,8 @@ public class PlaneTest {
 	}
 
 	/**
-	 * Test method for {@link geometries.Plane#Plane(primitives.Point, primitives.Point, primitives.Point)}
+	 * Test method for
+	 * {@link geometries.Plane#Plane(primitives.Point, primitives.Point, primitives.Point)}
 	 */
 	@Test
 	public void ctorTest() {

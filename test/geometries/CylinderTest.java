@@ -21,7 +21,8 @@ public class CylinderTest {
 	};
 
 	/**
-	 * Test method for {@link geometries.Cylinder#getNormal(primitives.Ray, double, double)}.
+	 * Test method for
+	 * {@link geometries.Cylinder#getNormal(primitives.Ray, double, double)}.
 	 */
 	@Test
 	public void getNormalTest() {

@@ -11,9 +11,10 @@ public class SpotLight extends PointLight {
 
     /**
      * bulid ctor for SpotLight
+     * 
      * @param color color
      * @param posit position
-     * @param dir direction
+     * @param dir   direction
      */
     public SpotLight(Color color, Point posit, Vector dir) {
         super(color, posit);
@@ -24,8 +25,7 @@ public class SpotLight extends PointLight {
     public Color getIntensity(Point p) {
         double cosTetha = direction.dot(getL(p));
         Color inten = super.getIntensity(p);
-        return inten.scale(Math.max(0,cosTetha));
+        return inten.scale(Math.max(0, cosTetha));
     }
-
 
 }

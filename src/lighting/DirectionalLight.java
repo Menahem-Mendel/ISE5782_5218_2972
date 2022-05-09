@@ -7,7 +7,7 @@ import primitives.Vector;
 /**
  * DirectionalLight class describes a direction light
  */
-public class DirectionalLight extends Light implements LightSource  {
+public class DirectionalLight extends Light implements LightSource {
 
     private final Vector direction; // vctor direction
 
@@ -15,9 +15,9 @@ public class DirectionalLight extends Light implements LightSource  {
      * ctor DirectionalLight
      * 
      * @param color color
-     * @param dir direction
+     * @param dir   direction
      */
-    public DirectionalLight(Color color , Vector dir) {
+    public DirectionalLight(Color color, Vector dir) {
         super(color);
         direction = dir;
     }
@@ -31,5 +31,5 @@ public class DirectionalLight extends Light implements LightSource  {
     public Vector getL(Point p) {
         return direction.normalize();
     }
-    
+
 }
