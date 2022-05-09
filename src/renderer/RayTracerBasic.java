@@ -28,10 +28,12 @@ public class RayTracerBasic extends RayTracerBase {
                 : calcColor(r.findClosestGeoPoint(intersections), r);
     }
 
+ 
     /**
      * calculates color of a given point
      * 
-     * @param p intersection point to color
+     * @param p intersection point to color 
+     * @param ray a given ray 
      * @return Color of the point
      */
     private Color calcColor(GeoPoint p, Ray ray) {
