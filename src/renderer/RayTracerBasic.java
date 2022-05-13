@@ -80,6 +80,7 @@ public class RayTracerBasic extends RayTracerBase {
     }
 
     /**
+     * unshaded checks if the current place is un shaded
      * 
      * @param lightSource lightSource
      * @param l           vector direction of light
