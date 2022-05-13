@@ -1,15 +1,21 @@
 package renderer;
 
+import java.util.List;
+
 import geometries.Intersectable.GeoPoint;
 import lighting.LightSource;
 import primitives.*;
-import primitives.Ray;
 import scene.Scene;
 
 /**
  * RayTracerBasic it's a basic implementation of the RayTracerBase class
  */
 public class RayTracerBasic extends RayTracerBase {
+
+    /**
+     * moving the intersect point with dist of delta
+     */
+    private static final double EPS = 0.1;
 
     /**
      * RayTracerBasic build ctor
@@ -22,7 +28,7 @@ public class RayTracerBasic extends RayTracerBase {
 
     @Override
     public Color traceRay(Ray r) {
-        var intersections = scene.geometries.findGeoIntersectionsHelper(r);
+        var intersections = scene.geometries.findGeoIntersections(r);
 
         return intersections == null ? scene.background
                 : calcColor(r.findClosestGeoPoint(intersections), r);
@@ -62,13 +68,36 @@ public class RayTracerBasic extends RayTracerBase {
             Vector l = lightSource.getL(g.point);
             double nl = Util.alignZero(n.dot(l));
             if (nl * nv > 0) {
-                Color lightIntensity = lightSource.getIntensity(g.point);
-                color = color.add(calcDiffusive(kd, l, n, lightIntensity),
-                        calcSpecular(ks, l, n, v, nShine, lightIntensity));
+                if (unshaded(lightSource, l, n, g ,nv)) {
+                    Color lightIntensity = lightSource.getIntensity(g.point);
+                    color = color.add(calcDiffusive(kd, l, n, lightIntensity),
+                            calcSpecular(ks, l, n, v, nShine, lightIntensity));
+                }
             }
         }
         return color;
 
+    }
+
+    /**
+     * 
+     * @param lightSource lightSource
+     * @param l           vector direction of light
+     * @param n           vector normal of geometry
+     * @param g           geoPoint
+     * @return
+     */
+    private boolean unshaded(LightSource lightSource, Vector l, Vector n, GeoPoint g, double nv) {
+
+        
+        Vector lightDirection = l.scale(-1); // from point to light source
+        Vector epsVector = n.scale(nv < 0 ? EPS : -EPS);
+        Point point = g.point.add(epsVector); // !!! MAYBE BREAK LAW OF DEMETER -> SOLUTION CREATING A NEW RAY CTOR
+        Ray lightRay = new Ray(point, lightDirection);
+        double dist = lightSource.getDistance(point);
+
+        List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay,dist);
+        return intersections == null;
     }
 
     /**
@@ -103,4 +132,5 @@ public class RayTracerBasic extends RayTracerBase {
         double ln = Math.abs(l.dot(n));
         return lightIntensity.scale(kd * ln);
     }
+
 }
