@@ -8,6 +8,7 @@ import primitives.*;
 public class SpotLight extends PointLight {
 
     private final Vector direction;
+    private double beam;
 
     /**
      * bulid ctor for SpotLight
@@ -25,7 +26,23 @@ public class SpotLight extends PointLight {
     public Color getIntensity(Point p) {
         double cosTetha = direction.dot(getL(p));
         Color inten = super.getIntensity(p);
-        return inten.scale(Math.max(0, cosTetha));
+        //return inten.scale(Math.max(0, cosTetha));
+        double factor=Math.max(0, cosTetha);
+        if(beam!=1){
+            factor=Math.pow(factor,beam);
+        }
+        return inten.scale(factor);
+    }
+
+    /**
+     * set narrow beam
+     * 
+     * @param b narrow beam size
+     * @return current light
+     */
+    public SpotLight setNarrowBeam(double b){
+        beam=b;
+        return this;
     }
 
 }
