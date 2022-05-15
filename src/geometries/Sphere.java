@@ -50,7 +50,7 @@ public class Sphere extends Geometry {
 	}
 
 	@Override
-	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray , double maxDistance) {
+	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
 		Vector u; // vector from p0 to the center of the sphere
 
 		try {
@@ -74,18 +74,27 @@ public class Sphere extends Geometry {
 		double th = Math.sqrt(th2); // distance from crossed points to the chord
 		double t2 = alignZero(tm + th); // distance from p0 to the furhter point
 
-		if (t2 <= 0 || Util.alignZero(t2 - maxDistance) > 0)
+		if (t2 <= 0)
 			return null;
 
 		double t1 = alignZero(tm - th); // distance from p0 to the nearer point
-		
+		if (t1 <= 0) {
+			if (Util.alignZero(t2 - maxDistance) <= 0) {
+				return List.of(new GeoPoint(ray.getPoint(t2), this));
+			} else
+				return null;
+		} 
+		else {
+			if (Util.alignZero(t1 - maxDistance) > 0)
+				return null;
+			if (Util.alignZero(t2 - maxDistance) <= 0) {
+				return List.of(new GeoPoint(ray.getPoint(t1), this),
+						new GeoPoint(ray.getPoint(t2), this));
+			}
+			else{
+				return List.of(new GeoPoint(ray.getPoint(t1), this));
+			}
 
-		if(t1<=0 ||Util.alignZero(t2 - maxDistance) > 0 ){
-			return List.of(new GeoPoint(ray.getPoint(t2), this));
 		}
-		else{
-			return List.of(new GeoPoint(ray.getPoint(t1), this),
-			new GeoPoint(ray.getPoint(t2), this));
-		}			
 	}
 }

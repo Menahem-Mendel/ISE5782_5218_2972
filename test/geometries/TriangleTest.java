@@ -101,4 +101,28 @@ public class TriangleTest {
 				"infront of one of the vertices");
 		assertNull(tr.findIntersections(ray), "infront of one of the vertices");
 	}
+
+	/**
+	 * Test method for
+	 * {@link geometries.Triangle#findGeoIntersections(primitives.Ray)}.
+	 */
+	@Test
+	public void testFindGeoIntersections() {
+
+		Triangle tr = new Triangle(new Point(0, 0, 1), new Point(1, 0, 0), new Point(0, 1, 0));
+		Ray ray;
+
+		// TC01: GeoIntersection is in range distance
+		ray = new Ray(new Point(1, 1, 1), new Vector(-1, -1, -1));
+		var resultGep = tr.findGeoIntersections(ray, 5);
+		var resultPoint = resultGep.get(0).point;
+
+		assertEquals((new Point(1d / 3, 1d / 3, 1d / 3)), resultPoint,
+				"intersection inside the range");
+
+		// TC02: GeoIntersection is out of range distance
+		assertNull(tr.findGeoIntersections(ray, 0.1), "intersection out of range");
+
+	}
+
 }

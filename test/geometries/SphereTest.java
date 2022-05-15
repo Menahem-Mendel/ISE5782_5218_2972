@@ -145,4 +145,43 @@ public class SphereTest {
 				"Ray's line is outside, ray is orthogonal to ray start to sphere's center line");
 	}
 
+	/**
+	 * Test method for
+	 * {@link geometries.Sphere#findGeoIntersections(primitives.Ray)}.
+	 */
+	@Test
+	public void testFindGeoIntersections() {
+
+		Sphere sphere = new Sphere(new Point(1, 0, 0), 1d);
+
+		Point p1 = new Point(0.0651530771650466, 0.355051025721682, 0);
+		Point p2 = new Point(1.53484692283495, 0.844948974278318, 0);
+		var listOfGeoPoints = sphere
+				.findGeoIntersections(new Ray(new Point(-1, 0, 0), new Vector(3, 1, 0)), 20);
+
+		// TC01: GeoIntersection is in range distance
+		var result = List.of(listOfGeoPoints.get(0).point, listOfGeoPoints.get(1).point);
+		assertEquals(2, result.size(), "Wrong number of points");
+		if (result.get(0).getX() > result.get(1).getX())
+			result = List.of(result.get(1), result.get(0));
+		assertEquals(List.of(p1, p2), result, "Ray crosses sphere in distance");
+
+		// TC02: GeoIntersection is in range distance for one point
+
+		listOfGeoPoints = sphere
+				.findGeoIntersections(new Ray(new Point(1, 0, 5), new Vector(0, 0, -1)), 5);
+		assertEquals(1, listOfGeoPoints.size(), "Wrong number of points");
+		result = List.of(listOfGeoPoints.get(0).point);
+		Point intersect = new Point(1, 0, 1);
+		assertEquals(intersect, result.get(0), "does not take the right intersect");
+
+		// TC03: GeoIntersection is out of range
+
+		listOfGeoPoints = sphere
+				.findGeoIntersections(new Ray(new Point(1, 0, 5), new Vector(0, 0, -1)), 2);
+		assertNull( listOfGeoPoints, "Wrong number of points");
+
+	
+	}
+
 }

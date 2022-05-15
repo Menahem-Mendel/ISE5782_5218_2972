@@ -132,6 +132,26 @@ public class PlaneTest {
 
 	}
 
-	
+	/**
+	 * Test method for
+	 * {@link geometries.Plane#findGeoIntersections(primitives.Ray)}.
+	 */
+	@Test
+	public void testFindGeoIntersections() {
+
+		Plane plane = new Plane(new Point(2, 0, 0), new Point(0, 2, 0), new Point(0, 0, 2));
+
+		// TC01: GeoIntersection is out of range distance
+		assertNull(plane.findGeoIntersections(new Ray(new Point(1, 0, 0), new Vector(1, 0, 0)), 0.1),
+				"Geo intersection is out of distance");
+
+		// TC02: GeoIntersection is in range distance
+		Point point = new Point(2, 0, 0);
+
+		assertEquals(point,
+				(plane.findGeoIntersections(new Ray(new Point(1, 0, 0), new Vector(1, 0, 0)),10)).get(0).point, //
+				"Geo intersection is in distance");
+
+	}
 
 }
