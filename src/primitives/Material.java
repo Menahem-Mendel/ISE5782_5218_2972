@@ -5,9 +5,11 @@ package primitives;
  */
 public class Material {
 
-    public double kD = 0;
-    public double kS = 0;
-    public int nShininess = 0;
+    public double kD = 0; // for diffuse
+    public double kS = 0; // for specular
+    public int nShininess = 0; // shininess
+    public double kT = 0; // for transparency
+    public double kR = 0; // for reflection
 
     /**
      * setKd set kD
@@ -39,6 +41,28 @@ public class Material {
      */
     public Material setShininess(int n) {
         nShininess = n;
+        return this;
+    }
+
+    /**
+     * setKt set kT for transparency
+     * 
+     * @param t double
+     * @return current material
+     */
+    public Material setKt(double t) {
+        kT = t;
+        return this;
+    }
+
+    /**
+     * setKr srt kR for reflection
+     * 
+     * @param r double
+     * @return current material
+     */
+    public Material setKr(double r) {
+        kR = r;
         return this;
     }
 

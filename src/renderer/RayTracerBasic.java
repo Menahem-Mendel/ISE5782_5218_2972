@@ -12,6 +12,9 @@ import scene.Scene;
  */
 public class RayTracerBasic extends RayTracerBase {
 
+    private static final int MAX_CALC_COLOR_LEVEL = 10;   //for Recursion
+    private static final double MIN_CALC_COLOR_K = 0.001;  // for Recursion
+
     /**
      * moving the intersect point with dist of delta
      */
@@ -68,7 +71,7 @@ public class RayTracerBasic extends RayTracerBase {
             Vector l = lightSource.getL(g.point);
             double nl = Util.alignZero(n.dot(l));
             if (nl * nv > 0) {
-                if (unshaded(lightSource, l, n, g ,nv)) {
+                if (unshaded(lightSource, l, n, g, nv)) {
                     Color lightIntensity = lightSource.getIntensity(g.point);
                     color = color.add(calcDiffusive(kd, l, n, lightIntensity),
                             calcSpecular(ks, l, n, v, nShine, lightIntensity));
@@ -90,14 +93,13 @@ public class RayTracerBasic extends RayTracerBase {
      */
     private boolean unshaded(LightSource lightSource, Vector l, Vector n, GeoPoint g, double nv) {
 
-        
         Vector lightDirection = l.scale(-1); // from point to light source
         Vector epsVector = n.scale(nv < 0 ? EPS : -EPS);
         Point point = g.point.add(epsVector); // !!! MAYBE BREAK LAW OF DEMETER -> SOLUTION CREATING A NEW RAY CTOR
         Ray lightRay = new Ray(point, lightDirection);
         double dist = lightSource.getDistance(point);
 
-        List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay,dist);
+        List<GeoPoint> intersections = scene.geometries.findGeoIntersections(lightRay, dist);
         return intersections == null;
     }
 
