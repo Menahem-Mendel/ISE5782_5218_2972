@@ -136,4 +136,15 @@ public class Double3 {
 		return d1 < k && d2 < k && d3 < k;
 	}
 
+	/**
+	 * Checks whether all the numbers are higher than a test number
+	 * 
+	 * @param k the test number
+	 * @return true if all the numbers are more than k, false otherwise
+	 */
+
+	public boolean higherThan(double k) {
+		return d1 > k && d2 > k && d3 > k;
+	}
+
 }
