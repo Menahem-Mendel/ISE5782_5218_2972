@@ -152,17 +152,16 @@ public class Camera {
 	 * loop over all pixels on view plane, wirting the correct color of each pixel
 	 */
 	public Camera renderImage() {
-		if (Stream.of(p0, vRight, vTo, vUp, rayTracerBase, imageWriter).anyMatch(x -> x == null)
-				|| Stream.of(height, width, dist).anyMatch(x -> x == 0))
-			throw new MissingResourceException("Some of the fields aren't initialized", "Camera",
-					"");
+		try {
+			int nx = imageWriter.getNx();
+			int ny = imageWriter.getNy();
 
-		int nx = imageWriter.getNx();
-		int ny = imageWriter.getNy();
-
-		for (int i = 0; i < nx; ++i)
-			for (int j = 0; j < ny; ++j)
-				imageWriter.writePixel(i, j, castRay(nx, ny, i, j));
+			for (int i = 0; i < ny; i++)
+				for (int j = 0; j < nx; j++)
+					imageWriter.writePixel(i, j, castRay(nx, ny, i, j));
+		} catch (MissingResourceException e) {
+			throw new MissingResourceException("missing resource", e.getClassName(), e.getKey());
+		}
 
 		return this;
 
@@ -173,8 +172,7 @@ public class Camera {
 	 */
 	public void writeToImage() {
 		if (imageWriter == null)
-			throw new MissingResourceException("Some of the fields aren't initialized", "Camera",
-					"imageWriter");
+			throw new MissingResourceException("missing resource", ImageWriter.class.getName(), "");
 
 		imageWriter.writeToImage();
 	}
@@ -189,9 +187,7 @@ public class Camera {
 	 * @return color
 	 */
 	private Color castRay(int Nx, int Ny, int i, int j) {
-		Ray ray = constructRay(Nx, Ny, i, j);
-
-		return rayTracerBase.traceRay(ray);
+		return rayTracerBase.traceRay(constructRay(Nx, Ny, i, j));
 	}
 
 	/**
@@ -202,7 +198,7 @@ public class Camera {
 	 */
 	public void printGrid(int delta, Color color) {
 		if (imageWriter == null)
-			throw new MissingResourceException("this image not initialized yet", "Camera", "");
+			throw new MissingResourceException("this image not initialized yet", ImageWriter.class.getName(), "");
 
 		int nx = imageWriter.getNx();
 		int ny = imageWriter.getNy();

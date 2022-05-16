@@ -19,6 +19,7 @@ public class DirectionalLight extends Light implements LightSource {
      */
     public DirectionalLight(Color color, Vector dir) {
         super(color);
+
         direction = dir;
     }
 
@@ -34,8 +35,7 @@ public class DirectionalLight extends Light implements LightSource {
 
     @Override
     public double getDistance(Point point) {
-        
-        return  Double.POSITIVE_INFINITY;
+        return Double.POSITIVE_INFINITY;
     }
 
 }

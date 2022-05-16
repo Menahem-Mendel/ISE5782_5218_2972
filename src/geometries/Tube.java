@@ -43,8 +43,7 @@ public class Tube extends Geometry {
 
 	@Override
 	public Vector getNormal(Point p) {
-		double t = axisRay.getDir().dot(p.sub(axisRay.getP0()));
-		return p.sub(axisRay.getPoint(t)).normalize();
+		return p.sub(axisRay.getPoint(axisRay.getDir().dot(p.sub(axisRay.getP0())))).normalize();
 	}
 
 	@Override

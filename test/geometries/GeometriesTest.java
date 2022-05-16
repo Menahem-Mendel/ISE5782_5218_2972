@@ -21,17 +21,17 @@ public class GeometriesTest {
 
 			for (Intersectable g : lst) {
 				var intersections = g.findIntersections(r);
+
 				if (intersections == null)
 					continue;
 
-				if (this.expected == null)
-					this.expected = new LinkedList<>(intersections);
-				else
-					this.expected.addAll(intersections);
+				if (expected == null)
+					expected = new LinkedList<>();
+
+				expected.addAll(intersections);
 			}
 
-			this.actual = new Geometries(lst.toArray(new Intersectable[lst.size()]))
-					.findIntersections(r);
+			actual = new Geometries(lst.toArray(new Intersectable[lst.size()])).findIntersections(r);
 			this.text = text;
 		}
 	};
@@ -65,13 +65,11 @@ public class GeometriesTest {
 		// TC12: Ray's line does not go through any geometry in the collection
 		// TC13: Ray's line goes through only one geometry element in the collection
 		// TC14: Ray's line goes through all elements in the collection
-		for (var item : items) {
+		for (var item : items)
 			if (item.expected != null) {
-				assertEquals(item.expected.size(), item.actual.size(),
-						"wrong amount of intersections");
+				assertEquals(item.expected.size(), item.actual.size(), "wrong amount of intersections");
 				assertTrue(item.expected.containsAll(item.actual), item.text);
 			} else
 				assertNull(item.actual, item.text);
-		}
 	}
 }

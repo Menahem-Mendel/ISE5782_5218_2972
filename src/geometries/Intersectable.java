@@ -70,21 +70,22 @@ public abstract class Intersectable {
 
 	/**
 	 * findGeoIntersections finds geometric intersections with limit of distance
-	 * @param ray a given ray
+	 * 
+	 * @param ray         a given ray
 	 * @param maxDistance max distance intersection from geometry
 	 * @return list of GeoPoint
 	 */
 	public final List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
-    	return findGeoIntersectionsHelper(ray, maxDistance);
-}
+		return findGeoIntersectionsHelper(ray, maxDistance);
+	}
 
-/**
- * findGeoIntersectionsHelper to find geoIntersections
- * 
- * @param ray a given ray
- * @param maxDistance max distance point from geometry
- * @return list of GeoPoint
- */
+	/**
+	 * findGeoIntersectionsHelper to find geoIntersections
+	 * 
+	 * @param ray         a given ray
+	 * @param maxDistance max distance point from geometry
+	 * @return list of GeoPoint
+	 */
 	protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
 
 }

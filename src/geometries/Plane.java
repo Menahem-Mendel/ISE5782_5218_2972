@@ -74,6 +74,7 @@ public class Plane extends Geometry {
 			return null;
 
 		Vector u;
+
 		try {
 			u = q0.sub(p0);
 		} catch (IllegalArgumentException ignore) {
@@ -81,11 +82,10 @@ public class Plane extends Geometry {
 		}
 
 		double t = Util.alignZero(normal.dot(u) / nv);
-	
-		if (t > 0 && Util.alignZero(t - maxDistance) <= 0) {
+
+		if (t > 0 && Util.alignZero(t - maxDistance) <= 0)
 			return List.of(new GeoPoint(ray.getPoint(t), this));
-		} else {
-			return null;
-		}
+
+		return null;
 	}
 }

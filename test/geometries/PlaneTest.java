@@ -149,7 +149,7 @@ public class PlaneTest {
 		Point point = new Point(2, 0, 0);
 
 		assertEquals(point,
-				(plane.findGeoIntersections(new Ray(new Point(1, 0, 0), new Vector(1, 0, 0)),10)).get(0).point, //
+				(plane.findGeoIntersections(new Ray(new Point(1, 0, 0), new Vector(1, 0, 0)), 10)).get(0).point, //
 				"Geo intersection is in distance");
 
 	}

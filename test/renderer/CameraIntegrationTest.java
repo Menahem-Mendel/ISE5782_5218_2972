@@ -34,7 +34,8 @@ public class CameraIntegrationTest {
 	 * 
 	 * @param c camera
 	 * @param g intersectable object
-	 * @return number of integration points between camera's rays to the intersectable
+	 * @return number of integration points between camera's rays to the
+	 *         intersectable
 	 */
 	private void assertIntersections(int expected, Camera c, Intersectable g) {
 		int count = 0;

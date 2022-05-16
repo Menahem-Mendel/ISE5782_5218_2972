@@ -29,6 +29,7 @@ public class PointLight extends Light implements LightSource {
     public Color getIntensity(Point p) {
         double d = position.dist(p);
         double attenuation = 1d / (kC + kL * d + kQ * d * d);
+
         return getIntensity().scale(attenuation);
     }
 
@@ -45,6 +46,7 @@ public class PointLight extends Light implements LightSource {
      */
     public PointLight setKc(double c) {
         kC = c;
+
         return this;
     }
 
@@ -56,6 +58,7 @@ public class PointLight extends Light implements LightSource {
      */
     public PointLight setKl(double l) {
         kL = l;
+
         return this;
     }
 
@@ -67,6 +70,7 @@ public class PointLight extends Light implements LightSource {
      */
     public PointLight setKq(double q) {
         kQ = q;
+
         return this;
     }
 

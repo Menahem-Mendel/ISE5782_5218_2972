@@ -5,64 +5,69 @@ package primitives;
  */
 public class Material {
 
-    public Double3 kD = new Double3(0.0); // for diffuse
-    public Double3 kS = new Double3(0.0); // for specular
     public int nShininess = 0; // shininess
-    public Double3 kT = new Double3(0.0); // for transparency
-    public Double3 kR = new Double3(0.0); // for reflection
+    public Double3 kD = Double3.ZERO; // for diffuse
+    public Double3 kS = Double3.ZERO; // for specular
+    public Double3 kT = Double3.ZERO; // for transparency
+    public Double3 kR = Double3.ZERO; // for reflection
 
     /**
-     * setKd set kD
+     * setKd set diffuse
      * 
      * @param d double
      * @return current material
      */
     public Material setKd(Double3 d) {
         kD = d;
+
         return this;
     }
 
     /**
-     * setKs set kS
+     * setKs set specular
      * 
      * @param s double
      * @return current material
      */
     public Material setKs(Double3 s) {
         kS = s;
+
         return this;
     }
 
     /**
-     * setShininess set nShininess
+     * setShininess set shininess
      * 
      * @param n int
      * @return current material
      */
     public Material setShininess(int n) {
         nShininess = n;
+
         return this;
     }
 
     /**
-     * setKt set kT for transparency
+     * setKt set transparency
      * 
      * @param t double
      * @return current material
      */
     public Material setKt(Double3 t) {
         kT = t;
+
         return this;
     }
 
     /**
-     * setKr srt kR for reflection
+     * setKr set reflection
      * 
      * @param r double
      * @return current material
      */
     public Material setKr(Double3 r) {
         kR = r;
+
         return this;
     }
 

@@ -33,16 +33,11 @@ public class CylinderTest {
 		Cylinder cl = new Cylinder(ray1, 1.0, 2.0);
 
 		Item items[] = {
-				new Item(new Vector(0, 1, 0), cl, new Point(1, 1, 0),
-						"getNormal() wrong normal vector"),
-				new Item(new Vector(1, 0, 0), cl, new Point(2, 0.1, 0.1),
-						"getNormal() wrong normal vector"),
-				new Item(new Vector(-1, 0, 0), cl, new Point(0, 0.1, 0.1),
-						"getNormal() wrong normal vector"),
-				new Item(new Vector(1, 0, 0), cl, new Point(2, 0, 0),
-						"getNormal() wrong normal vector"),
-				new Item(new Vector(-1, 0, 0), cl, Point.ZERO,
-						"getNormal() wrong normal vector"), };
+				new Item(new Vector(0, 1, 0), cl, new Point(1, 1, 0), "getNormal() wrong normal vector"),
+				new Item(new Vector(1, 0, 0), cl, new Point(2, 0.1, 0.1), "getNormal() wrong normal vector"),
+				new Item(new Vector(-1, 0, 0), cl, new Point(0, 0.1, 0.1), "getNormal() wrong normal vector"),
+				new Item(new Vector(1, 0, 0), cl, new Point(2, 0, 0), "getNormal() wrong normal vector"),
+				new Item(new Vector(-1, 0, 0), cl, Point.ZERO, "getNormal() wrong normal vector"), };
 
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: Test side

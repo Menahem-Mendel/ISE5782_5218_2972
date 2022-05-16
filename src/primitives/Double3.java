@@ -146,5 +146,4 @@ public class Double3 {
 	public boolean higherThan(double k) {
 		return d1 > k && d2 > k && d3 > k;
 	}
-
 }

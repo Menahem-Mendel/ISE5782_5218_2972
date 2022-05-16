@@ -25,6 +25,7 @@ public class Scene {
 	 */
 	public Scene(String n) {
 		name = n;
+
 		geometries = new Geometries();
 	}
 

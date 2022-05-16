@@ -56,8 +56,7 @@ public class Sphere extends Geometry {
 		try {
 			u = center.sub(ray.getP0());
 		} catch (IllegalArgumentException ignore) {
-			// the ray starts at the center
-			return List.of(new GeoPoint(ray.getPoint(radius), this));
+			return List.of(new GeoPoint(ray.getPoint(radius), this)); // the ray starts at the center
 		}
 
 		double tm = ray.getDir().dot(u); // distance from p0 to the center of the chord
@@ -78,23 +77,18 @@ public class Sphere extends Geometry {
 			return null;
 
 		double t1 = alignZero(tm - th); // distance from p0 to the nearer point
-		if (t1 <= 0) {
-			if (Util.alignZero(t2 - maxDistance) <= 0) {
-				return List.of(new GeoPoint(ray.getPoint(t2), this));
-			} else
-				return null;
-		} 
-		else {
-			if (Util.alignZero(t1 - maxDistance) > 0)
-				return null;
-			if (Util.alignZero(t2 - maxDistance) <= 0) {
-				return List.of(new GeoPoint(ray.getPoint(t1), this),
-						new GeoPoint(ray.getPoint(t2), this));
-			}
-			else{
-				return List.of(new GeoPoint(ray.getPoint(t1), this));
-			}
 
-		}
+		if (t1 <= 0)
+			if (Util.alignZero(t2 - maxDistance) <= 0)
+				return List.of(new GeoPoint(ray.getPoint(t2), this));
+			else
+				return null;
+		else if (Util.alignZero(t1 - maxDistance) > 0)
+			return null;
+		else if (Util.alignZero(t2 - maxDistance) <= 0)
+			return List.of(new GeoPoint(ray.getPoint(t1), this), new GeoPoint(ray.getPoint(t2), this));
+
+		return List.of(new GeoPoint(ray.getPoint(t1), this));
+
 	}
 }

@@ -49,13 +49,10 @@ public class RayTest {
 		Point p3 = new Point(3, 3, 3);
 
 		Item items[] = {
-				new Item(p1, List.of(p2, p1, p3),
-						"got wrong closest point, correct in middle of the list"),
+				new Item(p1, List.of(p2, p1, p3), "got wrong closest point, correct in middle of the list"),
 				new Item(null, List.of(), "wrong closest point in empty list"),
-				new Item(p1, List.of(p1, p2, p3),
-						"got wrong closest point, correct in head of the list"),
-				new Item(p1, List.of(p2, p3, p1),
-						"got wrong closest point, correct in the end of the list") };
+				new Item(p1, List.of(p1, p2, p3), "got wrong closest point, correct in head of the list"),
+				new Item(p1, List.of(p2, p3, p1), "got wrong closest point, correct in the end of the list") };
 
 		// ============ Equivalence Partitions Tests ==============
 		// TC01: the closest point is in the middle of the list

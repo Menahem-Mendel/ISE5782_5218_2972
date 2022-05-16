@@ -68,18 +68,15 @@ public class PointTest {
 
 		// =============== Boundary Values Tests ==================
 		// TC11: subtract the point itself, so the point of vector might be (0,0,0)
-		assertThrows(IllegalArgumentException.class, () -> lhs.sub(lhs),
-				"sub() can't create zero vector");
+		assertThrows(IllegalArgumentException.class, () -> lhs.sub(lhs), "sub() can't create zero vector");
 
 		// TC12: point subtract (0,0,0)
 		res = new Vector(x, y, z);
-		assertEquals(res, lhs.sub(Point.ZERO),
-				"sub() the vector should have the same value as the point");
+		assertEquals(res, lhs.sub(Point.ZERO), "sub() the vector should have the same value as the point");
 
 		// TC13: (0,0,0) subtract a point
 		res = new Vector(-x, -y, -z);
-		assertEquals(res, Point.ZERO.sub(lhs),
-				"sub() the vector should have the opposite value of the point");
+		assertEquals(res, Point.ZERO.sub(lhs), "sub() the vector should have the opposite value of the point");
 
 		// TC14: point subtract the opposite point
 		res = new Vector(2 * x, 2 * y, 2 * z);
@@ -110,8 +107,7 @@ public class PointTest {
 
 		// TC12: distance of opposite points
 		rhs = new Point(-x, -y, -z);
-		assertEquals(2 * lhs.dist(Point.ZERO), lhs.dist(rhs), DELTA,
-				"dist() wrong distance calculating");
+		assertEquals(2 * lhs.dist(Point.ZERO), lhs.dist(rhs), DELTA, "dist() wrong distance calculating");
 	}
 
 	/**
@@ -133,12 +129,10 @@ public class PointTest {
 
 		// =============== Boundary Values Tests ==================
 		// TC11: squared distance from a point to the same point
-		assertEquals(0, lhs.distSq(lhs), DELTA,
-				"distSquared() distance from point to himself should be 0");
+		assertEquals(0, lhs.distSq(lhs), DELTA, "distSquared() distance from point to himself should be 0");
 
 		// TC12: squared distance of opposite points
 		rhs = new Point(-x, -y, -z);
-		assertEquals(4 * lhs.distSq(Point.ZERO), lhs.distSq(rhs), DELTA,
-				"distSquared() wrong distance calculating");
+		assertEquals(4 * lhs.distSq(Point.ZERO), lhs.distSq(rhs), DELTA, "distSquared() wrong distance calculating");
 	}
 }

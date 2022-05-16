@@ -8,13 +8,10 @@ import geometries.Intersectable.GeoPoint;
  * Ray represents directional vector which starts from the starting point
  */
 public class Ray {
-	/**
-     * moving the intersect point with dist of delta
-     */
-    private static final double EPS = 0.1;
+	private static final double EPS = 0.1; // moving the intersect point with dist of delta
 
-	private final Point p0; //start
-	private final Vector dir; //direction
+	private final Point p0; // start
+	private final Vector dir; // direction
 
 	/**
 	 * Ray build ctor
@@ -29,18 +26,17 @@ public class Ray {
 
 	/**
 	 * ctor with moving the head of the ray with delta
+	 * 
 	 * @param point point
-	 * @param v direction 
-	 * @param n for delta
+	 * @param v     direction
+	 * @param n     for delta
 	 */
 	public Ray(Point point, Vector v, Vector n) {
-        Vector epsVector = n.scale(n.dot(v) > 0 ? EPS : -EPS);
-        Point p = point.add(epsVector); 
-        p0=p;
-		dir=v;
-    }
+		p0 = point.add(n.scale(n.dot(v) > 0 ? EPS : -EPS));
+		dir = v;
+	}
 
-    /**
+	/**
 	 * getP0 returns starting point
 	 * 
 	 * @return starting point
