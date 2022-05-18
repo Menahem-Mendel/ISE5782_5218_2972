@@ -10,11 +10,11 @@ import primitives.*;
  * shows all objects behind
  */
 public class Camera {
-	private Point p0;
-	private Vector vTo, vUp, vRight;
-	private double width, height, dist;
-	private ImageWriter imageWriter;
-	private RayTracerBase rayTracerBase;
+	private Point p0;                   //center of the camera
+	private Vector vTo, vUp, vRight;    //direction position
+	private double width, height, dist; //size
+	private ImageWriter imageWriter;     // image writer
+	private RayTracerBase rayTracerBase;  // a ray
 
 	/**
 	 * Camera build ctor

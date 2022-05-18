@@ -8,7 +8,7 @@ import primitives.*;
 public class SpotLight extends PointLight {
 
     private final Vector direction;
-    private double beam;
+    private double beam=1;
 
     /**
      * bulid ctor for SpotLight
