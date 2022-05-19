@@ -59,17 +59,15 @@ public class RayTracerBasic extends RayTracerBase {
         return maxCalcColorLevel == 1 ? color
                 : color.add(calcGlobalEffects(gp, ray.getDir(), maxCalcColorLevel, initialK));
 
-        // return
-        // scene.ambientLight.getIntensity().add(gp.geometry.getEmission()).add(calcLocalEffeects(gp,
-        // ray));
     }
 
     /**
-     * calcGlobalEffect calculate global effects 
-     * @param gp geo pint
-     * @param v vector
+     * calcGlobalEffect calculate global effects
+     * 
+     * @param gp    geo pint
+     * @param v     vector
      * @param level int depth level
-     * @param k INITIAL_K for recursion
+     * @param k     INITIAL_K for recursion
      * @return color
      */
     private Color calcGlobalEffects(GeoPoint gp, Vector v, int level, Double3 k) {
@@ -90,10 +88,11 @@ public class RayTracerBasic extends RayTracerBase {
 
     /**
      * calcGlobalEffect call recursion
-     * @param ray ray
+     * 
+     * @param ray   ray
      * @param level depth level
-     * @param kx parameter for calcolor
-     * @param kkx the new parameter for calcolor
+     * @param kx    parameter for calcolor
+     * @param kkx   the new parameter for calcolor
      * @return color
      */
     private Color calcGlobalEffect(Ray ray, int level, Double3 kx, Double3 kkx) {
@@ -110,9 +109,10 @@ public class RayTracerBasic extends RayTracerBase {
 
     /**
      * construct a new ray for refraction
+     * 
      * @param point for ray's p0
-     * @param v vector direction
-     * @param n vector normal
+     * @param v     vector direction
+     * @param n     vector normal
      * @return ray
      */
     private Ray constructRefractedRay(Point point, Vector v, Vector n) {
@@ -121,9 +121,10 @@ public class RayTracerBasic extends RayTracerBase {
 
     /**
      * construct a new ray for reflected
+     * 
      * @param point for ray's p0
-     * @param v vector direction
-     * @param n vector normal
+     * @param v     vector direction
+     * @param n     vector normal
      * @return ray
      */
     private Ray constructReflectedRay(Point point, Vector v, Vector n) {
@@ -131,7 +132,8 @@ public class RayTracerBasic extends RayTracerBase {
     }
 
     /**
-     * fond closest intersection of a given ray
+     * find closest intersection of a given ray
+     * 
      * @param ray a given ray
      * @return GeoPoint the closest one
      */
@@ -165,8 +167,8 @@ public class RayTracerBasic extends RayTracerBase {
         for (LightSource lightSource : scene.lights) {
             Vector l = lightSource.getL(g.point);
 
-            if (Util.alignZero(n.dot(l)) * nv > 0 && unshaded(lightSource, l, n, g, nv)) {
-                Color lightIntensity = lightSource.getIntensity(g.point);
+            if (Util.alignZero(n.dot(l)) * nv > 0) {// transparency(g,lightSource,l,n,)
+                Color lightIntensity = lightSource.getIntensity(g.point).scale(transparency(g, lightSource, l, n));
 
                 color = color.add(calcDiffusive(kd, l, n, lightIntensity),
                         calcSpecular(ks, l, n, v, nShine, lightIntensity));
@@ -224,5 +226,32 @@ public class RayTracerBasic extends RayTracerBase {
      */
     private Color calcDiffusive(Double3 kd, Vector l, Vector n, Color lightIntensity) {
         return lightIntensity.scale(kd.scale(Math.abs(l.dot(n))));
+    }
+
+    /**
+     * transparency check transparency in a place
+     * 
+     * @param geoPoint goe point
+     * @param ls       light source
+     * @param l        direction light
+     * @param n        normal of geo point
+     * @return Double3
+     */
+    private Double3 transparency(GeoPoint geoPoint, LightSource ls, Vector l, Vector n) {
+        Vector lightDirection = l.scale(-1); // from point to light source
+        Ray lightRay = new Ray(geoPoint.point, lightDirection, n);
+        double lightDistance = ls.getDistance(geoPoint.point);
+        var intersections = scene.geometries.findGeoIntersections(lightRay);
+        Double3 ktr = new Double3(1);
+        if (intersections == null)
+            return ktr;
+        for (GeoPoint gp : intersections) {
+            if (Util.alignZero(gp.point.dist(geoPoint.point) - lightDistance) <= 0) {
+                ktr = ktr.product(gp.geometry.getMaterial().kT);
+                if (ktr.lowerThan(MIN_CALC_COLOR_K))
+                    return Double3.ZERO;
+            }
+        }
+        return ktr;
     }
 }
