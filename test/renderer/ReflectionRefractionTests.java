@@ -134,4 +134,59 @@ public class ReflectionRefractionTests {
                                 .renderImage() //
                                 .writeToImage();
         }
+
+        /**
+         * Produce a picture of a two triangles lighted by a spot light with a
+         * partially
+         * transparent Sphere producing partial shadow
+         */
+        @Test
+        public void targil7() {
+
+                Scene scene = new Scene("Targil7");
+                Camera camera = new Camera(new Point(10, 10, 950), new Vector(0, 0, -1.5), new Vector(0, 1, 0)) //
+                                .setVPSize(200, 200).setVPDistance(1000) //
+                                .setRayTracer(new RayTracerBasic(scene));
+                scene.setAmbientLight(new AmbientLight(new Color(java.awt.Color.WHITE), new Double3(0.15, 0.15, 0.15)));
+
+                scene.geometries.add( //
+                                new Plane(new Point(-200, -250, -250), new Point(150, -150, -135),
+                                                new Point(75, 75, -150)) //
+                                                .setMaterial(new Material().setKs(new Double3(0)).setShininess(20)
+                                                                .setKd(new Double3(0))
+                                                                .setKr(new Double3(0.7)).setKs(new Double3(0.5)))
+                                                .setEmission(new Color(java.awt.Color.BLACK)), //
+                              //
+                                new Sphere(new Point(0, 0, -11), 30d) //
+                                                .setEmission(new Color(java.awt.Color.BLUE)) //
+                                                .setMaterial(new Material().setKd(new Double3(0.2))
+                                                                .setKs(new Double3(0.2)).setShininess(30)
+                                                                .setKt(new Double3(0.6))), //
+                                new Sphere(new Point(0, 0, -11), 10d) //
+                                                .setEmission(new Color(java.awt.Color.RED)) //
+                                                .setMaterial(new Material().setKd(new Double3(0.2))
+                                                                .setKs(new Double3(0.2)).setShininess(30)),
+                        
+                                new Sphere(new Point(0, 10, 0), 9) //
+                                                .setEmission(new Color(java.awt.Color.black)) //
+                                                .setMaterial(new Material().setKd(new Double3(0.2))
+                                                                .setKs(new Double3(0.2)).setShininess(30)),
+                                new Sphere(new Point(31, 31, -100), 15d) //
+                                                .setEmission(new Color(java.awt.Color.yellow)) //
+                                                .setMaterial(new Material()
+                                                                .setKr(new Double3(0.9))),
+                                new Sphere(new Point(-31, -31, -100), 15d) //
+                                                .setEmission(new Color(java.awt.Color.yellow)) //
+                                                .setMaterial(new Material()
+                                                                .setKr(new Double3(0.9))));
+
+                scene.lights.add(new DirectionalLight(new Color(yellow), new Vector(1, 1, -1)));
+                scene.lights.add(new SpotLight(new Color(700, 400, 400), new Point(40, 40, 115), new Vector(-1, -1, -4)) //
+                                .setKl(4E-4).setKq(2E-5));
+
+                camera.setImageWriter(new ImageWriter("targil7", 600, 600)) //
+                                .renderImage() //
+                                .writeToImage();
+        }
+
 }
