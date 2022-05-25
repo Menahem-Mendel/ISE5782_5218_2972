@@ -1,6 +1,7 @@
 package lighting;
 
 import primitives.*;
+import static primitives.Util.*;
 
 /**
  * SpotLight class represents a light source who has direction
@@ -8,7 +9,7 @@ import primitives.*;
 public class SpotLight extends PointLight {
 
     private final Vector direction;
-    private double beam=1;
+    private double beam = 1;
 
     /**
      * bulid ctor for SpotLight
@@ -25,13 +26,11 @@ public class SpotLight extends PointLight {
     @Override
     public Color getIntensity(Point p) {
         double cosTetha = direction.dot(getL(p));
-        Color inten = super.getIntensity(p);
-        //return inten.scale(Math.max(0, cosTetha));
-        double factor=Math.max(0, cosTetha);
-        if(beam!=1){
-            factor=Math.pow(factor,beam);
-        }
-        return inten.scale(factor);
+        if (alignZero(cosTetha) <= 0)
+            return Color.BLACK;
+        // return inten.scale(Math.max(0, cosTetha));
+        double factor = beam == 1 ? cosTetha : Math.pow(cosTetha, beam);
+        return super.getIntensity(p).scale(factor);
     }
 
     /**
@@ -40,8 +39,8 @@ public class SpotLight extends PointLight {
      * @param b narrow beam size
      * @return current light
      */
-    public SpotLight setNarrowBeam(double b){
-        beam=b;
+    public SpotLight setNarrowBeam(double b) {
+        beam = b;
         return this;
     }
 

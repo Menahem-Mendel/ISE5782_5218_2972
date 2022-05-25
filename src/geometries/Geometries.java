@@ -36,7 +36,7 @@ public class Geometries extends Intersectable {
 		List<GeoPoint> ret = null;
 
 		for (var g : list) {
-			var elems = g.findGeoIntersectionsHelper(ray, maxDistance);
+			var elems = g.findGeoIntersections(ray, maxDistance);
 
 			if (elems == null)
 				continue;

@@ -1,7 +1,6 @@
 package renderer;
 
 import java.util.MissingResourceException;
-import java.util.stream.Stream;
 
 import primitives.*;
 
@@ -10,11 +9,11 @@ import primitives.*;
  * shows all objects behind
  */
 public class Camera {
-	private Point p0;                   //center of the camera
-	private Vector vTo, vUp, vRight;    //direction position
-	private double width, height, dist; //size
-	private ImageWriter imageWriter;     // image writer
-	private RayTracerBase rayTracerBase;  // a ray
+	private Point p0; // center of the camera
+	private Vector vTo, vUp, vRight; // direction position
+	private double width, height, dist; // size
+	private ImageWriter imageWriter; // image writer
+	private RayTracerBase rayTracerBase; // a ray
 
 	/**
 	 * Camera build ctor
@@ -152,19 +151,14 @@ public class Camera {
 	 * loop over all pixels on view plane, wirting the correct color of each pixel
 	 */
 	public Camera renderImage() {
-		try {
-			int nx = imageWriter.getNx();
-			int ny = imageWriter.getNy();
+		int nx = imageWriter.getNx();
+		int ny = imageWriter.getNy();
 
-			for (int i = 0; i < ny; i++)
-				for (int j = 0; j < nx; j++)
-					imageWriter.writePixel(i, j, castRay(nx, ny, i, j));
-		} catch (MissingResourceException e) {
-			throw new MissingResourceException("missing resource", e.getClassName(), e.getKey());
-		}
+		for (int i = 0; i < ny; i++)
+			for (int j = 0; j < nx; j++)
+				castRay(nx, ny, i, j);
 
 		return this;
-
 	}
 
 	/**
@@ -186,8 +180,8 @@ public class Camera {
 	 * @param j  pixel row index
 	 * @return color
 	 */
-	private Color castRay(int Nx, int Ny, int i, int j) {
-		return rayTracerBase.traceRay(constructRay(Nx, Ny, i, j));
+	private void castRay(int Nx, int Ny, int i, int j) {
+		imageWriter.writePixel(i, j, rayTracerBase.traceRay(constructRay(Nx, Ny, i, j)));
 	}
 
 	/**

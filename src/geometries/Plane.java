@@ -3,6 +3,7 @@ package geometries;
 import java.util.List;
 
 import primitives.*;
+import static primitives.Util.*;
 
 /**
  * Plane class represents two-dimensional plane in 3D Cartesian coordinate
@@ -70,7 +71,7 @@ public class Plane extends Geometry {
 		double nv = normal.dot(dir);
 
 		// if ray parallel to plane
-		if (Util.isZero(nv))
+		if (isZero(nv))
 			return null;
 
 		Vector u;
@@ -81,9 +82,9 @@ public class Plane extends Geometry {
 			return null;
 		}
 
-		double t = Util.alignZero(normal.dot(u) / nv);
+		double t = alignZero(normal.dot(u) / nv);
 
-		if (t > 0 && Util.alignZero(t - maxDistance) <= 0)
+		if (t > 0 && alignZero(t - maxDistance) <= 0)
 			return List.of(new GeoPoint(ray.getPoint(t), this));
 
 		return null;

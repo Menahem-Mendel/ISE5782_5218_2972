@@ -61,8 +61,8 @@ public class Sphere extends Geometry {
 
 		double tm = ray.getDir().dot(u); // distance from p0 to the center of the chord
 
-		double d2 = Util.alignZero(u.lengthSq() - tm * tm); // squared distance from the center of the sphere to the
-															// chord
+		double d2 = alignZero(u.lengthSq() - tm * tm); // squared distance from the center of the sphere to the
+														// chord
 
 		double th2 = radius2 - d2; // squared distance from crossed points to the chord
 
@@ -72,23 +72,18 @@ public class Sphere extends Geometry {
 
 		double th = Math.sqrt(th2); // distance from crossed points to the chord
 		double t2 = alignZero(tm + th); // distance from p0 to the furhter point
-
-		if (t2 <= 0)
+		if (t2 <= 0) // both points are before the ray head
 			return null;
 
 		double t1 = alignZero(tm - th); // distance from p0 to the nearer point
-
-		if (t1 <= 0)
-			if (Util.alignZero(t2 - maxDistance) <= 0)
-				return List.of(new GeoPoint(ray.getPoint(t2), this));
-			else
-				return null;
-		else if (Util.alignZero(t1 - maxDistance) > 0)
+		if (alignZero(t1 - maxDistance) > 0) // both points are after the maxDistance on the ray
 			return null;
-		else if (Util.alignZero(t2 - maxDistance) <= 0)
-			return List.of(new GeoPoint(ray.getPoint(t1), this), new GeoPoint(ray.getPoint(t2), this));
 
-		return List.of(new GeoPoint(ray.getPoint(t1), this));
-
+		if (alignZero(t2 - maxDistance) > 0) // 2nd point is after the maxDistance
+			return t1 <= 0 ? null : List.of(new GeoPoint(ray.getPoint(t1), this));
+		else {
+			GeoPoint gp2 = new GeoPoint(ray.getPoint(t2), this);
+			return t1 <= 0 ? List.of(gp2) : List.of(new GeoPoint(ray.getPoint(t1), this), gp2);
+		}
 	}
 }

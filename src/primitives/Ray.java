@@ -29,7 +29,7 @@ public class Ray {
 	 * 
 	 * @param point point
 	 * @param v     direction
-	 * @param n     for delta
+	 * @param n     vector for the line to move the head on
 	 */
 	public Ray(Point point, Vector v, Vector n) {
 		p0 = point.add(n.scale(n.dot(v) > 0 ? EPS : -EPS));
@@ -58,7 +58,7 @@ public class Ray {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null || !(obj instanceof Ray other))
+		if (!(obj instanceof Ray other))
 			return false;
 		return p0.equals(other.p0) && dir.equals(other.dir);
 	}

@@ -1,15 +1,10 @@
 package geometries;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
 import primitives.*;
+import java.util.List;
 
 /**
  * Intersectable interface describe the intersections with Geomteries variables
- * + methods camelCase variables: class (static), instance (object), local,
- * parameters variables - main word is a subject, methods - main word is a verb
- * types CamelCase CONSTANT_NAMES packagesnames
  */
 public abstract class Intersectable {
 
@@ -21,8 +16,7 @@ public abstract class Intersectable {
 	 */
 	public List<Point> findIntersections(Ray ray) {
 		var lst = findGeoIntersections(ray);
-
-		return lst == null ? null : lst.stream().map(gp -> gp.point).collect(Collectors.toList());
+		return lst == null ? null : lst.stream().map(gp -> gp.point).toList();
 	}
 
 	/**
@@ -47,9 +41,9 @@ public abstract class Intersectable {
 		public boolean equals(Object obj) {
 			if (this == obj)
 				return true;
-			if (obj == null || !(obj instanceof GeoPoint other))
+			if (!(obj instanceof GeoPoint other))
 				return false;
-			return point.equals(other.point) && geometry.equals(other.geometry);
+			return geometry == other.geometry && point.equals(other.point);
 		}
 
 		@Override
