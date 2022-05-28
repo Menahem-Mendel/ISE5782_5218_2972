@@ -151,6 +151,15 @@ public class Camera {
 	 * loop over all pixels on view plane, wirting the correct color of each pixel
 	 */
 	public Camera renderImage() {
+
+		
+		var camera = "Camera"; // for the exception
+		if (imageWriter == null)
+			throw new MissingResourceException("imageWriter is null ", camera, "imageWriter");
+		if (rayTracerBase == null)
+			throw new MissingResourceException("rayTracerBase is null ", camera, "rayTracerBase");
+		
+
 		int nx = imageWriter.getNx();
 		int ny = imageWriter.getNy();
 
@@ -180,8 +189,8 @@ public class Camera {
 	 * @param j  pixel row index
 	 * @return color
 	 */
-	private void castRay(int Nx, int Ny, int i, int j) {
-		imageWriter.writePixel(i, j, rayTracerBase.traceRay(constructRay(Nx, Ny, i, j)));
+	private void castRay(int nX, int nY, int i, int j) {
+		imageWriter.writePixel(i, j, rayTracerBase.traceRay(constructRay(nX, nY, i, j)));
 	}
 
 	/**

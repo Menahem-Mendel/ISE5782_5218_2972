@@ -5,11 +5,26 @@ package primitives;
  */
 public class Material {
 
-    public int nShininess = 0; // shininess
-    public Double3 kD = Double3.ZERO; // for diffuse
-    public Double3 kS = Double3.ZERO; // for specular
-    public Double3 kT = Double3.ZERO; // for transparency
-    public Double3 kR = Double3.ZERO; // for reflection
+    /**
+     * shininess of the object
+     */
+    public int nShininess = 0; 
+    /**
+     * diffusion of the object
+     */
+    public Double3 kD = Double3.ZERO; 
+    /**
+     * specular of the object
+     */
+    public Double3 kS = Double3.ZERO; 
+    /**
+     * transparency of the object
+     */
+    public Double3 kT = Double3.ZERO; 
+    /**
+     * reflection of the object
+     */
+    public Double3 kR = Double3.ZERO; 
 
     /**
      * setKd set diffuse
