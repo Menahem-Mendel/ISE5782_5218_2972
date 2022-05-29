@@ -1,5 +1,7 @@
 package lighting;
 
+import java.util.List;
+
 import primitives.*;
 
 /**
@@ -30,5 +32,43 @@ public interface LightSource {
      * @return distance
      */
     double getDistance(Point point);
+
+    /**
+     * get the position of the center of the light
+     * @return Point position
+     */
+    public Point getPosition();
+
+    /**
+     * set size of radius of light source
+     * @param r radius
+     * @return current PointLight
+     */
+    public LightSource setRadius(double r);
+
+    /**
+     * return radius of the current light sorce
+     * @return radius
+     */
+    public double getRadius();
+
+    /**
+     * getDirection
+     * @return vector direction 
+     */
+    public Vector getDirection();
+
+    /**
+     * setPoints for spot light
+     * @param p list of Point
+     * @return this
+     */
+    public LightSource setPoints(List<Point> p);
+
+    /**
+     * getPoints of the spot light
+     * @return list of points
+     */
+    public List<Point> getPoints();
 
 }

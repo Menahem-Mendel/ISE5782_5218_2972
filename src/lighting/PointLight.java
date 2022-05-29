@@ -1,5 +1,7 @@
 package lighting;
 
+import java.util.List;
+
 import primitives.Color;
 import primitives.Point;
 import primitives.Vector;
@@ -9,6 +11,7 @@ import primitives.Vector;
  */
 public class PointLight extends Light implements LightSource {
     private final Point position;
+    private double radius=3d; //radius of the light 
 
     private double kC = 1; // constant factor
     private double kL = 0; // linear factor
@@ -76,5 +79,36 @@ public class PointLight extends Light implements LightSource {
     @Override
     public double getDistance(Point point) {
         return position.dist(point);
+    }
+
+    @Override
+    public Point getPosition(){
+        return position;
+    }
+
+    @Override
+    public PointLight setRadius(double r){
+        radius = r;
+        return this;
+    }
+
+    @Override
+    public double getRadius(){
+        return radius;
+    }
+
+    @Override
+    public Vector getDirection(){
+        return null;
+    }
+
+    @Override
+    public PointLight setPoints(List<Point> p){
+        return null;
+    }
+
+    @Override
+    public List<Point> getPoints(){
+        return null;
     }
 }

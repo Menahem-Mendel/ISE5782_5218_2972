@@ -16,6 +16,7 @@ public class RayTracerBasic extends RayTracerBase {
     private static final int MAX_CALC_COLOR_LEVEL = 10; // for recursion
     private static final double MIN_CALC_COLOR_K = 0.001; // for recursion
     private static final Double3 INITIAL_K = Double3.ONE; // for recursion
+    private int sample=150; // number of rays superSample for soft shadow
 
     /**
      * RayTracerBasic build ctor
@@ -150,7 +151,10 @@ public class RayTracerBasic extends RayTracerBase {
             Vector l = lightSource.getL(g.point);
 
             if (alignZero(n.dot(l)) * nv > 0) {
-                Double3 tr = transparency(g, lightSource, l, n);
+                Double3 tr;
+                
+                    tr = transparency(g, lightSource, l, n);
+                
                 if (!tr.lowerThan(MIN_CALC_COLOR_K)) {
                     Color lightIntensity = lightSource.getIntensity(g.point).scale(tr);
                     color = color.add(calcDiffusive(m.kD, l, n, lightIntensity),
@@ -219,13 +223,13 @@ public class RayTracerBasic extends RayTracerBase {
     /**
      * transparency check transparency in a place
      * 
-     * @param geoPoint goe point
+     * @param geoPoint geo point
      * @param ls       light source
      * @param l        direction light
      * @param n        normal of geo point
      * @return Double3
      */
-    private Double3 transparency(GeoPoint geoPoint, LightSource ls, Vector l, Vector n) {
+    private Double3 transparencyOLD(GeoPoint geoPoint, LightSource ls, Vector l, Vector n) {
         Double3 ktr = Double3.ONE;
         Ray lightRay = new Ray(geoPoint.point, l.scale(-1), n);
         var intersections = scene.geometries.findGeoIntersections(lightRay, ls.getDistance(geoPoint.point));
@@ -238,5 +242,61 @@ public class RayTracerBasic extends RayTracerBase {
                 return Double3.ZERO;
         }
         return ktr;
+    }
+
+    /**
+     * Gets super sampling.
+     *
+     * @return the number of rays
+     */
+    public int getSample() {
+        return sample;
+    }
+
+    /**
+     * Sets super sampling.
+     * number of Rays from the point, effected the image quality.
+     *
+     * @param number the super sampling
+     * @return the number of rays
+     */
+    public RayTracerBasic setSample(int number) {
+        sample = number;
+        return this;
+    }
+
+    /**
+     * transparency check transparency in a place
+     *
+     * @param ls  light source
+     * @param l  vector from light source to the point
+     * @param n  normal
+     * @param gp geo point
+     * @return Double3
+     */
+    private Double3 transparency(GeoPoint gp, LightSource ls, Vector l, Vector n) {
+        Ray lightRay = new Ray(gp.point, l.scale(-1), n);
+        Double3 ktr = Double3.ONE;
+        Double3 sumKtr = Double3.ZERO;
+        double distance = ls.getDistance(gp.point); // calculate here and not in the loop
+        List<Ray> beamRays = lightRay.createRaysBeam(ls, gp.point, n, getSample());
+        for (Ray r : beamRays) { // checking each ray and not just the center of light
+            var intersections = scene.geometries.findGeoIntersections(r);
+            if (intersections == null) {
+                sumKtr=sumKtr.add(Double3.ONE);
+                continue;
+            }
+            for (GeoPoint g : intersections) {
+                if (alignZero(g.point.dist(gp.point) - distance) <= 0) {
+                    if (ktr.lowerThan(MIN_CALC_COLOR_K)) {
+                        ktr = Double3.ZERO;
+                        break;
+                    }
+                    ktr = ktr.product(g.geometry.getMaterial().kT);
+                }
+            }
+            sumKtr = sumKtr.add(ktr);
+        }
+        return sumKtr.reduce(beamRays.size());
     }
 }

@@ -116,4 +116,35 @@ public class Vector extends Point {
 	public String toString() {
 		return String.format("-> %s", xyz);
 	}
+
+	 /**
+     * Create normal vector orthogonal to the Vector.
+     *
+     * @return the vector
+     */
+    public Vector createNormal() {
+        int min = 1;
+        double x = getX() , y = getY(), z = getZ();
+        double minCoord = x > 0 ? x : -x;
+        if (Math.abs(y) < minCoord) {
+            minCoord = y > 0 ? y : -y;
+            min = 2;
+        }
+        if (Math.abs(z) < minCoord) {
+            min = 3;
+        }
+        switch (min) {
+            case 1: {
+                return new Vector(0, -z, y).normalize();
+            }
+            case 2: {
+                return new Vector(-z, 0, x).normalize();
+            }
+            case 3: {
+                return new Vector(y, -x, 0).normalize();
+            }
+            default:
+                throw new IllegalArgumentException("Unexpected value: " + min);
+        }
+    }
 }

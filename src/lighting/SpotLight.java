@@ -3,6 +3,8 @@ package lighting;
 import primitives.*;
 import static primitives.Util.*;
 
+import java.util.List;
+
 /**
  * SpotLight class represents a light source who has direction
  */
@@ -10,6 +12,7 @@ public class SpotLight extends PointLight {
 
     private final Vector direction;
     private double beam = 1;
+    private List<Point> randPoints = null;
 
     /**
      * bulid ctor for SpotLight
@@ -42,6 +45,22 @@ public class SpotLight extends PointLight {
     public SpotLight setNarrowBeam(double b) {
         beam = b;
         return this;
+    }
+
+    @Override
+    public Vector getDirection(){
+        return direction;
+    }
+
+    @Override
+    public SpotLight setPoints(List<Point> p){
+        randPoints=p;
+        return this;
+    }
+
+    @Override
+    public List<Point> getPoints(){
+        return randPoints;
     }
 
 }

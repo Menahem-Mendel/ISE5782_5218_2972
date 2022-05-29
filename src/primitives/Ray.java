@@ -1,8 +1,11 @@
 package primitives;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import geometries.Intersectable.GeoPoint;
+import lighting.*;
+import primitives.*;
 
 /**
  * Ray represents directional vector which starts from the starting point
@@ -107,4 +110,64 @@ public class Ray {
 
 		return closest;
 	}
+
+	/**
+     * Create beam rays list from a given point to the light source.
+     *
+     * @param ls      the LightSource
+     * @param point   the point i want to calculate its color
+     * @param normal  the normal to the point
+     * @param numRays the number of rays in the beam
+     * @return the list
+     */
+    public List<Ray> createRaysBeam( LightSource ls, Point point, Vector normal, int numRays) {
+        List<Ray> rayList = new LinkedList<>();
+        rayList.add(this);
+		
+        List<Point> pointList = ls.getPoints();//in spot light i have already random points
+		Vector lightDirection = ls.getDirection();
+		if (pointList == null && lightDirection != null && ls.getRadius()>0) {//case spot light in first time
+			pointList = createRandomPoints(ls.getPosition(), lightDirection, ls.getRadius(), numRays);
+			ls.setPoints(pointList);
+		} if(lightDirection == null && ls.getRadius()>0){//case point light has no direction
+			pointList = createRandomPoints(ls.getPosition(), dir, ls.getRadius(), numRays);
+		}
+
+        if (pointList != null) {
+            for (Point p : pointList) {
+                Ray r = new Ray(point, p.sub(point).normalize(), normal);
+                rayList.add(r);
+            }
+        }
+        return rayList;
+    }
+
+    /**
+     * Create random points on the given area of light
+     * 
+     * @param centerPoint the center point
+     * @param direction   the direction
+     * @param radius      the radius
+     * @param numRays     the num rays
+     * @return the list
+     */
+    private List<Point> createRandomPoints(Point centerPoint, Vector direction, double radius, int numRays) {
+        List<Point> randomPoints = new LinkedList<>();
+        Vector vX = direction.createNormal();
+        Vector vY = vX.cross(direction);
+        double x, y;
+        for (int i = 0; i < numRays; i++) {
+            x = Util.random(-1, 1);
+            y = Math.sqrt(1 - x * x);
+            Point p = centerPoint;
+            x = Util.alignZero(x * (Util.random(-radius, radius)));
+            y = Util.alignZero(y * (Util.random(-radius, radius)));
+            if (x != 0)
+                p = p.add(vX.scale(x));
+            if (y != 0)
+                p = p.add(vY.scale(y));
+            randomPoints.add(p);
+        }
+        return randomPoints;
+    }
 }

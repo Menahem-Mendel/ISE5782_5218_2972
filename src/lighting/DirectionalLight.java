@@ -1,5 +1,7 @@
 package lighting;
 
+import java.util.List;
+
 import primitives.Color;
 import primitives.Point;
 import primitives.Vector;
@@ -35,6 +37,42 @@ public class DirectionalLight extends Light implements LightSource {
     @Override
     public double getDistance(Point point) {
         return Double.POSITIVE_INFINITY;
+    }
+
+    @Override
+    public Point getPosition() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public LightSource setRadius(double r) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public double getRadius() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public Vector getDirection() {
+        // TODO Auto-generated method stub
+        return direction;
+    }
+
+    @Override
+    public LightSource setPoints(List<Point> p) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public List<Point> getPoints() {
+        // TODO Auto-generated method stub
+        return null;
     }
 
 }
