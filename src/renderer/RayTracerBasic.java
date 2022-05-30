@@ -16,7 +16,7 @@ public class RayTracerBasic extends RayTracerBase {
     private static final int MAX_CALC_COLOR_LEVEL = 10; // for recursion
     private static final double MIN_CALC_COLOR_K = 0.001; // for recursion
     private static final Double3 INITIAL_K = Double3.ONE; // for recursion
-    private int sample=150; // number of rays superSample for soft shadow
+    private int sample=100; // number of rays superSample for soft shadow
 
     /**
      * RayTracerBasic build ctor
@@ -282,19 +282,20 @@ public class RayTracerBasic extends RayTracerBase {
         double distance = ls.getDistance(gp.point); // calculate here and not in the loop
         List<Ray> beamRays = lightRay.createRaysBeam(ls, gp.point, n, getSample());
         for (Ray r : beamRays) { // checking each ray and not just the center of light
-            var intersections = scene.geometries.findGeoIntersections(r);
+            var intersections = scene.geometries.findGeoIntersections(r,distance);
+            ktr = Double3.ONE;
             if (intersections == null) {
                 sumKtr=sumKtr.add(Double3.ONE);
                 continue;
             }
             for (GeoPoint g : intersections) {
-                if (alignZero(g.point.dist(gp.point) - distance) <= 0) {
+                
                     if (ktr.lowerThan(MIN_CALC_COLOR_K)) {
                         ktr = Double3.ZERO;
                         break;
                     }
                     ktr = ktr.product(g.geometry.getMaterial().kT);
-                }
+                
             }
             sumKtr = sumKtr.add(ktr);
         }
