@@ -114,19 +114,19 @@ public class Ray {
 	/**
      * Create beam rays list from a given point to the light source.
      *
-     * @param ls      the LightSource
-     * @param point   the point i want to calculate its color
-     * @param normal  the normal to the point
-     * @param numRays the number of rays in the beam
-     * @return the list
+     * @param ls       LightSource
+     * @param point    the point to check it's color
+     * @param normal   vector normal to the point
+     * @param numRays  number of rays in  beam
+     * @return  list of rays
      */
     public List<Ray> createRaysBeam( LightSource ls, Point point, Vector normal, int numRays) {
         List<Ray> rayList = new LinkedList<>();
         rayList.add(this);
 		
-        List<Point> pointList = ls.getPoints();//in spot light i have already random points
+        List<Point> pointList = ls.getPoints();//case of spot light
 		Vector lightDirection = ls.getDirection();
-		if (pointList == null && lightDirection != null && ls.getRadius()>0) {//case spot light in first time
+		if (pointList == null && lightDirection != null && ls.getRadius()>0) {//case spot light and pointlist not initialize
 			pointList = createRandomPoints(ls.getPosition(), lightDirection, ls.getRadius(), numRays);
 			ls.setPoints(pointList);
 		} if(lightDirection == null && ls.getRadius()>0){//case point light has no direction
@@ -145,11 +145,11 @@ public class Ray {
     /**
      * Create random points on the given area of light
      * 
-     * @param centerPoint the center point
-     * @param direction   the direction
-     * @param radius      the radius
-     * @param numRays     the num rays
-     * @return the list
+     * @param centerPoint  center point
+     * @param direction    direction
+     * @param radius       radius
+     * @param numRays      number of rays
+     * @return  list of points
      */
     private List<Point> createRandomPoints(Point centerPoint, Vector direction, double radius, int numRays) {
         List<Point> randomPoints = new LinkedList<>();
