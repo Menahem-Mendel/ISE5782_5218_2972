@@ -229,6 +229,8 @@ public class RayTracerBasic extends RayTracerBase {
      * @param n        normal of geo point
      * @return Double3
      */
+    @SuppressWarnings("unused")
+    @Deprecated
     private Double3 transparencyOLD(GeoPoint geoPoint, LightSource ls, Vector l, Vector n) {
         Double3 ktr = Double3.ONE;
         Ray lightRay = new Ray(geoPoint.point, l.scale(-1), n);
@@ -245,7 +247,7 @@ public class RayTracerBasic extends RayTracerBase {
     }
 
     /**
-     * Gets super sampling.
+     * getSample getnumber of sampling
      *
      * @return the number of rays
      */
@@ -254,8 +256,7 @@ public class RayTracerBasic extends RayTracerBase {
     }
 
     /**
-     * Sets super sampling.
-     * number of Rays from the point, effected the image quality.
+     * setSample set number of samples to check 
      *
      * @param number the super sampling
      * @return the number of rays

@@ -41,37 +41,37 @@ public class DirectionalLight extends Light implements LightSource {
 
     @Override
     public Point getPosition() {
-        // TODO Auto-generated method stub
+        // has no position
         return null;
     }
 
     @Override
     public LightSource setRadius(double r) {
-        // TODO Auto-generated method stub
+        // has no radius 
         return null;
     }
 
     @Override
     public double getRadius() {
-        // TODO Auto-generated method stub
+        // has no radius
         return 0;
     }
 
     @Override
     public Vector getDirection() {
-        // TODO Auto-generated method stub
+        // has no direction
         return direction;
     }
 
     @Override
     public LightSource setPoints(List<Point> p) {
-        // TODO Auto-generated method stub
+        // has no list of points
         return null;
     }
 
     @Override
     public List<Point> getPoints() {
-        // TODO Auto-generated method stub
+        // has no list of points
         return null;
     }
 

@@ -5,7 +5,6 @@ import java.util.List;
 
 import geometries.Intersectable.GeoPoint;
 import lighting.*;
-import primitives.*;
 
 /**
  * Ray represents directional vector which starts from the starting point

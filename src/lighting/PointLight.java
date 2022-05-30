@@ -10,7 +10,7 @@ import primitives.Vector;
  * PointLight class represents a light source who lights equally all over
  */
 public class PointLight extends Light implements LightSource {
-    private final Point position;
+    private final Point position; // position of the lightSource
     private double radius=3d; //radius of the light 
 
     private double kC = 1; // constant factor
@@ -99,16 +99,19 @@ public class PointLight extends Light implements LightSource {
 
     @Override
     public Vector getDirection(){
+        //has no direction
         return null;
     }
 
     @Override
     public PointLight setPoints(List<Point> p){
+        //has no field of List<Point>
         return null;
     }
 
     @Override
     public List<Point> getPoints(){
+        //has no field of List<Point>
         return null;
     }
 }

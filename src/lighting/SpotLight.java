@@ -10,9 +10,9 @@ import java.util.List;
  */
 public class SpotLight extends PointLight {
 
-    private final Vector direction;
-    private double beam = 1;
-    private List<Point> randPoints = null;
+    private final Vector direction; //direction of the light
+    private double beam = 1; //for narrow beam 
+    private List<Point> randPoints = null; //for super sampling, points on the spot light
 
     /**
      * bulid ctor for SpotLight
