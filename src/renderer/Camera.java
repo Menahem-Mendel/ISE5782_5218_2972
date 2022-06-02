@@ -152,13 +152,11 @@ public class Camera {
 	 */
 	public Camera renderImage() {
 
-		
 		var camera = "Camera"; // for the exception
 		if (imageWriter == null)
 			throw new MissingResourceException("imageWriter is null ", camera, "imageWriter");
 		if (rayTracerBase == null)
 			throw new MissingResourceException("rayTracerBase is null ", camera, "rayTracerBase");
-		
 
 		int nx = imageWriter.getNx();
 		int ny = imageWriter.getNy();
@@ -198,8 +196,9 @@ public class Camera {
 	 * 
 	 * @param delta size of the grid
 	 * @param color of the grid
+	 * @return Camera current object
 	 */
-	public void printGrid(int delta, Color color) {
+	public Camera printGrid(int delta, Color color) {
 		if (imageWriter == null)
 			throw new MissingResourceException("this image not initialized yet", ImageWriter.class.getName(), "");
 
@@ -213,5 +212,7 @@ public class Camera {
 		for (int i = 0; i < nx; ++i)
 			for (int j = 0; j < ny; j += delta)
 				imageWriter.writePixel(i, j, color);
+
+		return this;
 	}
 }

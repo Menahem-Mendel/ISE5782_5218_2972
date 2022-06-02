@@ -16,7 +16,7 @@ public class RayTracerBasic extends RayTracerBase {
     private static final int MAX_CALC_COLOR_LEVEL = 10; // for recursion
     private static final double MIN_CALC_COLOR_K = 0.001; // for recursion
     private static final Double3 INITIAL_K = Double3.ONE; // for recursion
-    private int sample=100; // number of rays superSample for soft shadow
+    private int sample = 0; // number of rays superSample for soft shadow
 
     /**
      * RayTracerBasic build ctor
@@ -152,9 +152,9 @@ public class RayTracerBasic extends RayTracerBase {
 
             if (alignZero(n.dot(l)) * nv > 0) {
                 Double3 tr;
-                
-                    tr = transparency(g, lightSource, l, n);
-                
+
+                tr = transparency(g, lightSource, l, n);
+
                 if (!tr.lowerThan(MIN_CALC_COLOR_K)) {
                     Color lightIntensity = lightSource.getIntensity(g.point).scale(tr);
                     color = color.add(calcDiffusive(m.kD, l, n, lightIntensity),
@@ -256,7 +256,7 @@ public class RayTracerBasic extends RayTracerBase {
     }
 
     /**
-     * setSample set number of samples to check 
+     * setSample set number of samples to check
      *
      * @param number the super sampling
      * @return the number of rays
@@ -269,7 +269,7 @@ public class RayTracerBasic extends RayTracerBase {
     /**
      * transparency check transparency in a place
      *
-     * @param ls  light source
+     * @param ls light source
      * @param l  vector from light source to the point
      * @param n  normal
      * @param gp geo point
@@ -282,20 +282,20 @@ public class RayTracerBasic extends RayTracerBase {
         double distance = ls.getDistance(gp.point); // calculate here and not in the loop
         List<Ray> beamRays = lightRay.createRaysBeam(ls, gp.point, n, getSample());
         for (Ray r : beamRays) { // checking each ray and not just the center of light
-            var intersections = scene.geometries.findGeoIntersections(r,distance);
+            var intersections = scene.geometries.findGeoIntersections(r, distance);
             ktr = Double3.ONE;
             if (intersections == null) {
-                sumKtr=sumKtr.add(Double3.ONE);
+                sumKtr = sumKtr.add(Double3.ONE);
                 continue;
             }
             for (GeoPoint g : intersections) {
-                
-                    if (ktr.lowerThan(MIN_CALC_COLOR_K)) {
-                        ktr = Double3.ZERO;
-                        break;
-                    }
-                    ktr = ktr.product(g.geometry.getMaterial().kT);
-                
+
+                if (ktr.lowerThan(MIN_CALC_COLOR_K)) {
+                    ktr = Double3.ZERO;
+                    break;
+                }
+                ktr = ktr.product(g.geometry.getMaterial().kT);
+
             }
             sumKtr = sumKtr.add(ktr);
         }
