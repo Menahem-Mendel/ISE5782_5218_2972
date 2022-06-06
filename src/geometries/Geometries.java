@@ -10,43 +10,68 @@ import primitives.Ray;
  */
 public class Geometries extends Intersectable {
 
-	private List<Intersectable> list = new LinkedList<>();
+    private List<Intersectable> list = new LinkedList<>();
 
-	/**
-	 * Geometries build ctor
-	 * 
-	 * @param geometries list who contains geometries
-	 */
-	public Geometries(Intersectable... geometries) {
-		if (geometries.length > 0)
-			add(geometries);
-	}
+    /**
+     * Geometries build ctor
+     * 
+     * @param geometries list who contains geometries
+     */
+    public Geometries(Intersectable... geometries) {
+        if (geometries.length > 0)
+            add(geometries);
+    }
 
-	/**
-	 * add geometries to the list
-	 * 
-	 * @param geometries list containing geometries
-	 */
-	public void add(Intersectable... geometries) {
-		list.addAll(List.of(geometries));
-	}
+    /**
+     * add geometries to the list
+     * 
+     * @param geometries list containing geometries
+     */
+    public void add(Intersectable... geometries) {
+        list.addAll(List.of(geometries));
+    }
 
-	@Override
-	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
-		List<GeoPoint> ret = null;
+    @Override
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+        List<GeoPoint> ret = null;
 
-		for (var g : list) {
-			var elems = g.findGeoIntersections(ray, maxDistance);
+        for (var g : list) {
+            var elems = g.findGeoIntersections(ray, maxDistance);
 
-			if (elems == null)
-				continue;
+            if (elems == null)
+                continue;
 
-			if (ret == null)
-				ret = new LinkedList<>(elems);
-			else
-				ret.addAll(elems);
-		}
+            if (ret == null)
+                ret = new LinkedList<>(elems);
+            else
+                ret.addAll(elems);
+        }
 
-		return ret;
-	}
+        return ret;
+    }
+
+    @Override
+    public void createBox() {
+        for(Intersectable l : list){
+            l.createBox();
+            this.createBox(l);
+        }
+    }
+
+    /**
+     * Create new size of box cuz the intersectable
+     *
+     * @param inter intersectable
+     */
+    void createBox(Intersectable inter) {
+        this.minX = Math.min(inter.minX, this.minX);
+        this.maxX = Math.max(inter.maxX, this.maxX);
+        this.minY = Math.min(inter.minY, this.minY);
+        this.maxY = Math.max(inter.maxY, this.maxY);
+        this.minZ = Math.min(inter.minZ, this.minZ);
+        this.maxZ = Math.max(inter.maxZ, this.maxZ);
+    }
+
+  
+     
 }

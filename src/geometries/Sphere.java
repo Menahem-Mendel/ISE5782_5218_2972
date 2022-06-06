@@ -86,4 +86,17 @@ public class Sphere extends Geometry {
 			return t1 <= 0 ? List.of(gp2) : List.of(new GeoPoint(ray.getPoint(t1), this), gp2);
 		}
 	}
+
+	@Override
+	public void createBox() {
+		double x = center.getX();
+		double y = center.getY();
+		double z = center.getZ();
+		this.minX = x - radius;
+		this.maxX = x + radius;
+		this.minY = y - radius;
+		this.maxY = y + radius;
+		this.minZ = z - radius;
+		this.maxZ = z + radius;
+	}
 }

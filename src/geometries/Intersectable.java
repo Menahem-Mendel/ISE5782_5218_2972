@@ -9,6 +9,138 @@ import java.util.List;
 public abstract class Intersectable {
 
 	/**
+     * Minimum of x
+     */
+    protected double minX = Double.POSITIVE_INFINITY;
+    /**
+     * Minimum of y
+     */
+    protected double minY = Double.POSITIVE_INFINITY;
+    /**
+     * Minimum of z
+     */
+    protected double minZ = Double.POSITIVE_INFINITY;
+    /**
+     * Maximum of x
+     */
+    protected double maxX = Double.NEGATIVE_INFINITY;
+    /**
+     * Maximum of y
+     */
+    protected double maxY = Double.NEGATIVE_INFINITY;
+    /**
+     * Maximum of z
+     */
+    protected double maxZ = Double.NEGATIVE_INFINITY;
+
+    /**
+     * Calculate the distance between two geometries
+     * according the middle of their boxes
+     *
+     * @param geoI the geo i
+     * @param geoJ the geo j
+     * @return The distance between geoI to geoJ
+     */
+    public static double distance(Intersectable geoI, Intersectable geoJ) {
+        double midX, midY, midZ;
+        midX = (geoI.minX + geoI.maxX) / 2d;
+        midY = (geoI.minY + geoI.maxY) / 2d;
+        midZ = (geoI.minZ + geoI.maxZ) / 2d;
+        Point pGeoI = new Point(midX, midY, midZ);
+
+        midX = (geoJ.minX + geoJ.maxX) / 2d;
+        midY = (geoJ.minY + geoJ.maxY) / 2d;
+        midZ = (geoJ.minZ + geoJ.maxZ) / 2d;
+        Point pGeoJ = new Point(midX, midY, midZ);
+
+        return pGeoI.dist(pGeoJ);
+    }
+
+
+
+    /**
+     * check if the ray intersects with the box
+     *
+     * @param ray the ray
+     * @return true or false
+     */
+    public Boolean checkIntersectionWithBox(Ray ray) {
+        Vector rayVector = ray.getDir();
+        Point rayPoint = ray.getP0();
+        double pCX = rayPoint.getX();
+        double pCY = rayPoint.getY();
+        double pCZ = rayPoint.getZ();
+
+        double pVX = rayVector.getX();
+        double pVY = rayVector.getY();
+        double pVZ = rayVector.getZ();
+
+        double tXmin = (minX - pCX) / pVX;
+        double tXmax = (maxX - pCX) / pVX;
+        if (tXmin > tXmax) {
+            double temp = tXmin;
+            tXmin = tXmax;
+            tXmax = temp;
+        }
+
+        double tYmin = (minY - pCY) / pVY;
+        double tYmax = (maxY - pCY) / pVY;
+        if (tYmin > tYmax) {
+            double temp = tYmin;
+            tYmin = tYmax;
+            tYmax = temp;
+        }
+        if ((tXmin > tYmax) || (tYmin > tXmax))
+            return false;
+
+        if (tYmin > tXmin)
+            tXmin = tYmin;
+
+        if (tYmax < tXmax)
+            tXmax = tYmax;
+
+
+        double tZmin = (minZ - pCZ) / pVZ;
+        double tZmax = (maxZ - pCZ) / pVZ;
+
+        if (tZmin > tZmax) {
+            double temp = tZmin;
+            tZmin = tZmax;
+            tZmax = temp;
+        }
+        return ((tXmin <= tZmax) && (tZmin <= tXmax));
+    }
+
+    /**
+     * creating a box to the objects
+     */
+    protected abstract void createBox();
+
+    /**
+     * FindGeoIntersections with BVH.
+     *
+     * @param ray the ray
+     * @return the list
+     */
+    public List<GeoPoint> findGeoIntersectionsBVH(Ray ray) {
+
+        return checkIntersectionWithBox(ray) == null ? null : findGeoIntersections(ray);
+        
+    }
+
+    /**
+     * FindGeoIntersections with BVH.
+     *
+     * @param ray the ray
+     * @return the list
+     */
+    public List<GeoPoint> findGeoIntersectionsBVH(Ray ray , double maxDistance) {
+
+        return checkIntersectionWithBox(ray) == null ? null : findGeoIntersections(ray , maxDistance);
+        
+    }
+
+	/**
 	 * findIntersections finds the intersection points
 	 * 
 	 * @param ray that goes through geometries

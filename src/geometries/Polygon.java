@@ -97,4 +97,18 @@ public class Polygon extends Geometry {
 	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
 		throw new UnsupportedOperationException("not yet implemented");
 	}
+
+	@Override
+	public void createBox(){
+		
+			for (Point ver : vertices) {
+				this.minX = Math.min(ver.getX(), this.minX);
+				this.maxX = Math.max(ver.getX(), this.maxX);
+				this.minY = Math.min(ver.getY(), this.minY);
+				this.maxY = Math.max(ver.getY(), this.maxY);
+				this.minZ = Math.min(ver.getZ(), this.minZ);
+				this.maxZ = Math.max(ver.getZ(), this.maxZ);
+			}
+	}
+	
 }
