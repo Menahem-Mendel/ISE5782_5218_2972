@@ -161,9 +161,18 @@ public class Camera {
 		int nx = imageWriter.getNx();
 		int ny = imageWriter.getNy();
 
-		for (int i = 0; i < ny; i++)
-			for (int j = 0; j < nx; j++)
-				castRay(nx, ny, i, j);
+		// for (int i = 0; i < ny; i++)
+		// for (int j = 0; j < nx; j++)
+		// castRay(nx, ny, i, j);
+		int threadsCount = 4;
+		Pixel.initialize(ny, nx, 1);
+		while (threadsCount-- > 0) {
+			new Thread(() -> {
+				for (Pixel pixel = new Pixel(); pixel.nextPixel(); Pixel.pixelDone())
+					castRay(nx, ny, pixel.col, pixel.row);
+			}).start();
+		}
+		Pixel.waitToFinish();
 
 		return this;
 	}
