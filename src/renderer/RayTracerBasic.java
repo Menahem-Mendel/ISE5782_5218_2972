@@ -17,7 +17,6 @@ public class RayTracerBasic extends RayTracerBase {
     private static final double MIN_CALC_COLOR_K = 0.001; // for recursion
     private static final Double3 INITIAL_K = Double3.ONE; // for recursion
     private int sample = 0; // number of rays superSample for soft shadow
-    private boolean firstTime = true; // for calculate CBR
 
     /**
      * RayTracerBasic build ctor
@@ -30,10 +29,7 @@ public class RayTracerBasic extends RayTracerBase {
 
     @Override
     public Color traceRay(Ray r) {
-        if (firstTime) {
-            scene.geometries.createBox();
-            firstTime = false;
-        }
+      
         if (scene.geometries.checkIntersectionWithBox(r)) {
             var intersection = findClosestIntersection(r);
             return intersection == null ? scene.background : calcColor(intersection, r);

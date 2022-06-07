@@ -28,7 +28,11 @@ public class Geometries extends Intersectable {
      * @param geometries list containing geometries
      */
     public void add(Intersectable... geometries) {
-        list.addAll(List.of(geometries));
+        for(Intersectable g : geometries){
+            g.createBox();;
+            this.createBox(g);
+            list.add(g);
+        }
     }
 
     @Override
