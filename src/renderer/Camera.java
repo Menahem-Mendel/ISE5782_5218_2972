@@ -14,6 +14,8 @@ public class Camera {
 	private double width, height, dist; // size
 	private ImageWriter imageWriter; // image writer
 	private RayTracerBase rayTracerBase; // a ray
+	private int threadsCount = 1;
+	private double DebugPrint = 1;
 
 	/**
 	 * Camera build ctor
@@ -164,8 +166,7 @@ public class Camera {
 		// for (int i = 0; i < ny; i++)
 		// for (int j = 0; j < nx; j++)
 		// castRay(nx, ny, i, j);
-		int threadsCount = 4;
-		Pixel.initialize(ny, nx, 1);
+		Pixel.initialize(ny, nx, DebugPrint);
 		while (threadsCount-- > 0) {
 			new Thread(() -> {
 				for (Pixel pixel = new Pixel(); pixel.nextPixel(); Pixel.pixelDone())
@@ -176,6 +177,30 @@ public class Camera {
 
 		return this;
 	}
+
+	/**
+	 * Set number of threads  
+	 *
+	 * @param threads number of threads
+	 * @return Camera , currnet object
+	 */
+	public Camera setMultithreading(int threads) {
+		if (threads <= 0)
+			throw new IllegalArgumentException("Multithreading can not be less than 1");
+
+		threadsCount = threads;
+		return this;
+	}
+
+	 /**
+     * Set debug to print
+     *
+     * @return Camera , currnet object
+     */
+    public Camera setDebugPrint(double p) {
+        DebugPrint = p;
+        return this;
+    }
 
 	/**
 	 * call by delegation the method writeToImage

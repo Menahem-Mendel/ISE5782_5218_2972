@@ -16,7 +16,7 @@ public class RayTracerBasic extends RayTracerBase {
     private static final int MAX_CALC_COLOR_LEVEL = 10; // for recursion
     private static final double MIN_CALC_COLOR_K = 0.001; // for recursion
     private static final Double3 INITIAL_K = Double3.ONE; // for recursion
-    private int sample = 100; // number of rays superSample for soft shadow
+    private int sample = 0; // number of rays superSample for soft shadow
 
     /**
      * RayTracerBasic build ctor

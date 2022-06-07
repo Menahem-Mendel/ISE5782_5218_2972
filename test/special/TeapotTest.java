@@ -26,8 +26,8 @@ public class TeapotTest {
 
 	private final Camera camera = new Camera(new Point(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, 1, 0)) //
 			.setVPDistance(1000).setVPSize(200, 200) //
-			.setImageWriter(imageWriter) ;//
-			//.setMultithreading(3).setDebugPrint(0.1);
+			.setImageWriter(imageWriter) 
+			.setMultithreading(3).setDebugPrint(0.1);
 
 	private final Scene scene = new Scene("Test scene");
 
