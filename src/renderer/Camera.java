@@ -14,8 +14,8 @@ public class Camera {
 	private double width, height, dist; // size
 	private ImageWriter imageWriter; // image writer
 	private RayTracerBase rayTracerBase; // a ray
-	private int threadsCount = 1;
-	private double DebugPrint = 1;
+	private int threadsCount = 1; // number of threads to use 
+	private double DebugPrint = 1; // printing process
 
 	/**
 	 * Camera build ctor
