@@ -76,6 +76,54 @@ public class Geometries extends Intersectable {
         this.maxZ = Math.max(inter.maxZ, this.maxZ);
     }
 
+   
+    /**
+     * buildBvhTree creating a Tree of geometries based on their distances 
+     */
+    public void buildBvhTree() {
+        List<Intersectable> infiniteGeometries = new LinkedList<>();//a plane list
+        for (Intersectable geo : list) {
+            if (geo instanceof Plane)
+                infiniteGeometries.add(geo);
+        }
+        list.removeAll(infiniteGeometries);
+        double distance = 0;
+        Intersectable left = null;
+        Intersectable right = null;
+        while (list.size() > 1) {
+            double best = Double.POSITIVE_INFINITY;
+            Intersectable geoI = list.get(0);
+            for (Intersectable geoJ : list) {
+                if (geoI != geoJ && (distance = distance(geoI, geoJ)) < best) {
+                    best = distance;
+                    left = geoI;
+                    right = geoJ;
+                }
+            }
+            Geometries tempGeometries = new Geometries(left, right);
+            list.remove(left);
+            list.remove(right);
+            list.add(tempGeometries);
+        }
+        list.addAll(infiniteGeometries);
+    }
+
+    @Override
+    public List<GeoPoint> findGeoIntersectionsBVH(Ray ray) {
+        List<GeoPoint> intersections = null;
+        List<GeoPoint> tempIntersection = null;
+        for (Intersectable geo : list) {
+            if (geo.checkIntersectionWithBox(ray)) {
+                tempIntersection = geo.findGeoIntersectionsBVH(ray);
+            }
+            if (tempIntersection != null) {
+                if (intersections == null)
+                    intersections = new LinkedList<>();
+                intersections.addAll(tempIntersection);
+            }
+        }
+        return intersections;
+    }
   
      
 }

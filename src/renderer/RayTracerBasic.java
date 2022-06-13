@@ -17,6 +17,7 @@ public class RayTracerBasic extends RayTracerBase {
     private static final double MIN_CALC_COLOR_K = 0.001; // for recursion
     private static final Double3 INITIAL_K = Double3.ONE; // for recursion
     private int sample = 0; // number of rays superSample for soft shadow
+    private boolean bvh=false; //bool for bvh improvment
 
     /**
      * RayTracerBasic build ctor
@@ -36,6 +37,19 @@ public class RayTracerBasic extends RayTracerBase {
         }
         
         return scene.background;
+    }
+
+    /**
+     * setBvh sets true/false to use BVH improve
+     *
+     * @param b true if improvment is set
+     * @return current RayTracerBasic
+     */
+    public RayTracerBasic setBvh(boolean b) {
+        this.bvh = b;
+        if (bvh)
+            scene.geometries.buildBvhTree();
+        return this;
     }
 
     /**
@@ -131,7 +145,13 @@ public class RayTracerBasic extends RayTracerBase {
      * @return GeoPoint the closest one
      */
     private GeoPoint findClosestIntersection(Ray ray) {
-        List<GeoPoint> gpList = scene.geometries.findGeoIntersections(ray);
+        List<GeoPoint> gpList;
+        if(bvh){
+            gpList=scene.geometries.findGeoIntersectionsBVH(ray);
+        }
+        else{
+            gpList = scene.geometries.findGeoIntersections(ray);
+        }
 
         return ray.findClosestGeoPoint(gpList);
     }
@@ -286,8 +306,14 @@ public class RayTracerBasic extends RayTracerBase {
         Double3 sumKtr = Double3.ZERO;
         double distance = ls.getDistance(gp.point); // calculate here and not in the loop
         List<Ray> beamRays = lightRay.createRaysBeam(ls, gp.point, n, getSample());
+        List<GeoPoint> intersections;
         for (Ray r : beamRays) { // checking each ray and not just the center of light
-            var intersections = scene.geometries.findGeoIntersections(r, distance);
+            if(bvh){
+                intersections = scene.geometries.findGeoIntersectionsBVH(r);
+            }
+            else{
+             intersections = scene.geometries.findGeoIntersections(r, distance);
+            }
             ktr = Double3.ONE;
             if (intersections == null) {
                 sumKtr = sumKtr.add(Double3.ONE);
